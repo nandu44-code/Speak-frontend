@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState,useEffect } from 'react';
+import { useDispatch,useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Register } from "../features/userSlice";
+import Swal from 'sweetalert2';
+
+// import {TailSpin, ThreeDots} from 'react-loader-spinner';
+// import Loader from 'react-loader-spinner/dist/loader/CradleLoader';
+
 
 function SignUpForm() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const loading = useSelector((state) => state.user.loading)
 
   const [formData, setformData] = useState({
     username: '',
@@ -22,23 +28,28 @@ function SignUpForm() {
     });
   };
 
-  const handleRegister = async () =>{
+const handleRegister = () =>{
       
       const credentials = {
         username: formData.username,
         email: formData.email,
         password: formData.password,
     }
-    dispatch(Register(credentials)).catch((error) => {
-      console.error("Error during registration:", error);
-    });
-    // navigate('/login');
+    try{
+
+      dispatch(Register(credentials));
+      navigate('/login/');
+    } catch (error) {
+    console.error("Error during registration:", error);
+    
+   }
 }
 
 const handleLoginNavigate = () => {
 
   navigate('/login/')
 }
+
 
   return (
     <div className="max-w-md mx-auto mt-28">
@@ -93,7 +104,7 @@ const handleLoginNavigate = () => {
           />
         </div>
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-          Sign Up
+        {loading ?'loading....' :'Sign Up'}
         </button>
         <h4>Already have an account?</h4>
         <h4 className='text-indigo-800 cursor-pointer' onClick={ handleLoginNavigate }>click here to sign in</h4>
