@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { Login } from '../features/userSlice';
+import {jwtDecode} from 'jwt-decode';
 
 function LoginForm() {
 
@@ -25,27 +26,35 @@ function LoginForm() {
     });
   };
 
-//   const handleRegister = async () =>{
-      
-//       const credentials = {
-//         username: formData.username,
-//         email: formData.email,
-//         password: formData.password,
-//     }
-//     dispatch(Register(credentials)).catch((error) => {
-//       console.error("Error during registration:", error);
-//     });
-    
-    const LoginNavigate = () => {
-
-      navigate('')
+  const handleLogin = async(e) =>{
+      e.preventDefault()  
+      console.log('hiiiiiiiiiiiii..........')
+      const credentials = {
+        email: formData.email,
+        password: formData.password,
     }
-
+    await dispatch(Login(credentials));
+    console.log('after dispatching the login')
+    if (localStorage.getItem('accessToken')){
+      let token = localStorage.getItem('accessToken')
+      let access = jwtDecode(token)
+      console.log('hi there')
+      if (access.is_superuser){
+        navigate('/admin')
+      }
+      else if (access.is_student){
+        navigate('/student/home')
+      }
+      else{
+        navigate('/tutor/home')
+      }
+    }
+  }
 
   return (
     <div className="max-w-md mx-auto mt-28">
       <h2 className="text-2xl font-bold mb-4 text-blue-800">Log in here....</h2>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={handleLogin} method='post'>
         <div>
           <input
             type="email"
@@ -80,4 +89,5 @@ function LoginForm() {
   );
 
   }
+
 export default LoginForm;

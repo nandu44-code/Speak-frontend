@@ -1,9 +1,10 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,memo } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Register } from "../features/userSlice";
 import Swal from 'sweetalert2';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import {TailSpin, ThreeDots} from 'react-loader-spinner';
 // import Loader from 'react-loader-spinner/dist/loader/CradleLoader';
 
@@ -13,12 +14,15 @@ function SignUpForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const loading = useSelector((state) => state.user.loading)
-
+  // const [selectedOption, setSelectedOption] = useState('');
   const [formData, setformData] = useState({
     username: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    selectedOption: '',
+    is_tutor:false,
+    is_student:false,
   });
 
   const handleChange = (e) => {
@@ -27,14 +31,61 @@ function SignUpForm() {
       [e.target.name]: e.target.value
     });
   };
+  
 
-const handleRegister = () =>{
-      
+const handleRegister = (e) =>{
+
+   e.preventDefault()
+   // Password validation: At least 8 characters, one uppercase letter, one lowercase letter, and one digit
+   if((formData.username).split(" ").join("")!='' && formData.email!='' && formData.password!='' && formData.confirmPassword!=''){
+
+   
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (!passwordRegex.test(formData.password)) {
+      toast.error('Password must be at least 8 characters, contain one uppercase letter, one lowercase letter, and one digit.');
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast.error('Please enter a valid email address.');
+      return;
+    }
+
+    // Username length validation
+    const minUsernameLength = 3;
+    if (formData.username.length < minUsernameLength) {
+      toast.error(`Username must be at least ${minUsernameLength} characters.`);
+      return;
+    }
+
+    // Matching password and confirm password
+    if (formData.password !== formData.confirmPassword) {
+      toast.error('Password and Confirm Password must match.');
+      return;
+    }
+
+    // Checking if a radio button is selected
+    if (!formData.selectedOption) {
+      toast.error('Please choose student or tutor.');
+      return;
+    }
+
+      if (formData.selectedOption =='tutor'){
+        formData.is_tutor=true
+      }else{
+        formData.is_student=true
+      }
+
       const credentials = {
         username: formData.username,
         email: formData.email,
         password: formData.password,
+        is_tutor:formData.is_tutor,
+        is_student:formData.is_student
     }
+
     try{
 
       dispatch(Register(credentials));
@@ -43,6 +94,9 @@ const handleRegister = () =>{
     console.error("Error during registration:", error);
     
    }
+}else{
+  toast.error('Enter the valid credentials.');
+}
 }
 
 const handleLoginNavigate = () => {
@@ -102,7 +156,33 @@ const handleLoginNavigate = () => {
             placeholder='confirm password...'
             required
           />
+
         </div>
+        <div>
+      <label className='mr-20 flex text-fuchsia-900 font-semibold mt-5'>
+        <input
+          name='selectedOption'
+          type="radio"
+          value="tutor"
+          checked={formData.selectedOption === 'tutor'}
+          onChange={handleChange}
+          className='mr-3 cursor-pointer'
+        />
+      Register as a Tutor
+      </label>
+
+      <label className='mr-20 flex font-semibold text-indigo-600 mt-2 mb-5'>
+        <input
+          name='selectedOption'
+          type="radio"
+          value="student"
+          checked={formData.selectedOption === 'student'}
+          onChange={handleChange}
+          className='mr-3 cursor-pointer'
+        />
+        Register as a student
+      </label>
+    </div>
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
         {loading ?'loading....' :'Sign Up'}
         </button>
@@ -113,4 +193,4 @@ const handleLoginNavigate = () => {
   );
 }
 
-export default SignUpForm;
+export default memo(SignUpForm);
