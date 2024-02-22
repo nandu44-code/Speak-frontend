@@ -90,7 +90,7 @@ function StudentProfile() {
               <img
                 src={imageSrc}
                 alt="User Image"
-                className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer"
+                className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
               />
             </label>
 
