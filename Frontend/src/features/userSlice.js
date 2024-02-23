@@ -67,6 +67,21 @@ export const changeUserName = createAsyncThunk(
   }
 );
 
+export const changeProfileImage = createAsyncThunk(
+  "change_profileImage",
+  async(credentials) =>{
+    try{
+      const request = await api.put(`users/${credentials.id}/`,credentials);
+      if(request.status == 200){
+        console.log('profile updated successfully')
+        return request.data
+      }
+    }catch(error) {
+      console.log("Error:",error)
+    }
+  }
+);
+
 const initialState = {
   msg: "",
   user: null,

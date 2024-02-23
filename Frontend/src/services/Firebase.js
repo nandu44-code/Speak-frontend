@@ -4,14 +4,14 @@ import { getAnalytics } from "firebase/analytics";
 import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBfVG2X29o8CvFuRNE3SLPMiyviwqHexMo",
-  authDomain: "speak-b1e37.firebaseapp.com",
-  projectId: "speak-b1e37",
-  storageBucket: "speak-b1e37.appspot.com",
-  messagingSenderId: "182169446971",
-  appId: "1:182169446971:web:789a1bee37d13c4a4f4a1e",
-  measurementId: "G-ERB6LMMKH9"
+  apiKey: "AIzaSyC91wbrD4FYkxYn41JUlkfkxLVvHtu1LeY",
+  authDomain: "speakfiles-37868.firebaseapp.com",
+  projectId: "speakfiles-37868",
+  storageBucket: "speakfiles-37868.appspot.com",
+  messagingSenderId: "10688100205",
+  appId: "1:10688100205:web:33c79f96f0d2ff8d590c64",
+  measurementId: "G-R8NQSC01QM"
 };
 
 export const app = initializeApp(firebaseConfig);
-export const firebasestore = getStorage(app)
+export const firebaseStore = getStorage(app)
