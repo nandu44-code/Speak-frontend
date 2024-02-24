@@ -71,7 +71,7 @@ export const changeProfileImage = createAsyncThunk(
   "change_profileImage",
   async(credentials) =>{
     try{
-      const request = await api.put(`users/${credentials.id}/`,credentials);
+      const request = await api.patch(`users/${credentials.id}/`,credentials);
       if(request.status == 200){
         console.log('profile updated successfully')
         return request.data
@@ -94,7 +94,11 @@ const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    clearUser(state){
+      state.user=null
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(Register.pending, (state) => {
@@ -113,7 +117,7 @@ const userSlice = createSlice({
         }
       })
       .addCase(Register.rejected, (state) => {
-        state.loading = true;
+        state.loading = false;
         Swal.fire({
           icon: "error",
           title: "Error",
@@ -176,4 +180,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { clearUser } = userSlice.actions;
 export default userSlice.reducer;

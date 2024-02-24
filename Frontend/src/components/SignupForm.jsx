@@ -5,7 +5,7 @@ import { Register } from "../features/userSlice";
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import {TailSpin, ThreeDots} from 'react-loader-spinner';
+import {TailSpin, ThreeDots} from 'react-loader-spinner';
 // import Loader from 'react-loader-spinner/dist/loader/CradleLoader';
 
 
@@ -184,7 +184,7 @@ const handleLoginNavigate = () => {
       </label>
     </div>
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-        {loading ?'loading....' :'Sign Up'}
+        {loading ?<TailSpin/>:'Sign Up'}
         </button>
         <h4>Already have an account?</h4>
         <h4 className='text-indigo-800 cursor-pointer' onClick={ handleLoginNavigate }>click here to sign in</h4>

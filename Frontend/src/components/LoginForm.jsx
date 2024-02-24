@@ -33,6 +33,7 @@ function LoginForm() {
         email: formData.email,
         password: formData.password,
     }
+    console.log(formData.password)
     await dispatch(Login(credentials));
     console.log('after dispatching the login')
     if (localStorage.getItem('accessToken')){

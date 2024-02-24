@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FaUser } from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
-import { getMyProfile } from "../features/userSlice";
+import { getMyProfile,clearUser } from "../features/userSlice";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
+    dispatch((clearUser()))
     navigate("/login");
   };
 
