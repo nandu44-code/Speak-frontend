@@ -4,7 +4,7 @@ import { BsHouseDoor, BsPeople } from 'react-icons/bs';
 import { IoMdSchool } from 'react-icons/io';
 import { HiOutlineDocumentReport, HiOutlineClipboardList } from 'react-icons/hi';
 
-const UserProfileSidebar = () => {
+const StudentProfileSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -52,4 +52,4 @@ const UserProfileSidebar = () => {
   );
 };
 
-export default UserProfileSidebar;
+export default StudentProfileSidebar;

@@ -8,7 +8,7 @@ import {
 import { jwtDecode } from "jwt-decode";
 import Navbar from "../components/Navbar";
 import imageSrc from "../assets/images/profileuser.jpg";
-import UserprofileSidebar from "../components/UserProfileSidebar";
+import StudentprofileSidebar from "../components/StudentProfileSidebar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { app, firebaseStore } from "../services/Firebase";
@@ -81,7 +81,7 @@ function StudentProfile() {
             setImageUrl(url);
             updateImage(url); // Pass the URL to updateImage function
             toast.success("Image uploaded successfully");
-            getMyProfile(access.user)
+            // getMyProfile(access.user)
           })
           .catch((error) => {
             console.log("Error retrieving URL:", error);
@@ -111,7 +111,7 @@ function StudentProfile() {
     <>
       <Navbar />
       <div className="flex">
-        <UserprofileSidebar className="justify-start" />
+        <StudentprofileSidebar className="justify-start" />
         <div className="ml-72 mt-20">
           <div className="max-w-md mx-auto bg-white shadow-stone-950 rounded-md border-2 px-8 pt-6 pb-8 mb-4 text-center relative ">
             <input
