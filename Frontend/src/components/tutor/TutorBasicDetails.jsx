@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import imageSrc from "../../assets/images/profileuser.jpg";
-import { changeProfileImage,getMyProfile } from "../../features/userSlice";
+import { changeProfileImage, getMyProfile, tutorchecklist } from "../../features/userSlice";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
 import "react-toastify/dist/ReactToastify.css";
 import { app, firebaseStore } from "../../services/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 function TutorBasicDetails() {
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
   const [selfIntro, setSelfIntro] = useState("");
   const [teachingStyle, setTeachingStyle] = useState("");
-  const [profileImage,setProfileImage] = useState(null)
+  const [profileImage, setProfileImage] = useState(null);
+  const [selfIntroVideo, setSelfIntroVideo] = useState(null);
+  const [certificates, setCertificates] = useState(null);
 
   const countryRegex = "^[a-zA-Z]+$";
 
   const userprofile = useSelector((state) => state.user.user);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const token = localStorage.getItem("accessToken");
+  const access = jwtDecode(token);
+
   const formSubmit = (e) => {
     e.preventDefault();
     if (country.split(" ").join(" ") == "") {
@@ -38,21 +44,60 @@ function TutorBasicDetails() {
       toast.error(
         "teaching style shoule not be empty and should contain atlest 50 words"
       );
+    } else if (certificates.length === 0) {
+      toast.error("add relevant certificate");
+    } else {
+
+        const uuid = uuidv4();
+
+        const storageRef = ref(firebaseStore);
+        const imageRef = ref(
+          storageRef,
+          `certificates/${certificates.name}_${uuid}`
+        );
+        uploadBytes(imageRef, profileImage).then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((url) => {
+            // setImageUrl(url);
+            tutorChecklist(url);
+            toast.success("certificates uploaded successfully");
+            // getMyProfile(access.user)
+          });
+        });
     }
-  };
-  const token = localStorage.getItem("accessToken");
-  const access = jwtDecode(token);
+
+    const tutorChecklist = async(url) =>{
+      
+      const credentials = {
+        user:access.user,
+        state:state,
+        country:country,
+        introduction_description:selfIntro,
+        teaching_style:teachingStyle,
+        certificates:url
+
+      }
+      console.log(credentials)
+      await dispatch(tutorchecklist(credentials))
+    }
+   };
 
   useEffect(() => {
     dispatch(getMyProfile(access.user));
   }, []);
 
-  useEffect(()=>{
-    if (profileImage !== null){
-        console.log("profile image selcted successfully")
-        uploadImage()
+  useEffect(() => {
+    if (profileImage !== null) {
+      console.log("profile image selcted successfully");
+      uploadImage();
     }
-  },[profileImage])
+  }, [profileImage]);
+
+  // useEffect(() => {
+  //   if (certificates !== null) {
+  //     console.log("profile image selcted successfully");
+  //     uploadImage();
+  //   }
+  // }, [certificates]);
 
   const uploadImage = () => {
     if (profileImage == null) {
@@ -88,55 +133,52 @@ function TutorBasicDetails() {
     console.log("its updated userImage");
     const credentials = {
       id: access.user,
-    //   username: userprofile.username,
-    //   email: userprofile.email,
+      //   username: userprofile.username,
+      //   email: userprofile.email,
       // "password": userprofile.password,
       profile_image: url, // Use the URL passed as an argument
     };
     await dispatch(changeProfileImage(credentials));
-}
+  };
   return (
     <div>
-      <div>
-        <p className="font-medium mt-4 font-mono text-meium text-red-800">
-          "Your tutor profile is your chance to market yourself to students on
-          speakiko. You can make edit changes on your profile later. New
-          students may browse tutor profiles to find a tutor that fits their
-          learning goals personally."
-        </p>
+      <div className="mt-20 w-full ml-56">
+        <h1 className="text-xl mb-10 font-normal text-gray-500">
+          Profile image
+        </h1>
+        <input
+          type="file"
+          id="fileInput"
+          className="hidden"
+          onChange={(e) => {
+            setProfileImage(e.target.files[0]);
+          }}
+        />
 
-        <div className="mt-20 mr-64">
-            <h1 className="text-xl mb-10 font-medium text-gray-500">Profile image</h1>
-          <input type="file" id="fileInput" className="hidden"  onChange={(e)=>{setProfileImage(e.target.files[0])}}/>
-
-          <label htmlFor="fileInput">
-            <img
-              src={ userprofile && userprofile.profile_image
+        <label htmlFor="fileInput">
+          <img
+            src={
+              userprofile && userprofile.profile_image
                 ? userprofile.profile_image
-                : imageSrc}
-              alt="no image"
-              className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
-              
-            />
-           { userprofile && userprofile.profile_image
-                ? <h1 className="mb-10 text-indigo-400 cursor-pointer" htmlFor="fileInput">Edit</h1>
-                : <h1 className="mb-10">Choose a profile picture</h1>}
-            
-          </label>
-        </div>
+                : imageSrc
+            }
+            alt="no image"
+            className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
+          />
+          {userprofile && userprofile.profile_image ? (
+            <h1
+              className="mb-10 text-indigo-400 cursor-pointer"
+              htmlFor="fileInput"
+            >
+              Edit
+            </h1>
+          ) : (
+            <h1 className="mb-10">Choose a profile picture</h1>
+          )}
+        </label>
       </div>
       <form className="w-full" onSubmit={formSubmit}>
-        <div className="flex  flex-col w-1/4 justify-center ml-96">
-          {/* <select onChange={""} className="mt-10 mr-10">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-        <select onChange={""} className="mt-10 mr-10">
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select> */}
+        <div className="flex  flex-col w-1/2 justify-center ml-96">
           <input
             type="text"
             className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 focus:border-2 mb-4"
@@ -150,19 +192,18 @@ function TutorBasicDetails() {
             placeholder="state"
             onChange={(e) => setState(e.target.value)}
           />
-
-          <input type="file" id="fileInput" className="hidden" />
-
-          <label htmlFor="fileInput">
-            <video
-              width="640"
-              height="360"
-              controls
-              src=""
-              alt=""
-              className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
-            ></video>
+          {/* <label htmlFor="fileInput" className="block mt-10 mb-10 text-indigo-500 cursor-pointer">
+           Upload your self introduction 
           </label>
+          <input
+            type="file"
+            id="fileInput"
+            className="hidden"
+            placeholder="your self introduction video"
+            onChange={(e) => {
+              setSelfIntroVideo(e.target.files[0]);
+            }}
+          /> */}
 
           <textarea
             className="w-full px-3 py-2 border mb-4 rounded-md focus:outline-none focus:border-blue-500 focus:border-2"
@@ -176,21 +217,17 @@ function TutorBasicDetails() {
             onChange={(e) => setTeachingStyle(e.target.value)}
           />
 
-          {/* <select onChange={""} className="mt-10 mr-10">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-          </select> */}
-          <div>
-            <input type="file" id="fileInput" className="hidden" />
-
-            <label htmlFor="fileInput">
-              <img
-                src={imageSrc}
-                alt="no image"
-                className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
-              />
+          <div className="m-10 flex">
+            <label className="text-gray-700 mr-10 font-medium">
+              Certificates(*optional):
             </label>
+            <input
+              type="file"
+              id="fileInput"
+              onChange={(e) => {
+                setCertificates(e.target.files[0]);
+              }}
+            />
           </div>
           <button
             className="bg-sky-800 p-2 rounded-md hover:bg-sky-900 text-white font-medium hover:scale-110 duration-500 mb-96"
@@ -203,6 +240,5 @@ function TutorBasicDetails() {
     </div>
   );
 }
-
 
 export default TutorBasicDetails;

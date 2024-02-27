@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { BsHouseDoor, BsPeople } from 'react-icons/bs';
 import { IoMdSchool } from 'react-icons/io';
 import { HiOutlineDocumentReport, HiOutlineClipboardList } from 'react-icons/hi';
+// import { clearUser } from '../features/UserSlice';
+
+
 
 const Sidebar = () => {
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    dispatch((clearUser()))
+    navigate("/login");
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -18,13 +29,13 @@ const Sidebar = () => {
       </div>
       <ul>
         <li className="hover:scale-110 mb-4">
-          <Link to="/dashboard" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
+          <Link to="/admin" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
             <BsHouseDoor size={20} className="inline mr-2 hover:text-blue-800" />
             Dashboard
           </Link>
         </li>
         <li className="hover:scale-110 mb-4">
-          <Link to="/users" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
+          <Link to="/admin/users/" className="block py-2 hover:bg-gray-200" onClick={''}>
             <BsPeople size={20} className="inline mr-2 hover:text-blue-800" />
             Users
           </Link>
@@ -47,6 +58,13 @@ const Sidebar = () => {
             Reports
           </Link>
         </li>
+        {/* <li className="hover:scale-110 mb-4">
+          <p className="block py-2 hover:bg-gray-200" onClick={handleLogout}>
+            <HiOutlineClipboardList size={20} className="inline mr-2 hover:text-blue-800" />
+            logout
+          </p>
+        </li> */}
+  
       </ul>
       <div className="md:hidden">
         <button onClick={toggleSidebar}>Toggle Sidebar</button>

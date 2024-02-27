@@ -32,6 +32,7 @@ export const Login = createAsyncThunk("login", async (credentials) => {
     }
   } catch (error) {
     console.error("error", error);
+    toast.error(error)
     throw error;
   }
 });
@@ -81,6 +82,36 @@ export const changeProfileImage = createAsyncThunk(
     }
   }
 );
+
+export const tutorchecklist = createAsyncThunk(
+  "Tutor_checklist",
+  async(credentials) =>{
+    console.log(credentials)
+    try{
+      const request = await api.post("tutor/register/",credentials);
+      if(request.status == 200){
+        console.log('tutor profile completed')
+
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
+);
+
+export const getUsers = createAsyncThunk(
+  "get_users",
+  async() =>{
+    try{
+      const request = await api.get("users/")
+      if(request.status == 200){
+        console.log("fetched all the users")
+      }
+    }catch(error){
+      console.log("Error:",error)
+    }
+  }
+)
 
 const initialState = {
   msg: "",
@@ -174,6 +205,20 @@ const userSlice = createSlice({
         toast.success('username changed successfully')
       })
       .addCase(changeUserName.rejected, (state) => {
+        state.loading = false;
+        toast.error("something went wrong")
+      });
+
+    builder
+      .addCase(tutorchecklist.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(tutorchecklist.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        toast.success('successfully')
+      })
+      .addCase(tutorchecklist.rejected, (state) => {
         state.loading = false;
         toast.error("something went wrong")
       });

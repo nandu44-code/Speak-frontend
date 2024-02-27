@@ -47,7 +47,7 @@ function LoginForm() {
         navigate('/student/home')
       }
       else{
-        navigate('/tutor/home')
+        navigate('/tutor/checklist')
       }
     }
   }
