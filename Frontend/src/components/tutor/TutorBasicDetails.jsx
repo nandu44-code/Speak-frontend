@@ -105,7 +105,8 @@ function TutorBasicDetails() {
           learning goals personally."
         </p>
 
-        <div className="mt-20">
+        <div className="mt-20 mr-64">
+            <h1 className="text-xl mb-10 font-medium text-gray-500">Profile image</h1>
           <input type="file" id="fileInput" className="hidden"  onChange={(e)=>{setProfileImage(e.target.files[0])}}/>
 
           <label htmlFor="fileInput">
@@ -117,6 +118,10 @@ function TutorBasicDetails() {
               className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
               
             />
+           { userprofile && userprofile.profile_image
+                ? <h1 className="mb-10 text-indigo-400 cursor-pointer" htmlFor="fileInput">Edit</h1>
+                : <h1 className="mb-10">Choose a profile picture</h1>}
+            
           </label>
         </div>
       </div>
