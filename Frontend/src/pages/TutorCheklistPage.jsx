@@ -4,9 +4,9 @@ import TutorBasicDetails from "../components/tutor/TutorBasicDetails";
 function TutorCheklistPage() {
   return (
     <div>
-      <div>
-      <h5 className="font-bold text-sky-900 text-4xl mt-7 shadow-lg">
-          Speak Tutor profile
+      <div className="ml-72">
+        <h5 className="font-semibold text-sky-900 text-3xl mt-7 mb-2">
+          Fill Up Your Details
         </h5>
       </div>
       <div className="flex flex-row">

@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import imageSrc from "../../assets/images/profileuser.jpg";
-import { changeProfileImage, getMyProfile, tutorchecklist } from "../../features/userSlice";
+import {
+  changeProfileImage,
+  getMyProfile,
+  tutorchecklist,
+} from "../../features/userSlice";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
 import "react-toastify/dist/ReactToastify.css";
 import { app, firebaseStore } from "../../services/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
 
 function TutorBasicDetails() {
   const [country, setCountry] = useState("");
@@ -17,11 +22,13 @@ function TutorBasicDetails() {
   const [profileImage, setProfileImage] = useState(null);
   const [selfIntroVideo, setSelfIntroVideo] = useState(null);
   const [certificates, setCertificates] = useState(null);
+  const loading = useSelector((state)=> state.user.loading)
 
   const countryRegex = "^[a-zA-Z]+$";
 
   const userprofile = useSelector((state) => state.user.user);
 
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const token = localStorage.getItem("accessToken");
@@ -33,53 +40,53 @@ function TutorBasicDetails() {
       toast.error("country should not be empty");
     } else if (state.split(" ").join("") == "") {
       toast.error("state should not be empty");
-    } else if (selfIntro.split(" ").join("") == "" || selfIntro.length <= 400) {
+    } else if (selfIntro.split(" ").join("") == "" ){
       toast.error(
-        "self introduction should not be empty and should contain atleast 100 words"
+        "self introduction should not be empty."
       );
     } else if (
-      teachingStyle.split(" ").join("") == "" ||
-      teachingStyle.length <= 200
+      teachingStyle.split(" ").join("") == ""
     ) {
       toast.error(
-        "teaching style shoule not be empty and should contain atlest 50 words"
+        "teaching style should not be empty."
       );
-    } else if (certificates.length === 0) {
+    } else if (certificates === null) {
       toast.error("add relevant certificate");
     } else {
+      const uuid = uuidv4();
 
-        const uuid = uuidv4();
-
-        const storageRef = ref(firebaseStore);
-        const imageRef = ref(
-          storageRef,
-          `certificates/${certificates.name}_${uuid}`
-        );
-        uploadBytes(imageRef, profileImage).then((snapshot) => {
-          getDownloadURL(snapshot.ref).then((url) => {
-            // setImageUrl(url);
-            tutorChecklist(url);
-            toast.success("certificates uploaded successfully");
-            // getMyProfile(access.user)
-          });
+      const storageRef = ref(firebaseStore);
+      const imageRef = ref(
+        storageRef,
+        `certificates/${certificates.name}_${uuid}`
+      );
+      uploadBytes(imageRef, profileImage).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          // setImageUrl(url);
+          tutorChecklist(url);
+          toast.success("certificates uploaded successfully");
+          // getMyProfile(access.user)
         });
+      });
     }
 
-    const tutorChecklist = async(url) =>{
-      
+    
+    const tutorChecklist = async (url) => {
       const credentials = {
-        user:access.user,
-        state:state,
-        country:country,
-        introduction_description:selfIntro,
-        teaching_style:teachingStyle,
-        certificates:url
+       
+        state: state,
+        country: country,
+        introduction_description: selfIntro,
+        teaching_style: teachingStyle,
+        certificates: url,
+        user: access.user
+      };
+      console.log(credentials);
+      await dispatch(tutorchecklist(credentials));
+      navigate('/tutor/checklist/processing')
 
-      }
-      console.log(credentials)
-      await dispatch(tutorchecklist(credentials))
-    }
-   };
+    };
+  };
 
   useEffect(() => {
     dispatch(getMyProfile(access.user));
@@ -142,40 +149,43 @@ function TutorBasicDetails() {
   };
   return (
     <div>
-      <div className="mt-20 w-full ml-56">
-        <h1 className="text-xl mb-10 font-normal text-gray-500">
-          Profile image
-        </h1>
-        <input
-          type="file"
-          id="fileInput"
-          className="hidden"
-          onChange={(e) => {
-            setProfileImage(e.target.files[0]);
-          }}
-        />
-
-        <label htmlFor="fileInput">
-          <img
-            src={
-              userprofile && userprofile.profile_image
-                ? userprofile.profile_image
-                : imageSrc
-            }
-            alt="no image"
-            className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
+      <div className="mt-20 w-full ml-36">
+        <div className="w-1/4 ml-96">
+          <h1 className="text-xl mb-10 font-normal text-gray-500">
+            Profile image
+          </h1>
+          <input
+            type="file"
+            id="fileInput"
+            className="hidden cursor-pointer"
+            onChange={(e) => {
+              setProfileImage(e.target.files[0]);
+            }}
           />
-          {userprofile && userprofile.profile_image ? (
-            <h1
-              className="mb-10 text-indigo-400 cursor-pointer"
-              htmlFor="fileInput"
-            >
-              Edit
-            </h1>
-          ) : (
-            <h1 className="mb-10">Choose a profile picture</h1>
-          )}
-        </label>
+
+          <label htmlFor="fileInput">
+            <img
+              src={
+                userprofile && userprofile.profile_image
+                  ? userprofile.profile_image
+                  : imageSrc
+              }
+              alt="no image"
+              className="mx-auto rounded-full w-40 h-40 mb-4 cursor-pointer hover:scale-110 transition duration-500"
+            />
+
+            {userprofile && userprofile.profile_image ? (
+              <h1
+                className="mb-10 text-indigo-700 font-bold cursor-pointer hover:text-red-900 hover:font-bold hover:shadow-red"
+                htmlFor="fileInput"
+              >
+                Edit
+              </h1>
+            ) : (
+              <h1 className="mb-10">Choose a profile picture</h1>
+            )}
+          </label>
+        </div>
       </div>
       <form className="w-full" onSubmit={formSubmit}>
         <div className="flex  flex-col w-1/2 justify-center ml-96">
@@ -229,12 +239,19 @@ function TutorBasicDetails() {
               }}
             />
           </div>
+          {loading?
           <button
-            className="bg-sky-800 p-2 rounded-md hover:bg-sky-900 text-white font-medium hover:scale-110 duration-500 mb-96"
+            className="bg-sky-400 p-2 rounded-md hover:bg-sky-900 text-white font-medium hover:scale-110 duration-500 mb-96"
             type="submit"
           >
-            Submit
+            Submiting..
           </button>
+          :<button
+          className="bg-sky-800 p-2 rounded-md hover:bg-sky-900 text-white font-medium hover:scale-110 duration-500 mb-96"
+          
+        >
+          Submit
+        </button>}
         </div>
       </form>
     </div>

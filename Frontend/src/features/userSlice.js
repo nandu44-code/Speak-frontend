@@ -216,7 +216,7 @@ const userSlice = createSlice({
       .addCase(tutorchecklist.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        toast.success('successfully')
+        toast.success('successfully submitted')
       })
       .addCase(tutorchecklist.rejected, (state) => {
         state.loading = false;

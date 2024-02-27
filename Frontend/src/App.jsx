@@ -9,6 +9,7 @@ import StudentHomePage from './pages/StudentHomePage';
 import StudentProfile from './pages/StudentProfile';
 import TutorCheklistPage from './pages/TutorCheklistPage';
 import AdminUsersPage from './pages/AdminUsersPage';
+import TutorProcessingPage from './pages/TutorProcessingPage';
 
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
           <Route path='/student/profile/' element={<StudentProfile/>}/> 
           <Route path='/tutor/checklist/' element={<TutorCheklistPage/>}/> 
           <Route path='/admin/users' element={<AdminUsersPage/>}/>
+          <Route path='/tutor/checklist/processing' element={<TutorProcessingPage/>}/>
         </Routes>
       </>
    </Router>
