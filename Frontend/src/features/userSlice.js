@@ -113,6 +113,27 @@ export const getUsers = createAsyncThunk(
   }
 )
 
+export const getTutors = createAsyncThunk(
+  "getTutors",
+  async() =>{
+    try{
+      const request = await api.get("users/")
+      const response = request.data
+      if(request.status == 200){
+        console.log("fetched all the tutors")
+        console.log(response)
+        const data = response.filter((item) => item.is_tutor)
+        console.log(data)
+        return data
+      }
+    }catch(error){
+      console.log("Error:",error)
+    }
+  }
+)
+
+
+
 const initialState = {
   msg: "",
   user: null,
@@ -120,6 +141,8 @@ const initialState = {
   token: "",
   loading: false,
   error: "",
+  data:[],
+  tutor:[]
 };
 
 const userSlice = createSlice({
@@ -221,6 +244,22 @@ const userSlice = createSlice({
       .addCase(tutorchecklist.rejected, (state) => {
         state.loading = false;
         toast.error("something went wrong")
+      });
+
+    builder
+      .addCase(getTutors.pending, (state) => {
+        state.loading = true;
+        
+      })
+      .addCase(getTutors.fulfilled, (state, action) => {
+        state.loading = false;
+        state.tutor=action.payload
+        console.log(action.payload)
+        
+      })
+      .addCase(getTutors.rejected, (state) => {
+        state.loading = false;
+        
       });
   },
 });

@@ -11,9 +11,7 @@ function ListUsers() {
         if (response.status === 200) {
           console.log("Fetched all the users");
           console.log(response.data);
-          // const studentUsers = response.data.filter(user => user.is_student);
           setUsers(response.data);
-          // console.log(users)
         }
       } catch (error) {
         console.log("Error:", error);
@@ -23,36 +21,23 @@ function ListUsers() {
     fetchUsers();
   }, []);
 
-  useEffect(() => {
-    console.log(users); // This will log the updated users state
-  }, [users]);
-
-
-  const blockuser = async (id) => {
-    try{
-        const credentials={
-            is_active:false
-        }
-
-        const response = await api.patch(`users/${id}/`,credentials);
-
-    }catch(error){
-        console.log("error,",error)
+  const blockOrUnblockUser = async (id, isBlocked) => {
+    try {
+      const response = await api.patch(`users/${id}/`, { is_active: !isBlocked });
+      if (response.status === 200) {
+        const updatedUsers = users.map(user => {
+          if (user.id === id) {
+            return { ...user, is_active: !isBlocked };
+          }
+          return user;
+        });
+        setUsers(updatedUsers);
+      }
+    } catch (error) {
+      console.log("Error:", error);
     }
-  }
+  };
 
-  const unblockuser = async (id) => {
-    try{
-        const credentials={
-            is_active:true
-        }
-
-        const response = await api.patch(`users/${id}/`,credentials);
-
-    }catch(error){
-        console.log("error,",error)
-    }
-  }
   return (
     <div className="ml-56 mt-20">
       <h1 className="text-2xl font-medium text-red-400 mb-10">Users</h1>
@@ -60,38 +45,31 @@ function ListUsers() {
         <table className="table-auto border-collapse">
           <thead>
             <tr>
-              <th className="px-4 py-2">ID</th>
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Email</th>
-              <th className="px-4 py-2">Actions</th>
+              <th className="px-4 py-5">ID</th>
+              <th className="px-20 py-5">Name</th>
+              <th className="px-20 py-5">Email</th>
+              <th className="px-20 py-5">Actions</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => (
-             user.is_student?
-              <tr key={index}>
-                <td className="border border-gray-400 px-4 py-2">
-                {index+1}
-                </td>
-                <td className="border border-gray-400 px-4 py-2">
-                  {user.username}
-                </td>
-                <td className="border border-gray-400 px-4 py-2">
-                  {user.email}
-                </td>
-                <td className="border border-gray-400 px-4 py-2">
-                {user.is_active?<button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" onClick={() => blockuser(user.id)}>
-                    Block
-                  </button>:
-                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2" onClick={() => unblockuser(user.id)}>
-                  Un block
-                </button>}
-                  
-                </td>
-              </tr>
-              :null
+              user.is_student ? (
+                <tr key={index}>
+                  <td className="border border-gray-400 px-4 py-2">{user.id}</td>
+                  <td className="border border-gray-400 px-4 py-2">{user.username}</td>
+                  <td className="border border-gray-400 px-4 py-2">{user.email}</td>
+                  <td className="border border-gray-400 px-4 py-2">
+                    
+                  {user.is_active ? <button className='bg-red-700 p-2 m-2 font-bold rounded text-white' onClick={() => blockOrUnblockUser(user.id, user.is_active)}
+                    >block </button>: <button
+                    className='bg-green-400 p-2 m-2'
+                    onClick={() => blockOrUnblockUser(user.id, user.is_active)}
+                  >unblock</button>}
+                    
+                  </td>
+                </tr>
+              ) : null
             ))}
-            {/* Add more rows as needed */}
           </tbody>
         </table>
       </div>

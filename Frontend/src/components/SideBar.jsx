@@ -25,36 +25,36 @@ const Sidebar = () => {
   return (
     <nav className={`bg-transparent text-indigo-800 font-bold h-screen w-1/5 p-4  ${isOpen ? 'md:block' : 'hidden md:block'}`}>
       <div className="mb-8">
-        <h2 className="text-2xl font-bold">Welcome Admin</h2>
+        <h2 className="text-3xl font-bold">Welcome Admin</h2>
       </div>
       <ul>
         <li className="hover:scale-110 mb-4">
           <Link to="/admin" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
-            <BsHouseDoor size={20} className="inline mr-2 hover:text-blue-800" />
+            <BsHouseDoor size={30} className="inline mr-2 hover:text-blue-800" />
             Dashboard
           </Link>
         </li>
         <li className="hover:scale-110 mb-4">
           <Link to="/admin/users/" className="block py-2 hover:bg-gray-200" onClick={''}>
-            <BsPeople size={20} className="inline mr-2 hover:text-blue-800" />
+            <BsPeople size={30} className="inline mr-2 hover:text-blue-800" />
             Users
           </Link>
         </li>
         <li className="hover:scale-110 mb-4">
-          <Link to="/tutors" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
-            <IoMdSchool size={20} className="inline mr-2 hover:text-blue-800" />
+          <Link to="/admin/tutors" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
+            <IoMdSchool size={30} className="inline mr-2 hover:text-blue-800" />
             Tutors
           </Link>
         </li>
         <li className="hover:scale-110 mb-4">
-          <Link to="/requests" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
-            <HiOutlineDocumentReport size={20} className="inline mr-2 hover:text-blue-800" />
+          <Link to="/admin/requests/" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
+            <HiOutlineDocumentReport size={30} className="inline mr-2 hover:text-blue-800" />
             Requests
           </Link>
         </li>
         <li className="hover:scale-110 mb-4">
           <Link to="/reports" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
-            <HiOutlineClipboardList size={20} className="inline mr-2 hover:text-blue-800" />
+            <HiOutlineClipboardList size={30} className="inline mr-2 hover:text-blue-800" />
             Reports
           </Link>
         </li>
