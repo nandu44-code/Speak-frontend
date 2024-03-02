@@ -1,7 +1,7 @@
 import React from 'react'
-import ListTutors from '../components/ListTutors'
-import Navbar from '../components/Navbar'
-import Sidebar from '../components/SideBar'
+import ListTutors from '../../components/ListTutors'
+import Navbar from '../../components/Navbar'
+import Sidebar from '../../components/SideBar'
 
 function AdminTutorsPage() {
   return (

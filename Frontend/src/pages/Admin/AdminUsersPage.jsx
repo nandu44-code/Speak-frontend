@@ -1,7 +1,8 @@
 import React from "react";
-import ListUsers from "../components/ListUsers";
-import Sidebar from "../components/SideBar";
-import Navbar from "../components/Navbar";
+import ListUsers from "../../components/ListUsers";
+import Sidebar from "../../components/SideBar";
+import Navbar from "../../components/Navbar";
+
 function AdminUsersPage() {
   return (
     <>

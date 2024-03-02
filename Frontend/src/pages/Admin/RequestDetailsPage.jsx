@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../services/Axios";
+import api from "../../services/Axios";
 import { useDispatch } from "react-redux";
 
 function RequestDetailsPage() {

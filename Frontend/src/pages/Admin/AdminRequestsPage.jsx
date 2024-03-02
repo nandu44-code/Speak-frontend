@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import Sidebar from "../components/SideBar";
+import Navbar from "../../components/Navbar";
+import Sidebar from "../../components/SideBar";
 import { useDispatch, useSelector } from "react-redux";
-import { getTutors } from "../features/userSlice";
+import { getTutors } from "../../features/userSlice";
 import { useNavigate } from "react-router-dom";
 
 function AdminRequestsPage() {
