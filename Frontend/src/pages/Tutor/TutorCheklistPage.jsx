@@ -1,6 +1,7 @@
 import React from "react";
-import TutorSignupsidebar from "../components/tutor/TutorSignupsidebar";
-import TutorBasicDetails from "../components/tutor/TutorBasicDetails";
+import TutorSignupsidebar from "../../components/tutor/TutorSignupsidebar";
+import TutorBasicDetails from "../../components/tutor/TutorBasicDetails";
+
 function TutorCheklistPage() {
   return (
     <div>
