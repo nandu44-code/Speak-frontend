@@ -4,14 +4,14 @@ import {
   getMyProfile,
   changeUserName,
   changeProfileImage,
-} from "../features/userSlice";
+} from "../../features/userSlice";
 import { jwtDecode } from "jwt-decode";
-import Navbar from "../components/Navbar";
-import imageSrc from "../assets/images/profileuser.jpg";
-import StudentprofileSidebar from "../components/StudentProfileSidebar";
+import Navbar from "../../components/Navbar";
+import imageSrc from "../../assets/images/profileuser.jpg";
+import StudentprofileSidebar from "../../components/StudentProfileSidebar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { app, firebaseStore } from "../services/Firebase";
+import { app, firebaseStore } from "../../services/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function StudentProfile() {

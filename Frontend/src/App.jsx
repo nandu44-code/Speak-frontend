@@ -5,8 +5,8 @@ import LandingPage from './pages/LandingPage';
 import SignUpPage from './pages/Auth/SignUpPage';
 import LoginPage from './pages/Auth/LoginPage'
 import AdminHomePage from './pages/Admin/AdminHomePage';
-import StudentHomePage from './pages/StudentHomePage';
-import StudentProfile from './pages/StudentProfile';
+import StudentHomePage from './pages/Student/StudentHomePage';
+import StudentProfile from './pages/Student/StudentProfile';
 import TutorCheklistPage from './pages/TutorCheklistPage';
 import AdminUsersPage from './pages/Admin/AdminUsersPage';
 import TutorProcessingPage from './pages/TutorProcessingPage';
