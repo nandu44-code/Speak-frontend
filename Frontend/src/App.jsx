@@ -6,6 +6,8 @@ import './App.css';
 import LandingPage from './pages/LandingPage';
 import SignUpPage from './pages/Auth/SignUpPage';
 import LoginPage from './pages/Auth/LoginPage'
+import OtpPgae from './pages/Auth/OtpPgae';
+
 //student related pages
 import StudentHomePage from './pages/Student/StudentHomePage';
 import StudentProfile from './pages/Student/StudentProfile';
@@ -29,10 +31,11 @@ function App() {
           <Route path='/' element={<LandingPage/>} />
           <Route path='register/' element={<SignUpPage/>} />
           <Route path='/login/' element={<LoginPage/>} />
-          
+          <Route path='/otp/' element={<OtpPgae/>}/>
+
           <Route path='/student/home/' element={<StudentHomePage/>}/>
           <Route path='/student/profile/' element={<StudentProfile/>}/> 
-          
+
           <Route path='/tutor/home/' element={<TutorHomePage/>}/>
           <Route path='/tutor/checklist/' element={<TutorCheklistPage/>}/>
           <Route path='/tutor/checklist/processing' element={<TutorProcessingPage/>}/>
