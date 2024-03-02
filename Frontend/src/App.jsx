@@ -2,8 +2,8 @@ import { useState } from 'react';
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import './App.css';
 import LandingPage from './pages/LandingPage';
-import SignUpPage from './pages/SignUpPage';
-import LoginPage from './pages/LoginPage'
+import SignUpPage from './pages/Auth/SignUpPage';
+import LoginPage from './pages/Auth/LoginPage'
 import AdminHomePage from './pages/Admin/AdminHomePage';
 import StudentHomePage from './pages/StudentHomePage';
 import StudentProfile from './pages/StudentProfile';
