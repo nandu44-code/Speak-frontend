@@ -11,6 +11,7 @@ import OtpPgae from './pages/Auth/OtpPgae';
 //student related pages
 import StudentHomePage from './pages/Student/StudentHomePage';
 import StudentProfile from './pages/Student/StudentProfile';
+import ChangePassPage from './pages/Student/ChangePassPage';
 //Tutor related pages
 import TutorCheklistPage from './pages/Tutor/TutorCheklistPage';
 import TutorHomePage from './pages/Tutor/TutorHomePage';
@@ -35,6 +36,7 @@ function App() {
 
           <Route path='/student/home/' element={<StudentHomePage/>}/>
           <Route path='/student/profile/' element={<StudentProfile/>}/> 
+          <Route path='/student/changePassword/' element={<ChangePassPage/>}/> 
 
           <Route path='/tutor/home/' element={<TutorHomePage/>}/>
           <Route path='/tutor/checklist/' element={<TutorCheklistPage/>}/>

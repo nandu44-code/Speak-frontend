@@ -145,6 +145,17 @@ export const otp_validation = createAsyncThunk(
   }
 );
 
+export const change_password = createAsyncThunk(
+  'change_password',
+  async (credentials) => {
+    try {
+      const response = await api.patch(`users/${credentials.id}/`, credentials)
+    }catch(error){
+      console.log('error',error)
+    }
+  }
+)
+
 const initialState = {
   msg: "",
   user: null,
@@ -280,6 +291,26 @@ const userSlice = createSlice({
         
       })
       .addCase(otp_validation.rejected, (state) => {
+        state.loading = false;
+        Swal.fire({
+          background: "#fff",
+          icon: "error",
+          title: "oops, something went wrong",
+          text: action.payload,
+        });
+
+      });
+
+      builder
+      .addCase(change_password.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(change_password.fulfilled, (state, action) => {
+        state.loading = false;
+        toast.success('Password changed successfully')
+        
+      })
+      .addCase(change_password.rejected, (state) => {
         state.loading = false;
         Swal.fire({
           background: "#fff",

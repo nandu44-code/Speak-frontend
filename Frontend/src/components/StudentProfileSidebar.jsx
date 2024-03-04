@@ -15,12 +15,12 @@ const StudentProfileSidebar = () => {
     <nav className={`bg-transparent text-indigo-800 font-bold h-screen w-1/5 p-4  ${isOpen ? 'md:block' : 'hidden md:block'}`}>
       <ul>
         <li className="hover:scale-110 mb-4">
-          <Link to="/dashboard" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
+          <Link to="/student/profile/" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
             <BsHouseDoor size={20} className="inline mr-2 hover:text-blue-800" />
-            Dashboard
+           Your Profile
           </Link>
         </li>
-        <li className="hover:scale-110 mb-4">
+        {/* <li className="hover:scale-110 mb-4">
           <Link to="/users" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
             <BsPeople size={20} className="inline mr-2 hover:text-blue-800" />
             Users
@@ -37,11 +37,11 @@ const StudentProfileSidebar = () => {
             <HiOutlineDocumentReport size={20} className="inline mr-2 hover:text-blue-800" />
             Requests
           </Link>
-        </li>
+        </li> */}
         <li className="hover:scale-110 mb-4">
-          <Link to="/reports" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
+          <Link to="/student/changePassword/" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
             <HiOutlineClipboardList size={20} className="inline mr-2 hover:text-blue-800" />
-            Reports
+            Change password
           </Link>
         </li>
       </ul>
