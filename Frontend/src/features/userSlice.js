@@ -2,8 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 import api from "../services/Axios";
 import Swal from "sweetalert2";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FaCreativeCommonsNcJp } from "react-icons/fa";
 
 export const Register = createAsyncThunk("register", async (credentials) => {
   try {
@@ -32,7 +33,7 @@ export const Login = createAsyncThunk("login", async (credentials) => {
     }
   } catch (error) {
     console.error("error", error);
-    toast.error(error)
+    toast.error(error);
     throw error;
   }
 });
@@ -57,7 +58,7 @@ export const changeUserName = createAsyncThunk(
   "change_username",
   async (credentials) => {
     try {
-      const request = await api.put(`users/${credentials.id}/`,credentials);
+      const request = await api.put(`users/${credentials.id}/`, credentials);
       if (request.status === 200) {
         console.log("everything is perfect");
         return request.data;
@@ -70,69 +71,79 @@ export const changeUserName = createAsyncThunk(
 
 export const changeProfileImage = createAsyncThunk(
   "change_profileImage",
-  async(credentials) =>{
-    try{
-      const request = await api.patch(`users/${credentials.id}/`,credentials);
-      if(request.status == 200){
-        console.log('profile updated successfully')
-        return request.data
+  async (credentials) => {
+    try {
+      const request = await api.patch(`users/${credentials.id}/`, credentials);
+      if (request.status == 200) {
+        console.log("profile updated successfully");
+        return request.data;
       }
-    }catch(error) {
-      console.log("Error:",error)
+    } catch (error) {
+      console.log("Error:", error);
     }
   }
 );
 
 export const tutorchecklist = createAsyncThunk(
   "Tutor_checklist",
-  async(credentials) =>{
-    console.log(credentials)
-    try{
-      const request = await api.post("tutor/register/",credentials);
-      if(request.status == 200){
-        console.log('tutor profile completed')
-
+  async (credentials) => {
+    console.log(credentials);
+    try {
+      const request = await api.post("tutor/register/", credentials);
+      if (request.status == 200) {
+        console.log("tutor profile completed");
       }
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   }
 );
 
-export const getUsers = createAsyncThunk(
-  "get_users",
-  async() =>{
-    try{
-      const request = await api.get("users/")
-      if(request.status == 200){
-        console.log("fetched all the users")
+export const getUsers = createAsyncThunk("get_users", async () => {
+  try {
+    const request = await api.get("users/");
+    if (request.status == 200) {
+      console.log("fetched all the users");
+    }
+  } catch (error) {
+    console.log("Error:", error);
+  }
+});
+
+export const getTutors = createAsyncThunk("getTutors", async () => {
+  try {
+    const request = await api.get("users/");
+    const response = request.data;
+    if (request.status == 200) {
+      console.log("fetched all the tutors");
+      console.log(response);
+      const data = response.filter((item) => item.is_tutor);
+      console.log(data);
+      return data;
+    }
+  } catch (error) {
+    console.log("Error:", error);
+  }
+});
+
+export const otp_validation = createAsyncThunk(
+  "otpValidation",
+  async (credentials) => {
+    try {
+      const response = await api.post("validate-otp/", credentials);
+
+      if (response.data.status) {
+        if (response.data.status == 200) {
+          console.log("otp verified successfully");
+        } else {
+          console.log("otp is not verified");
+        }
       }
-    }catch(error){
-      console.log("Error:",error)
+    } catch (error) {
+      console.log("Error", error);
     }
   }
-)
-
-export const getTutors = createAsyncThunk(
-  "getTutors",
-  async() =>{
-    try{
-      const request = await api.get("users/")
-      const response = request.data
-      if(request.status == 200){
-        console.log("fetched all the tutors")
-        console.log(response)
-        const data = response.filter((item) => item.is_tutor)
-        console.log(data)
-        return data
-      }
-    }catch(error){
-      console.log("Error:",error)
-    }
-  }
-)
-
-
+);
 
 const initialState = {
   msg: "",
@@ -141,17 +152,17 @@ const initialState = {
   token: "",
   loading: false,
   error: "",
-  data:[],
-  tutor:[]
+  data: [],
+  tutor: [],
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    clearUser(state){
-      state.user=null
-    }
+    clearUser(state) {
+      state.user = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -165,8 +176,8 @@ const userSlice = createSlice({
           Swal.fire({
             background: "#fff",
             icon: "success",
-            title: "Account Created!",
-            text: "Your account has been created!!",
+            title: "An otp send to your email",
+            text: "OTP sent successfully!!",
           });
         }
       })
@@ -206,7 +217,7 @@ const userSlice = createSlice({
       .addCase(getMyProfile.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        toast.success('welcome to your profile')
+        toast.success("welcome to your profile");
       })
       .addCase(getMyProfile.rejected, (state) => {
         state.loading = false;
@@ -218,18 +229,18 @@ const userSlice = createSlice({
         });
       });
 
-	  builder
+    builder
       .addCase(changeUserName.pending, (state) => {
         state.loading = true;
       })
       .addCase(changeUserName.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        toast.success('username changed successfully')
+        toast.success("username changed successfully");
       })
       .addCase(changeUserName.rejected, (state) => {
         state.loading = false;
-        toast.error("something went wrong")
+        toast.error("something went wrong");
       });
 
     builder
@@ -239,27 +250,44 @@ const userSlice = createSlice({
       .addCase(tutorchecklist.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        toast.success('successfully submitted')
+        toast.success("successfully submitted");
       })
       .addCase(tutorchecklist.rejected, (state) => {
         state.loading = false;
-        toast.error("something went wrong")
+        toast.error("something went wrong");
       });
 
     builder
       .addCase(getTutors.pending, (state) => {
         state.loading = true;
-        
       })
       .addCase(getTutors.fulfilled, (state, action) => {
         state.loading = false;
-        state.tutor=action.payload
-        console.log(action.payload)
-        
+        state.tutor = action.payload;
+        console.log(action.payload);
       })
       .addCase(getTutors.rejected, (state) => {
         state.loading = false;
+      });
+
+    builder
+      .addCase(otp_validation.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(otp_validation.fulfilled, (state, action) => {
+        state.loading = false;
+        toast.success('account created successfully')
         
+      })
+      .addCase(otp_validation.rejected, (state) => {
+        state.loading = false;
+        Swal.fire({
+          background: "#fff",
+          icon: "error",
+          title: "oops, something went wrong",
+          text: action.payload,
+        });
+
       });
   },
 });

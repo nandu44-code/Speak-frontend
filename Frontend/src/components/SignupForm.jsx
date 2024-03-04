@@ -33,7 +33,7 @@ function SignUpForm() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // Password validation: At least 8 characters, one uppercase letter, one lowercase letter, and one digit
+   
     if (
       formData.username.split(" ").join("") != "" &&
       formData.email != "" &&
@@ -92,7 +92,7 @@ function SignUpForm() {
 
       try {
         dispatch(Register(credentials));
-        navigate("/login/");
+        navigate("/otp/");
       } catch (error) {
         console.error("Error during registration:", error);
       }

@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { BsCheckLg } from 'react-icons/bs';
 import OtpInput from 'react-otp-input';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { otp_validation } from '../../features/userSlice';
+import { toast } from 'react-toastify';
 
 function OtpPage() {
   const [otp, setOtp] = useState('');
   const [fullotp, setFullotp] = useState('')
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const handleOtpChange = (newOtp) => {
     setOtp(newOtp);
-    if (otp !== ''){
-        BsCheckLg
-    }
+    console.log(newOtp)
   }
   console.log("this is console.log",fullotp)
 
@@ -35,11 +40,26 @@ function OtpPage() {
         <button
           className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
           onClick={() => {
-            // Access the entire OTP after user finishes typing
-            console.log('Entire OTP:', otp);
-            setFullotp(otp)
-
-            // You can now use the otp variable for validation or other actions
+            if (otp.length === 6) {
+              console.log("otp length is 6")
+              console.log('Entire OTP:', otp);
+              setFullotp(otp);
+              const intotp = parseInt(otp,10)
+              const credentials = {
+                'otp': intotp,
+              };
+              console.log(credentials)
+              try {
+                dispatch(otp_validation(credentials));
+                navigate('/login/');
+              } catch (error) {
+                console.log("error", error);
+              }
+            } else {
+             
+              toast.error('Invalid OTP length')
+              // Optionally, provide user feedback for invalid OTP length
+            }
           }}
         >
           <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
