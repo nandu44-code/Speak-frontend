@@ -10,7 +10,7 @@ import Navbar from "../../components/Navbar";
 import imageSrc from "../../assets/images/profileuser.jpg";
 import StudentprofileSidebar from "../../components/StudentProfileSidebar";
 import { toast } from "react-toastify";
-import { ThreeDots } from "react-loader-spinner";
+import { TailSpin }  from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 import { app, firebaseStore } from "../../services/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -18,6 +18,8 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 function StudentProfile() {
   const dispatch = useDispatch();
   const userprofile = useSelector((state) => state.user.user);
+  const loading = useSelector((state) => state.user.loading);
+
   const [isUploadButton, setIsUploadButton] = useState(false);
   const [username, setUsername] = useState(
     userprofile ? userprofile.username : ""
@@ -119,22 +121,29 @@ function StudentProfile() {
               type="file"
               id="fileInput"
               className="hidden"
-          
               onChange={(e) => {
                 setImageUpload(e.target.files[0]);
               }}
             />
 
             <label htmlFor="fileInput">
-              <img
-                src={
-                  userprofile && userprofile.profile_image
-                    ? userprofile.profile_image
-                    : imageSrc
-                }
-                alt="no image"
-                className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
-              />
+              {loading ? (
+                // Render loader while image is loading
+                <div className="mx-auto rounded-full w-32 h-32 mb-4">
+                    <TailSpin />
+                </div>
+              ) : (
+                // Render the image when it is loaded
+                <img
+                  src={
+                    userprofile && userprofile.profile_image
+                      ? userprofile.profile_image
+                      : imageSrc
+                  }
+                  alt="no image"
+                  className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
+                />
+              )}
             </label>
 
             <input

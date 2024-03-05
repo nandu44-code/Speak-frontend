@@ -254,6 +254,19 @@ const userSlice = createSlice({
       });
 
     builder
+      .addCase(changeProfileImage.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(changeProfileImage.fulfilled, (state,action) => {
+        state.loading = false
+
+      })
+      .addCase(changeProfileImage.rejected, (state)=> {
+        state.loading = false
+        toast.error('Error while uploading image')
+      })
+
+    builder
       .addCase(tutorchecklist.pending, (state) => {
         state.loading = true;
       })
