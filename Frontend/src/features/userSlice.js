@@ -58,7 +58,7 @@ export const changeUserName = createAsyncThunk(
   "change_username",
   async (credentials) => {
     try {
-      const request = await api.put(`users/${credentials.id}/`, credentials);
+      const request = await api.patch(`users/${credentials.id}/`, credentials);
       if (request.status === 200) {
         console.log("everything is perfect");
         return request.data;
@@ -148,12 +148,11 @@ export const otp_validation = createAsyncThunk(
 export const change_password = createAsyncThunk(
   'change_password',
   async (credentials) => {
-    try {
-      const response = await api.patch(`users/${credentials.id}/`, credentials)
-    }catch(error){
-      console.log('error',error)
+    
+      const response = await api.post('change-password/', credentials)
+      return response.data
+   
     }
-  }
 )
 
 const initialState = {
@@ -316,7 +315,7 @@ const userSlice = createSlice({
           background: "#fff",
           icon: "error",
           title: "oops, something went wrong",
-          text: action.payload,
+          text: "Internal server error",
         });
 
       });

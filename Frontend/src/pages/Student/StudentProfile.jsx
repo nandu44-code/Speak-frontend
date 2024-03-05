@@ -10,6 +10,7 @@ import Navbar from "../../components/Navbar";
 import imageSrc from "../../assets/images/profileuser.jpg";
 import StudentprofileSidebar from "../../components/StudentProfileSidebar";
 import { toast } from "react-toastify";
+import { ThreeDots } from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 import { app, firebaseStore } from "../../services/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";

@@ -6,8 +6,7 @@ import { useDispatch } from "react-redux";
 function RequestDetailsPage() {
   const { id } = useParams();
   const [userData, setUserData] = useState(null);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,33 +21,32 @@ function RequestDetailsPage() {
     fetchData();
   }, [id]);
 
-  const handleApproval = async()=>{
+  const handleApproval = async () => {
     const credentials = {
-        is_approved:true
+      is_approved: true,
+    };
+    try {
+      const response = await api.patch(`users/${id}/`, credentials);
+      console.log(response.data);
+      navigate("/admin/requests");
+    } catch (error) {
+      console.log(error);
     }
-   try{
-    const response = await api.patch(`users/${id}/`,credentials);
-    console.log(response.data)
-    navigate('/admin/requests')
-   }catch(error){
-    console.log(error)
-   }
-  }
+  };
 
-  const handleReject = async() => {
-
+  const handleReject = async () => {
     const credentials = {
-      is_rejected:true
-    }
-    try{
-      const response = await api.patch(`users/${id}/`,credentials)
+      is_rejected: true,
+    };
+    try {
+      const response = await api.patch(`users/${id}/`, credentials);
 
-      console.log(response.data)
-      navigate('/admin/requests')
-    }catch(error){
-      console.log("error",error)
+      console.log(response.data);
+      navigate("/admin/requests");
+    } catch (error) {
+      console.log("error", error);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col justify-center m-20">
@@ -93,27 +91,25 @@ function RequestDetailsPage() {
       </label>
 
       {userData && (
-        
         <img
           src={userData.tutor.certificates}
           className=" w-60 h-20  ml-96 mr-10 mt-10 cursor-pointer "
-        > 
-          </img>
-        
+        ></img>
       )}
 
-      
       <div className="m-20 flex justify-evenly">
         {/* <button className='bg-indigo-500 px-3 py-1 text-white rounded hover:bg- hover:scale-110 duration-500'>Accept</button> */}
-        <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-        onClick={handleApproval}
+        <button
+          className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+          onClick={handleApproval}
         >
           <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-purple-700 rounded-md group-hover:bg-opacity-0">
             Accept
           </span>
         </button>
-        <button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-100 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white "
-        onClick={handleReject}
+        <button
+          className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-100 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white "
+          onClick={handleReject}
         >
           <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-white dark:bg-red-500 rounded-md group-hover:bg-opacity-0">
             Reject

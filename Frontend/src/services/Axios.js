@@ -11,6 +11,26 @@ api.interceptors.request.use((config)=>{
         config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config
-})
+});
+
+// api.interceptors.response.use(
+//     (response) => {
+//         return response;
+//     },
+//     (error) => {
+//         if (error.response.status === 401) {
+            
+//             logoutUser(); 
+//         }
+//         return Promise.reject(error);
+//     }
+// );
+
+// const logoutUser = () => {
+    
+//     localStorage.removeItem('accessToken');
+    
+//     window.location.href = '/login'; // Adjust the path as needed
+// };
 
 export default api

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/Axios";
+import { useNavigate } from "react-router-dom";
 
 function ListTutors() {
     const [users, setUsers] = useState([]);
-
+    const [id,setId] = useState(null)
+    const navigate = useNavigate()
     useEffect(() => {
       const fetchUsers = async () => {
         try {
@@ -37,6 +39,13 @@ function ListTutors() {
         console.log("Error:", error);
       }
     };
+
+
+    useEffect(() => {
+      if (id != null){
+          navigate(`/admin/tutors/detail/${id}`)
+      }
+    },[id])
   return (
     <div>
     <div className="ml-56 mt-20">
@@ -65,7 +74,7 @@ function ListTutors() {
                     className='bg-green-600 p-2 m-2 rounded text-white font-bold'
                     onClick={() => blockOrUnblockUser(user.id, user.is_active)}
                   >UnBlock</button>}
-                  <button className="bg-blue-900 p-2 m-2 rounded font-bold text-white hover:bg-blue-800" onClick={''}>View Details</button>
+                  <button className="bg-blue-900 p-2 m-2 rounded font-bold text-white hover:bg-blue-800" onClick={() =>{setId(user.id)}}>View Details</button>
                   </td>
                 </tr>
               ) : null
