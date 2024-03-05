@@ -65,7 +65,7 @@ function ListTutors() {
                     className='bg-green-600 p-2 m-2 rounded text-white font-bold'
                     onClick={() => blockOrUnblockUser(user.id, user.is_active)}
                   >UnBlock</button>}
-
+                  <button className="bg-blue-900 p-2 m-2 rounded font-bold text-white hover:bg-blue-800" onClick={''}>View Details</button>
                   </td>
                 </tr>
               ) : null

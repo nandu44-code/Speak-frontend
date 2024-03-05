@@ -70,7 +70,6 @@ function TutorBasicDetails() {
       });
     }
 
-    
     const tutorChecklist = async (url) => {
       const credentials = {
        
@@ -229,7 +228,7 @@ function TutorBasicDetails() {
 
           <div className="m-10 flex">
             <label className="text-gray-700 mr-10 font-medium">
-              Certificates(*optional):
+              Certificates:
             </label>
             <input
               type="file"
