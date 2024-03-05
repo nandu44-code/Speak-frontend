@@ -8,6 +8,7 @@ import {
 } from "../../features/userSlice";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
+import { TailSpin } from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 import { app, firebaseStore } from "../../services/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -22,6 +23,7 @@ function TutorBasicDetails() {
   const [profileImage, setProfileImage] = useState(null);
   const [selfIntroVideo, setSelfIntroVideo] = useState(null);
   const [certificates, setCertificates] = useState(null);
+
   const loading = useSelector((state)=> state.user.loading)
 
   const countryRegex = "^[a-zA-Z]+$";
@@ -163,15 +165,23 @@ function TutorBasicDetails() {
           />
 
           <label htmlFor="fileInput">
-            <img
-              src={
-                userprofile && userprofile.profile_image
-                  ? userprofile.profile_image
-                  : imageSrc
-              }
-              alt="no image"
-              className="mx-auto rounded-full w-40 h-40 mb-4 cursor-pointer hover:scale-110 transition duration-500"
-            />
+              {loading ? (
+                // Render loader while image is loading
+                <div className="mx-auto rounded-full w-32 h-32 mb-4">
+                    <TailSpin />
+                </div>
+              ) : (
+                // Render the image when it is loaded
+                <img
+                  src={
+                    userprofile && userprofile.profile_image
+                      ? userprofile.profile_image
+                      : imageSrc
+                  }
+                  alt="no image"
+                  className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
+                />
+              )}
 
             {userprofile && userprofile.profile_image ? (
               <h1

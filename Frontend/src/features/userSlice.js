@@ -20,9 +20,11 @@ export const Login = createAsyncThunk("login", async (credentials) => {
   console.log("its working here aswell");
   try {
     const response = await api.post("login/", credentials);
-    console.log(response);
+    console.log(response.data);
     const accessToken = response.data.access;
+    const refreshToken = response.data.refresh;
     localStorage.setItem("accessToken", accessToken);
+    localStorage.setItem("refreshToken", refreshToken)
     if (response.status === 200) {
       Swal.fire({
         background: "#fff",
