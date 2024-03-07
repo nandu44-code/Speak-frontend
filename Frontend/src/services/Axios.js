@@ -8,7 +8,7 @@ const api = axios.create({
 const refreshAccessToken = async () => {
   try {
     const refreshToken = localStorage.getItem('refreshToken');
-    const response = await axios.post('/api/login/refresh/', {
+    const response = await api.post('/login/refresh/', {
       refresh: refreshToken
     });
 
@@ -28,7 +28,7 @@ api.interceptors.request.use(async (config) => {
   if (accessToken) {
     const decodedToken = jwtDecode(accessToken);
     const currentTime = Math.floor(Date.now() / 1000);
-
+    console.log("entered here")
     if (decodedToken.exp < currentTime) {
       try {
         const newAccessToken = await refreshAccessToken();
