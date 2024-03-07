@@ -49,15 +49,16 @@ function RequestDetailsPage() {
   };
 
   return (
-    <div className="flex flex-col justify-center m-20">
-      <div className="flex">
+    <div className="flex flex-col justify-center m-10 bg-stone-300 rounded-3xl p-10">
+      <div className=" flex justify-center">
         {userData && (
           <img
-            className=" w-40 h-40  ml-96 mr-10 cursor-pointer rounded-full"
+            className=" w-40 h-40 cursor-pointer"
             src={userData.profile_image}
           ></img>
         )}
-        <div className="flex flex-col">
+      </div>
+        <div className="">
           {userData && (
             <p className="font-bold text-2xl text-violet-900">
               {userData.username}
@@ -73,7 +74,7 @@ function RequestDetailsPage() {
             )}
           </div>
         </div>
-      </div>
+     
 
       {userData && (
         <p className="font-bold text-2xl text-violet-900">
