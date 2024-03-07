@@ -2,11 +2,11 @@ import React, { useState, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Register } from "../features/userSlice";
-import imageSrc from "../assets/images/pexels-andrea-piacquadio-3772511.jpg";
+import imageSrc from "../assets/images/signupPageImage.jpg";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { TailSpin, ThreeDots } from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 // import Loader from 'react-loader-spinner/dist/loader/CradleLoader';
 
 function SignUpForm() {
@@ -16,6 +16,8 @@ function SignUpForm() {
   // const [selectedOption, setSelectedOption] = useState('');
   const [formData, setformData] = useState({
     username: "",
+    first_name:"",
+    last_name:"",
     email: "",
     password: "",
     confirmPassword: "",
@@ -106,7 +108,11 @@ function SignUpForm() {
   };
 
   return (
-      <div className="w-1/4 mx-auto bg-transparent mt-32">
+    <div className="flex flex-row bg-yellow-300">
+      <div className="w-3/5 mr-2">
+        <img src={imageSrc} className="w-full h-screen p-2"></img>
+      </div>
+      <div className="w-1/3 mx-auto bg-transparent mt-32">
         <h2 className="text-2xl font-bold mb-4 text-blue-800">
           Create an Account
         </h2>
@@ -120,6 +126,28 @@ function SignUpForm() {
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 focus:border-2"
               placeholder="Username..."
+              required
+            />
+          </div>
+          <div className="flex flex-row ">
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              value={formData.first_name}
+              onChange={handleChange}
+              className="w-full px-3 py-2 mr-2 border rounded-md focus:outline-none focus:border-blue-500 focus:border-2"
+              placeholder="First Name"
+              required
+            />
+              <input
+              type="text"
+              id="last_name"
+              name="last_name"
+              value={formData.last_name}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 focus:border-2"
+              placeholder="Last Name"
               required
             />
           </div>
@@ -199,6 +227,7 @@ function SignUpForm() {
           </h4>
         </form>
       
+     </div>
      </div>
   );
 }

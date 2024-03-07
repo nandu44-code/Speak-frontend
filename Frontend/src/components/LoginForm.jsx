@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Login } from '../features/userSlice';
 import {jwtDecode} from 'jwt-decode';
+import imageSrc from "../assets/images/signupPageImage.jpg";
 
 function LoginForm() {
 
@@ -53,7 +54,12 @@ function LoginForm() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-28">
+    <div className="flex flex-row bg-yellow-300">
+    <div className="w-3/5 mr-2">
+      <img src={imageSrc} className="w-full h-screen p-2"></img>
+    </div>
+    <div className="w-1/3 mx-auto bg-transparent mt-32">
+   
       <h2 className="text-2xl font-bold mb-4 text-blue-800">Log in here....</h2>
       <form className="space-y-4" onSubmit={handleLogin} method='post'>
         <div>
@@ -86,6 +92,7 @@ function LoginForm() {
         <h4 className='text-md'>Don't have an account?</h4>
         <h4 className='text-indigo-800 cursor-pointer' onClick={handleClickSignUp}>click here to register</h4>
       </form>
+    </div>
     </div>
   );
 
