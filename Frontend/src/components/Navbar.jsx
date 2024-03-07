@@ -36,18 +36,18 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-slate-700 p-4 ">
+    <nav className="bg-white p-4 ">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="flex-shrink-0">
-          <Link to='/' className="text-white font-normal text-4xl ml-0">
+          <Link to='/' className="text-purple-900 font-bold text-4xl ml-0">
             Speak
           </Link>
         </div>
 
         {/* Navigation links */}
-        <div className="hidden md:flex space-x-10  hover:border-b-4 border-indigo-400 ">
-          <Link to="/" className="text-white  hover:text-gray-200">
+        <div className="hidden md:flex space-x-10  ">
+          <Link to="/" className="text-purple-950 font-bold text-lg hover:scale-110 hover:text-purple-950 duration-500">
             Home
           </Link>
         </div>
