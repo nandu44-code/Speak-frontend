@@ -54,7 +54,7 @@ function LoginForm() {
   }
 
   return (
-    <div className="flex flex-row bg-yellow-300">
+    <div className="flex flex-row">
     <div className="w-3/5 mr-2">
       <img src={imageSrc} className="w-full h-screen p-2"></img>
     </div>

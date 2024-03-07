@@ -90,6 +90,8 @@ function SignUpForm() {
         password: formData.password,
         is_tutor: formData.is_tutor,
         is_student: formData.is_student,
+        first_name: formData.first_name,
+        last_name: formData.last_name
       };
 
       try {
@@ -108,7 +110,7 @@ function SignUpForm() {
   };
 
   return (
-    <div className="flex flex-row bg-yellow-300">
+    <div className="flex flex-row">
       <div className="w-3/5 mr-2">
         <img src={imageSrc} className="w-full h-screen p-2"></img>
       </div>
