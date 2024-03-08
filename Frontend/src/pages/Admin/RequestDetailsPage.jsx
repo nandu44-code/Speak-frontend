@@ -49,7 +49,7 @@ function RequestDetailsPage() {
   };
 
   return (
-    <div className="flex flex-col justify-center m-10 bg-stone-200 rounded-3xl p-10">
+    <div className="flex flex-col justify-center m-10 bg-stone-200 rounded-3xl p-10 ">
       <div className=" flex justify-center">
         {userData && (
           <img
