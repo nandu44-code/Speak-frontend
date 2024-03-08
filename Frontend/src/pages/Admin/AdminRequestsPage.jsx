@@ -29,12 +29,12 @@ function AdminRequestsPage() {
     }
   },[id])
 
-  const pendingRequests = tutors.filter((tutor) => !tutor.is_approved && !tutor.is_rejected);
+  const pendingRequests = tutors.filter((tutor) => !tutor.is_approved && !tutor.is_rejected && tutor.is_student);
 
   console.log(pendingRequests);
 
   return (
-    <div className="flex-row">
+    <div className="flex-row"> 
       <Navbar />
       <div className="flex">
         <Sidebar />
