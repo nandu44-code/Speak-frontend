@@ -29,7 +29,7 @@ function AdminRequestsPage() {
     }
   },[id])
 
-  const pendingRequests = tutors.filter((tutor) => !tutor.is_approved && !tutor.is_rejected && tutor.is_student);
+  const pendingRequests = tutors.filter((tutor) => !tutor.is_approved && !tutor.is_rejected && tutor.is_tutor);
 
   console.log(pendingRequests);
 

@@ -59,15 +59,31 @@ function RequestDetailsPage() {
         )}
       </div>
         <div className=" bg-slate-200 mt-10">
+          <p className="font-bold text-2xl text-gray-500">Basic Details</p>
+          {userData && (
+            <input className="font-bold w-auto text-2xl m-6 text-violet-900 rounded-xl "
+              value={userData.username}
+            />
+          )}
+          <div className="flex flex-row justify-center">
+          <p className="font-bold text-gray-700">Full Name:</p>
           {userData && (
             <p className="font-bold text-2xl text-violet-900">
-              {userData.username}
+              {userData.first_name}
+              <span>{'\u00A0'}</span>
             </p>
           )}
+           {userData && (
+            <p className="font-bold text-2xl text-violet-900">
+              {userData.last_name}
+            </p>
+          )}
+          </div>
+
           {userData && <p className="font-bold text-2xl">{userData.email}</p>}
           <div className="flex justify-center">
             {userData && (
-              <p className="font-semibold text-xl">{userData.tutor.state} , </p>
+              <p className="font-semibold text-xl">{userData.tutor.state}</p>
             )}
             {userData && (
               <p className="font-semibold text-xl">{userData.tutor.country}</p>

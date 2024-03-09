@@ -5,7 +5,8 @@ import {
   changeProfileImage,
   getMyProfile,
   tutorchecklist,
-} from "../../features/userSlice";
+} 
+from "../../features/userSlice";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
 import { TailSpin } from "react-loader-spinner";
@@ -24,7 +25,7 @@ function TutorBasicDetails() {
   const [selfIntroVideo, setSelfIntroVideo] = useState(null);
   const [certificates, setCertificates] = useState(null);
 
-  const loading = useSelector((state)=> state.user.loading)
+  let loading = useSelector((state)=> state.user.loading)
 
   const countryRegex = "^[a-zA-Z]+$";
 
@@ -55,6 +56,7 @@ function TutorBasicDetails() {
     } else if (certificates === null) {
       toast.error("add relevant certificate");
     } else {
+      // loading = true
       const uuid = uuidv4();
 
       const storageRef = ref(firebaseStore);
@@ -68,6 +70,7 @@ function TutorBasicDetails() {
           tutorChecklist(url);
           toast.success("certificates uploaded successfully");
           // getMyProfile(access.user)
+          // loading = false
         });
       });
     }
@@ -100,12 +103,6 @@ function TutorBasicDetails() {
     }
   }, [profileImage]);
 
-  // useEffect(() => {
-  //   if (certificates !== null) {
-  //     console.log("profile image selcted successfully");
-  //     uploadImage();
-  //   }
-  // }, [certificates]);
 
   const uploadImage = () => {
     if (profileImage == null) {
@@ -178,7 +175,7 @@ function TutorBasicDetails() {
                       ? userprofile.profile_image
                       : imageSrc
                   }
-                  alt="no image"
+                 
                   className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
                 />
               )}
