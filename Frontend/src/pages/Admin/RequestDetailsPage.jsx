@@ -12,7 +12,6 @@ function RequestDetailsPage() {
     const fetchData = async () => {
       try {
         const response = await api.get(`user/${id}/`);
-        console.log(response);
         setUserData(response.data);
       } catch (error) {
         console.error();
@@ -27,7 +26,6 @@ function RequestDetailsPage() {
     };
     try {
       const response = await api.patch(`users/${id}/`, credentials);
-      console.log(response.data);
       navigate("/admin/requests");
     } catch (error) {
       console.log(error);
@@ -40,8 +38,6 @@ function RequestDetailsPage() {
     };
     try {
       const response = await api.patch(`users/${id}/`, credentials);
-
-      console.log(response.data);
       navigate("/admin/requests");
     } catch (error) {
       console.log("error", error);
@@ -49,88 +45,72 @@ function RequestDetailsPage() {
   };
 
   return (
-    <div className="flex flex-col justify-center m-10 bg-stone-200 rounded-3xl p-10 ">
-      <div className=" flex justify-center">
-        {userData && (
-          <img
-            className=" w-40 h-40 cursor-pointer"
-            src={userData.profile_image}
-          ></img>
-        )}
-      </div>
-        <div className=" bg-slate-200 mt-10">
-          <p className="font-bold text-2xl text-gray-500">Basic Details</p>
-          {userData && (
-            <input className="font-bold w-auto text-2xl m-6 text-violet-900 rounded-xl "
-              value={userData.username}
-            />
-          )}
-          <div className="flex flex-row justify-center">
-          <p className="font-bold text-gray-700">Full Name:</p>
-          {userData && (
-            <p className="font-bold text-2xl text-violet-900">
-              {userData.first_name}
-              <span>{'\u00A0'}</span>
-            </p>
-          )}
-           {userData && (
-            <p className="font-bold text-2xl text-violet-900">
-              {userData.last_name}
-            </p>
-          )}
-          </div>
-
-          {userData && <p className="font-bold text-2xl">{userData.email}</p>}
-          <div className="flex justify-center">
-            {userData && (
-              <p className="font-semibold text-xl">{userData.tutor.state}</p>
-            )}
-            {userData && (
-              <p className="font-semibold text-xl">{userData.tutor.country}</p>
-            )}
-          </div>
-        </div>
-     
-
-      {userData && (
-        <p className="font-bold text-2xl text-violet-900">
-          {userData.username}
-        </p>
-      )}
-      {userData && (
-        <p className="font-normal">{userData.tutor.introduction_description}</p>
-      )}
-      <label className="font-bold text-xl">
-        Teaching style
-        {userData && (
-          <p className="font-bold text-2xl">{userData.tutor.teaching_style}</p>
-        )}
-      </label>
-
+    <div className="flex flex-col items-center m-10 bg-stone-200 rounded-3xl p-10">
       {userData && (
         <img
-          src={userData.tutor.certificates}
-          className=" w-60 h-20  ml-96 mr-10 mt-10 cursor-pointer "
-        ></img>
+          className="w-40 h-40 cursor-pointer mb-6"
+          src={userData.profile_image}
+          alt="Profile"
+        />
       )}
 
-      <div className="m-20 flex justify-evenly">
-        {/* <button className='bg-indigo-500 px-3 py-1 text-white rounded hover:bg- hover:scale-110 duration-500'>Accept</button> */}
+      <div className="bg-slate-200 p-6 rounded-xl w-full mb-6">
+        <p className="font-bold text-2xl text-gray-500">Basic Details</p>
+        <div className="flex flex-row justify-center mb-4">
+          <p className="font-bold text-gray-700">Full Name:</p>
+          <p className="font-bold text-2xl text-violet-900 ml-2">
+            {userData && userData.first_name}
+            <span className="mx-1">&nbsp;</span>
+            {userData && userData.last_name}
+          </p>
+        </div>
+
+        <p className="font-bold text-2xl text-violet-900 mb-4">
+          {userData && userData.email}
+        </p>
+
+        <div className="flex justify-center">
+          <p className="font-semibold text-xl mr-4">
+            {userData && userData.tutor.state}
+          </p>
+          <p className="font-semibold text-xl">
+            {userData && userData.tutor.country}
+          </p>
+        </div>
+      </div>
+
+      {userData && (
+        <>
+          <p className="font-bold text-2xl text-violet-900 mb-4">
+            {userData.username}
+          </p>
+          <p className="font-normal mb-4">
+            {userData.tutor.introduction_description}
+          </p>
+          <label className="font-bold text-xl mb-2">Teaching style</label>
+          <p className="font-bold text-2xl mb-4">
+            {userData.tutor.teaching_style}
+          </p>
+          <img
+            src={userData.tutor.certificates}
+            className="w-60 h-20 cursor-pointer mb-4"
+            alt="Certificates"
+          />
+        </>
+      )}
+
+      <div className="flex justify-evenly w-full">
         <button
-          className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+          className="bg-gradient-to-br from-purple-600 to-blue-500 text-white py-2 px-8 rounded-md hover:bg-opacity-0 focus:ring-4 focus:outline-none focus:ring-blue-300"
           onClick={handleApproval}
         >
-          <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-purple-700 rounded-md group-hover:bg-opacity-0">
-            Accept
-          </span>
+          Accept
         </button>
         <button
-          className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-100 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white "
+          className="bg-gradient-to-br from-purple-600 to-blue-500 text-white py-2 px-8 rounded-md hover:bg-opacity-0"
           onClick={handleReject}
         >
-          <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-white dark:bg-red-500 rounded-md group-hover:bg-opacity-0">
-            Reject
-          </span>
+          Reject
         </button>
       </div>
     </div>

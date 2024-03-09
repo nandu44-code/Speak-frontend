@@ -3,7 +3,7 @@ import api from "../services/Axios";
 
 function ListUsers() {
   const [users, setUsers] = useState([]);
-
+  let id = 0
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -55,7 +55,7 @@ function ListUsers() {
             {users.map((user, index) => (
               user.is_student ? (
                 <tr key={index}>
-                  <td className="border border-gray-400 px-4 py-2">{user.id}</td>
+                  <td className="border border-gray-400 px-4 py-2">{++id}</td>
                   <td className="border border-gray-400 px-4 py-2">{user.username}</td>
                   <td className="border border-gray-400 px-4 py-2">{user.email}</td>
                   <td className="border border-gray-400 px-4 py-2">
