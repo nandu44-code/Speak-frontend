@@ -46,7 +46,9 @@ function ListUsers() {
           <thead>
             <tr>
               <th className="px-4 py-5">ID</th>
-              <th className="px-20 py-5">Name</th>
+              <th className="px-20 py-5">Username</th>
+              <th className="px-20 py-5">First Name</th>
+              <th className="px-20 py-5">Last Name</th>
               <th className="px-20 py-5">Email</th>
               <th className="px-20 py-5">Actions</th>
             </tr>
@@ -57,6 +59,8 @@ function ListUsers() {
                 <tr key={index}>
                   <td className="border border-gray-400 px-4 py-2">{++id}</td>
                   <td className="border border-gray-400 px-4 py-2">{user.username}</td>
+                  <td className="border border-gray-400 px-4 py-2">{user.first_name}</td>
+                  <td className="border border-gray-400 px-4 py-2">{user.last_name}</td>
                   <td className="border border-gray-400 px-4 py-2">{user.email}</td>
                   <td className="border border-gray-400 px-4 py-2">
                     
