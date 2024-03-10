@@ -36,18 +36,18 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-white p-4 ">
+    <nav className="bg-zinc-400 p-4 bg-fixed z-10">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="flex-shrink-0">
-          <Link to='/' className="text-purple-900 font-bold text-4xl ml-0">
+          <Link to='/' className="text-purple-900 font-bold text-4xl ml-0 hover:scale-x-110 hover:text-indigo-900">
             Speak
           </Link>
         </div>
 
         {/* Navigation links */}
         <div className="hidden md:flex space-x-10  ">
-          <Link to="/" className="text-purple-950 font-bold text-lg hover:scale-110 hover:text-purple-950 duration-500">
+          <Link to="/" className="text-purple-950 font-bold text-lg hover:scale-110  hover:text-indigo-900 duration-500">
             Home
           </Link>
         </div>
@@ -57,7 +57,7 @@ function Navbar() {
             <Link to="/student/profile/">
               <FaUser
                 size={24}
-                className="cursor-pointer text-white  transform hover:-scale-x-110 transition-transform hover: from-purple-600 to-blue-500"
+                className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
               />
             </Link>
             <button

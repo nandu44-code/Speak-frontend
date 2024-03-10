@@ -6,8 +6,6 @@ function Header() {
 
   return (
     <header className="relative bg-cover bg-center flex flex-col items-center justify-center mt-0 w-full opacity-80">
-      <h1 className="text-black text-4xl font-bold"></h1>
-
       <div className="relative">
         <img src={imageSrc} alt="Description of the image" className="rounded-sm shadow-2xl w-full" />
 
