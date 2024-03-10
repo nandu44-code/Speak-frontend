@@ -36,10 +36,10 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-zinc-400 p-4 bg-fixed z-10">
+    <nav className="bg-neutral-400 hover:border-b-1 hover:duration-1000 border-indigo-900 border-transparent p-4 bg-fixed z-10">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0"> 
           <Link to='/' className="text-purple-900 font-bold text-4xl ml-0 hover:scale-x-110 hover:text-indigo-900">
             Speak
           </Link>
@@ -80,7 +80,7 @@ function Navbar() {
           </span>
         </button>
             <button
-              className="bg-white-700 hover:bg-gray-800 text-red-500 font-medium py-2 px-4 rounded focus:outline-none"
+              className="bg-white-700 hover:bg-gray-800 bg-indigo-950 duration-700 text-white font-medium py-2 px-4 rounded focus:outline-none"
               onClick={handleClickLogIn}
             >
               Login

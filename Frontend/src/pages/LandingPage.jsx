@@ -12,7 +12,7 @@ function LandingPage() {
     <div>
       <Navbar />
       <Header />
-        <div className="flex flex-row md:flex-row m-4 justify-evenly">
+        <div className="flex flex-col justify-evenly lg:flex-row xl:flex-row md:flex-col md:justify-center sm:flex-col m-4">
           <FeatureCard
             icon={<BiWorld color="blue" />}
             heading="Learn English online anytime, anywhere"
