@@ -32,14 +32,14 @@ function OtpPage() {
           renderInput={(props) => (
             <input
               {...props}
-              className="h-14 text-lg border-2 mb-10 mt-20 border-gray-300 rounded-md focus:outline-none focus:border-4 focus:border-indigo-500"
+              className="h-14 text-lg border-2 mb-10 mt-20 border-gray-300 rounded-md focus:outline-none focus:border-4 focus:border-indigo-500 text-center"
               style={{ width: '3em' }}
             />
           )}
         />
         <button
           className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-          onClick={() => {
+          onClick={async() => {
             if (otp.length === 6) {
               console.log("otp length is 6")
               console.log('Entire OTP:', otp);
@@ -50,7 +50,7 @@ function OtpPage() {
               };
               console.log(credentials)
               try {
-                dispatch(otp_validation(credentials));
+                await dispatch(otp_validation(credentials));
                 navigate('/login/');
               } catch (error) {
                 console.log("error", error);

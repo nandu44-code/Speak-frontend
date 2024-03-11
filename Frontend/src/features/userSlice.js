@@ -24,7 +24,7 @@ export const Login = createAsyncThunk("login", async (credentials) => {
     const accessToken = response.data.access;
     const refreshToken = response.data.refresh;
     localStorage.setItem("accessToken", accessToken);
-    localStorage.setItem("refreshToken", refreshToken)
+    localStorage.setItem("refreshToken", refreshToken);
     if (response.status === 200) {
       Swal.fire({
         background: "#fff",
@@ -133,7 +133,7 @@ export const otp_validation = createAsyncThunk(
   async (credentials) => {
     try {
       const response = await api.post("validate-otp/", credentials);
-
+  
       if (response.data.status) {
         if (response.data.status == 200) {
           console.log("otp verified successfully");
@@ -143,19 +143,19 @@ export const otp_validation = createAsyncThunk(
       }
     } catch (error) {
       console.log("Error", error);
+
+      toast.error(error);
     }
   }
 );
 
 export const change_password = createAsyncThunk(
-  'change_password',
+  "change_password",
   async (credentials) => {
-    
-      const response = await api.post('change-password/', credentials)
-      return response.data
-   
-    }
-)
+    const response = await api.post("change-password/", credentials);
+    return response.data;
+  }
+);
 
 const initialState = {
   msg: "",
@@ -259,14 +259,13 @@ const userSlice = createSlice({
       .addCase(changeProfileImage.pending, (state) => {
         state.loading = true;
       })
-      .addCase(changeProfileImage.fulfilled, (state,action) => {
-        state.loading = false
-
+      .addCase(changeProfileImage.fulfilled, (state, action) => {
+        state.loading = false;
       })
-      .addCase(changeProfileImage.rejected, (state)=> {
-        state.loading = false
-        toast.error('Error while uploading image')
-      })
+      .addCase(changeProfileImage.rejected, (state) => {
+        state.loading = false;
+        toast.error("Error while uploading image");
+      });
 
     builder
       .addCase(tutorchecklist.pending, (state) => {
@@ -301,8 +300,7 @@ const userSlice = createSlice({
       })
       .addCase(otp_validation.fulfilled, (state, action) => {
         state.loading = false;
-        toast.success('account created successfully')
-        
+        toast.success("account created successfully");
       })
       .addCase(otp_validation.rejected, (state) => {
         state.loading = false;
@@ -312,17 +310,15 @@ const userSlice = createSlice({
           title: "oops, something went wrong",
           text: action.payload,
         });
-
       });
 
-      builder
+    builder
       .addCase(change_password.pending, (state) => {
         state.loading = true;
       })
       .addCase(change_password.fulfilled, (state, action) => {
         state.loading = false;
-        toast.success('Password changed successfully')
-        
+        toast.success("Password changed successfully");
       })
       .addCase(change_password.rejected, (state) => {
         state.loading = false;
@@ -332,7 +328,6 @@ const userSlice = createSlice({
           title: "oops, something went wrong",
           text: "Internal server error",
         });
-
       });
   },
 });
