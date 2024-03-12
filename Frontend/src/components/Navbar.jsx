@@ -8,8 +8,11 @@ import { getMyProfile,clearUser } from "../features/userSlice";
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const userState = useSelector(state => state.user)
+  const is_authenticated = useSelector(state => state.user.is_authenticated)
+  const [is_tutor,setIs_tutor] = useState(false)
+  console.log(is_authenticated)
   const [isAuthenticated, setIsauthenticated] = useState("");
+
   const handleClickSignUp = () => {
     navigate("/register/");
   };
@@ -31,7 +34,8 @@ function Navbar() {
 
     if (token) {
       const decodedToken = jwtDecode(token);
-      setIsauthenticated("true"); // Assuming roles are stored in the 'roles' field
+      const is_tutor = decodedToken.is_tutor
+      setIs_tutor(is_tutor)
     }
   }, []);
 
@@ -52,14 +56,22 @@ function Navbar() {
           </Link>
         </div>
 
-        {isAuthenticated ? (
+        {is_authenticated ? (
           <>
-            <Link to="/student/profile/">
-              <FaUser
-                size={24}
-                className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
-              />
-            </Link>
+          {is_tutor?
+           <Link to="/tutor/checklist">
+           <FaUser
+             size={24}
+             className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
+           />
+         </Link>:
+           <Link to="/student/profile/">
+           <FaUser
+             size={24}
+             className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
+           />
+         </Link>}
+           
             <button
               className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
               onClick={handleLogout}
