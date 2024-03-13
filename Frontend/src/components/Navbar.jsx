@@ -11,8 +11,7 @@ function Navbar() {
   const is_authenticated = useSelector(state => state.user.is_authenticated)
   const [is_tutor,setIs_tutor] = useState(false)
   console.log(is_authenticated)
-  const [isAuthenticated, setIsauthenticated] = useState("");
-
+  
   const handleClickSignUp = () => {
     navigate("/register/");
   };
@@ -59,18 +58,18 @@ function Navbar() {
         {is_authenticated ? (
           <>
           {is_tutor?
-           <Link to="/tutor/checklist">
+           (<Link to="/tutor/checklist">
            <FaUser
              size={24}
              className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
            />
-         </Link>:
-           <Link to="/student/profile/">
+         </Link>):
+           (<Link to="/student/profile/">
            <FaUser
              size={24}
              className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
            />
-         </Link>}
+         </Link>)}
            
             <button
               className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
@@ -84,15 +83,15 @@ function Navbar() {
         ) : (
           <div>
           <button
-          className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+          className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group  group-hover:from-purple-600 ghover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
           onClick={handleClickSignUp}
         >
-          <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+          <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-white dark:bg-indigo-900 rounded-md group-hover:bg-opacity-80">
             Sign Up
           </span>
         </button>
             <button
-              className="bg-white-700 hover:bg-gray-800 bg-indigo-950 duration-700 text-white font-medium py-2 px-4 rounded focus:outline-none"
+              className="bg-white-700 hover:bg-opacity-80 bg-stone-700 duration-700 text-white font-medium py-2 px-4 rounded focus:outline-none"
               onClick={handleClickLogIn}
             >
               Login

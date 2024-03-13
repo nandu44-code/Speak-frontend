@@ -10,7 +10,7 @@ import Navbar from "../../components/Navbar";
 import imageSrc from "../../assets/images/profileuser.jpg";
 import StudentprofileSidebar from "../../components/StudentProfileSidebar";
 import { toast } from "react-toastify";
-import { TailSpin }  from "react-loader-spinner";
+import { TailSpin } from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 import { app, firebaseStore } from "../../services/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -130,7 +130,7 @@ function StudentProfile() {
               {loading ? (
                 // Render loader while image is loading
                 <div className="mx-auto rounded-full w-32 h-32 mb-4">
-                    <TailSpin />
+                  <TailSpin />
                 </div>
               ) : (
                 // Render the image when it is loaded
@@ -145,25 +145,50 @@ function StudentProfile() {
                 />
               )}
             </label>
+            
+            <div className="flex flex-row">
+              <lablel className="font-bold text-gray-600 mr-8">Username : </lablel>
+              <input
+                className="text-md text-purple-800 font-bold mb-2 rounded-lg border border-gray-300 focus:border-blue-500 px-3 py-2"
+                defaultValue={userprofile && userprofile.username}
+                onFocus={uploadButton}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-row">
+              <lablel className="font-bold text-gray-600 mr-8">First Name: </lablel>
+              <input
+                className="text-md text-purple-800 font-bold mb-2 rounded-lg border border-gray-300 focus:border-blue-500 px-3 py-2"
+                defaultValue={userprofile && userprofile.first_name}
+                disabled
+              />
+            </div>
 
-            <input
-              className="text-md text-purple-800 font-bold mb-2 rounded-lg border border-gray-300 focus:border-blue-500 px-3 py-2"
-              defaultValue={userprofile && userprofile.username}
-              onFocus={uploadButton}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+           <div className="flex flex-row">
+              <lablel className="font-bold text-gray-600 mr-8">Last Name: </lablel>
+              <input
+                className="text-md text-purple-800 font-bold mb-2 rounded-lg border border-gray-300 focus:border-blue-500 px-3 py-2"
+                defaultValue={userprofile && userprofile.last_name}
+                disabled
 
-            <input
-              className="text-md text-purple-600 font-bold mb-2 rounded-lg border border-gray-300 focus:border-blue-500 px-3 py-2"
-              value={userprofile && userprofile.email}
-            />
+              />
+            </div>
+
+            <div className="flex justify-end">
+              {/* <lablel className="font-bold text-gray-600 mr-16">Email: </lablel> */}
+              <input
+                className="text-md text-purple-800 font-bold mb-2 rounded-lg border border-gray-300 focus:border-blue-500 px-3 py-2"
+                defaultValue={userprofile && userprofile.email}
+                disabled
+              />
+            </div>
             <div className="mt-5">
               {isUploadButton && (
                 <button
                   className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
                   onClick={updateUsername}
                 >
-                  <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                  <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-white dark:bg-indigo-900 rounded-md group-hover:bg-opacity-0">
                     Update
                   </span>
                 </button>

@@ -20,24 +20,6 @@ const StudentProfileSidebar = () => {
            Your Profile
           </Link>
         </li>
-        {/* <li className="hover:scale-110 mb-4">
-          <Link to="/users" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
-            <BsPeople size={20} className="inline mr-2 hover:text-blue-800" />
-            Users
-          </Link>
-        </li>
-        <li className="hover:scale-110 mb-4">
-          <Link to="/tutors" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
-            <IoMdSchool size={20} className="inline mr-2 hover:text-blue-800" />
-            Tutors
-          </Link>
-        </li>
-        <li className="hover:scale-110 mb-4">
-          <Link to="/requests" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
-            <HiOutlineDocumentReport size={20} className="inline mr-2 hover:text-blue-800" />
-            Requests
-          </Link>
-        </li> */}
         <li className="hover:scale-110 mb-4">
           <Link to="/student/changePassword/" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
             <HiOutlineClipboardList size={20} className="inline mr-2 hover:text-blue-800" />
