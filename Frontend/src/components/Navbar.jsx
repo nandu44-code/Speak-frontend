@@ -3,15 +3,15 @@ import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FaUser } from "react-icons/fa";
 import { jwtDecode } from "jwt-decode";
-import { getMyProfile,clearUser } from "../features/userSlice";
+import { getMyProfile, clearUser } from "../features/userSlice";
 
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const is_authenticated = useSelector(state => state.user.is_authenticated)
-  const [is_tutor,setIs_tutor] = useState(false)
-  console.log(is_authenticated)
-  
+  const is_authenticated = useSelector((state) => state.user.is_authenticated);
+  const [is_tutor, setIs_tutor] = useState(false);
+  console.log(is_authenticated);
+
   const handleClickSignUp = () => {
     navigate("/register/");
   };
@@ -24,7 +24,7 @@ function Navbar() {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
 
-    dispatch((clearUser()))
+    dispatch(clearUser());
     navigate("/login");
   };
 
@@ -33,8 +33,8 @@ function Navbar() {
 
     if (token) {
       const decodedToken = jwtDecode(token);
-      const is_tutor = decodedToken.is_tutor
-      setIs_tutor(is_tutor)
+      const is_tutor = decodedToken.is_tutor;
+      setIs_tutor(is_tutor);
     }
   }, []);
 
@@ -42,35 +42,53 @@ function Navbar() {
     <nav className="bg-neutral-400 hover:border-b-1 hover:duration-1000 border-indigo-900 border-transparent p-4 bg-fixed z-10">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
-        <div className="flex-shrink-0"> 
-          <Link to='/' className="text-purple-900 font-bold text-4xl ml-0 hover:scale-x-110 hover:text-indigo-900">
+        <div className="flex-shrink-0">
+          <Link
+            to="/"
+            className="text-purple-900 font-bold text-4xl ml-0 hover:scale-x-110 hover:text-indigo-900"
+          >
             Speak
           </Link>
         </div>
 
         {/* Navigation links */}
-        <div className="hidden md:flex space-x-10  ">
-          <Link to="/" className="text-purple-950 font-bold text-lg hover:scale-110  hover:text-indigo-900 duration-500">
-            Home
-          </Link>
+        <div className="flex">
+          <div className="hidden md:flex space-x-10  mx-6">
+            <Link
+              to="/"
+              className="text-purple-950 font-bold text-lg hover:scale-110  hover:text-indigo-900 duration-500"
+            >
+              Home
+            </Link>
+          </div>
+          <div className="hidden md:flex space-x-10  mx-6">
+            <Link
+              to="/student/findTutors/"
+              className="text-purple-950 font-bold text-lg hover:scale-110  hover:text-indigo-900 duration-500"
+            >
+              Find Tutor
+            </Link>
+          </div>
         </div>
 
         {is_authenticated ? (
           <>
-          {is_tutor?
-           (<Link to="/tutor/checklist">
-           <FaUser
-             size={24}
-             className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
-           />
-         </Link>):
-           (<Link to="/student/profile/">
-           <FaUser
-             size={24}
-             className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
-           />
-         </Link>)}
-           
+            {is_tutor ? (
+              <Link to="/tutor/checklist">
+                <FaUser
+                  size={24}
+                  className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
+                />
+              </Link>
+            ) : (
+              <Link to="/student/profile/">
+                <FaUser
+                  size={24}
+                  className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
+                />
+              </Link>
+            )}
+
             <button
               className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
               onClick={handleLogout}
@@ -82,14 +100,14 @@ function Navbar() {
           </>
         ) : (
           <div>
-          <button
-          className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group  group-hover:from-purple-600 ghover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
-          onClick={handleClickSignUp}
-        >
-          <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-white dark:bg-indigo-900 rounded-md group-hover:bg-opacity-80">
-            Sign Up
-          </span>
-        </button>
+            <button
+              className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group  group-hover:from-purple-600 ghover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800"
+              onClick={handleClickSignUp}
+            >
+              <span className="relative px-5 py-2.5 transition-all ease-in duration-500 bg-white dark:bg-indigo-900 rounded-md group-hover:bg-opacity-80">
+                Sign Up
+              </span>
+            </button>
             <button
               className="bg-white-700 hover:bg-opacity-80 bg-stone-700 duration-700 text-white font-medium py-2 px-4 rounded focus:outline-none"
               onClick={handleClickLogIn}

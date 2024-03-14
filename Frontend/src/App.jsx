@@ -16,6 +16,7 @@ import ChangePassPage from './pages/Student/ChangePassPage';
 import TutorCheklistPage from './pages/Tutor/TutorCheklistPage';
 import TutorHomePage from './pages/Tutor/TutorHomePage';
 import TutorProcessingPage from './pages/Tutor/TutorProcessingPage';
+import FindTutorsPage from './pages/Student/FindTutorsPage';
 //admin related pages
 import AdminHomePage from './pages/Admin/AdminHomePage';
 import AdminUsersPage from './pages/Admin/AdminUsersPage';
@@ -38,6 +39,7 @@ function App() {
           <Route path='/student/home/' element={<StudentHomePage/>}/>
           <Route path='/student/profile/' element={<StudentProfile/>}/> 
           <Route path='/student/changePassword/' element={<ChangePassPage/>}/> 
+          <Route path='/student/findTutors/' element={<FindTutorsPage/>}/>
 
           <Route path='/tutor/home/' element={<TutorHomePage/>}/>
           <Route path='/tutor/checklist/' element={<TutorCheklistPage/>}/>
