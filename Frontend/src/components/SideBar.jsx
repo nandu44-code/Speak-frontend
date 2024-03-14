@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsHouseDoor, BsPeople } from 'react-icons/bs';
 import { IoMdSchool } from 'react-icons/io';
 import { HiOutlineDocumentReport, HiOutlineClipboardList } from 'react-icons/hi';
-// import { clearUser } from '../features/UserSlice';
+import { clearUser } from '../features/userSlice';
 
 
 
 const Sidebar = () => {
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     dispatch((clearUser()))
@@ -58,12 +58,12 @@ const Sidebar = () => {
             Reports
           </Link>
         </li>
-        {/* <li className="hover:scale-110 mb-4">
-          <p className="block py-2 hover:bg-gray-200" onClick={handleLogout}>
+        <li className="hover:scale-110 mb-4 cursor-pointer" onClick={handleLogout}>
+          <p className="block py-2 hover:bg-gray-200" >
             <HiOutlineClipboardList size={20} className="inline mr-2 hover:text-blue-800" />
             logout
           </p>
-        </li> */}
+        </li>
   
       </ul>
       <div className="md:hidden">

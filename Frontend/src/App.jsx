@@ -17,6 +17,7 @@ import TutorCheklistPage from './pages/Tutor/TutorCheklistPage';
 import TutorHomePage from './pages/Tutor/TutorHomePage';
 import TutorProcessingPage from './pages/Tutor/TutorProcessingPage';
 import FindTutorsPage from './pages/Student/FindTutorsPage';
+import RejectedPage from './pages/Tutor/RejectedPage';
 //admin related pages
 import AdminHomePage from './pages/Admin/AdminHomePage';
 import AdminUsersPage from './pages/Admin/AdminUsersPage';
@@ -24,6 +25,7 @@ import AdminRequestsPage from './pages/Admin/AdminRequestsPage';
 import RequestDetailsPage from './pages/Admin/RequestDetailsPage';
 import AdminTutorsPage from './pages/Admin/AdminTutorsPage';
 import TutorDetailsPage from './pages/Admin/TutorDetailsPage';
+
 
 function App() {
   
@@ -44,6 +46,7 @@ function App() {
           <Route path='/tutor/home/' element={<TutorHomePage/>}/>
           <Route path='/tutor/checklist/' element={<TutorCheklistPage/>}/>
           <Route path='/tutor/checklist/processing' element={<TutorProcessingPage/>}/>
+          <Route path='tutor/rejected/' element={<RejectedPage/>}/>
 
           <Route path='/admin/users' element={<AdminUsersPage/>}/>
           <Route path='/admin/tutors' element={<AdminTutorsPage/>}/>

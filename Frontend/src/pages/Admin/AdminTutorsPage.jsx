@@ -6,7 +6,7 @@ import Sidebar from '../../components/SideBar'
 function AdminTutorsPage() {
   return (
     <>
-    <Navbar />
+    {/* <Navbar /> */}
     <div className="flex">
       <Sidebar />
       <ListTutors />

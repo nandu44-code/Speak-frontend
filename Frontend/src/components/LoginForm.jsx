@@ -45,10 +45,19 @@ function LoginForm() {
         navigate('/admin')
       }
       else if (access.is_student){
-        navigate('/student/home')
+        navigate('/')
       }
       else{
-        navigate('/tutor/checklist')
+        if (access.is_approved){
+            navigate('/tutor/home/')
+        }else if (access.is_rejected){
+          console.log('tutor is rejected')
+          navigate('/tutor/rejected')
+        }
+        else{
+          
+          navigate('/tutor/checklist/')
+        }
       }
     }
   }

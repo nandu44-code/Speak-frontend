@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useDebugValue, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/Axios";
 import { useDispatch } from "react-redux";
@@ -54,10 +54,10 @@ function RequestDetailsPage() {
         />
       )}
 
-      <div className="bg-slate-200 p-6 rounded-xl w-full mb-6">
-        <p className="font-bold text-2xl text-gray-500">Basic Details</p>
-        <div className="flex flex-row justify-center mb-4">
-          <p className="font-bold text-gray-700">Full Name:</p>
+      <div className="bg-slate-100 p-6 rounded-xl w-full mb-6">
+        {/* <p className="font-bold text-2xl text-gray-500">Basic Details</p> */}
+        <div className="flex flex-row justify-center mb-2">
+    
           <p className="font-bold text-2xl text-violet-900 ml-2">
             {userData && userData.first_name}
             <span className="mx-1">&nbsp;</span>
@@ -65,7 +65,7 @@ function RequestDetailsPage() {
           </p>
         </div>
 
-        <p className="font-bold text-2xl text-violet-900 mb-4">
+        <p className="font-bold text-2xl text-violet-900 mb-2">
           {userData && userData.email}
         </p>
 
@@ -80,23 +80,27 @@ function RequestDetailsPage() {
       </div>
 
       {userData && (
-        <>
+        <div>
+        <div className="bg-gray-100 rounded-xl p-4 m-2">
           <p className="font-bold text-2xl text-violet-900 mb-4">
             {userData.username}
           </p>
           <p className="font-normal mb-4">
             {userData.tutor.introduction_description}
           </p>
+        </div>
+        <div className="bg-gray-100 rounded-xl p-4">
           <label className="font-bold text-xl mb-2">Teaching style</label>
-          <p className="font-bold text-2xl mb-4">
+          <p className="font-thintext-2xl mb-4">
             {userData.tutor.teaching_style}
           </p>
-          <img
+          {/* <img
             src={userData.tutor.certificates}
             className="w-60 h-20 cursor-pointer mb-4"
             alt="Certificates"
-          />
-        </>
+          /> */}
+        </div>
+      </div>
       )}
 
       <div className="flex justify-evenly w-full">

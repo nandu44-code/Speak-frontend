@@ -35,7 +35,7 @@ function AdminRequestsPage() {
 
   return (
     <div className="flex-row"> 
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="flex">
         <Sidebar />
         {console.log("hi")}

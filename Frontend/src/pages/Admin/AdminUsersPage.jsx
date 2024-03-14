@@ -6,7 +6,7 @@ import Navbar from "../../components/Navbar";
 function AdminUsersPage() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="flex">
         <Sidebar />
         <ListUsers />

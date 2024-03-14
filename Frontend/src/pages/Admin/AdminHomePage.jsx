@@ -6,7 +6,7 @@ import SideBar from '../../components/SideBar'
 function AdminHomePage() {
   return (
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
       <SideBar/>
     </div>
   )
