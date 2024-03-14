@@ -8,9 +8,10 @@ import { getMyProfile, clearUser } from "../features/userSlice";
 function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const is_authenticated = useSelector((state) => state.user.is_authenticated);
+  // const is_authenticated = useSelector((state) => state.user.is_authenticated);
+  const [is_authenticated,setIs_authenticated] = useState(false)
   const [is_tutor, setIs_tutor] = useState(false);
-  console.log(is_authenticated);
+  
 
   const handleClickSignUp = () => {
     navigate("/register/");
@@ -34,6 +35,7 @@ function Navbar() {
     if (token) {
       const decodedToken = jwtDecode(token);
       const is_tutor = decodedToken.is_tutor;
+      setIs_authenticated(true)
       setIs_tutor(is_tutor);
     }
   }, []);
