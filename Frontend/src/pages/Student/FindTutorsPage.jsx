@@ -29,6 +29,8 @@ import Navbar from '../../components/Navbar';
         <>
         <Navbar/>
         <p className='font-bold text-2xl text-indigo-900 mt-10 select-none'>Find a Tutor</p>
+        <input type='search' placeholder='search...' className='rounded-full placeholder-indigo-950 placeholder:font-bold w-96 px-4 py-2 my-10 focus:bg-gray-200 
+         bg-stone-200'/>
         <div className='flex justify-evenly'>
         {tutors.map((user) => (
                 <TutorCard 
