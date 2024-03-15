@@ -29,13 +29,13 @@ function TutorSidebar() {
        </div>
        <ul>
             <li className="hover:scale-110 mb-4">
-            <Link to="/admin" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
+            <Link to="/tutor/home/" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
                 <BsHouseDoor size={30} className="inline mr-2 hover:text-blue-800" />
                 Dashboard
             </Link>
             </li>
             <li className="hover:scale-110 mb-4">
-            <Link to="/admin/users/" className="block py-2 hover:bg-gray-200" onClick={''}>
+            <Link to="/tutor/createslot/" className="block py-2 hover:bg-gray-200" onClick={''}>
                 <BsPeople size={30} className="inline mr-2 hover:text-blue-800" />
                 Create Slots
             </Link>
