@@ -24,7 +24,7 @@ function CreateSlotForm() {
   };
 
   return (
-    <div className="max-w-lg mx-auto">
+    <div className="max-w-lg mr-96">
       <h2 className="text-xl font-bold mb-4">Create Slot</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
