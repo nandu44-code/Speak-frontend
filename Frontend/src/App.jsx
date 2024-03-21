@@ -19,6 +19,7 @@ import TutorProcessingPage from './pages/Tutor/TutorProcessingPage';
 import FindTutorsPage from './pages/Student/FindTutorsPage';
 import RejectedPage from './pages/Tutor/RejectedPage';
 import CreateSlotPage from './pages/Tutor/CreateSlotPage';
+import ViewSlotPage from './pages/Tutor/ViewSlotPage';
 //admin related pages
 import AdminHomePage from './pages/Admin/AdminHomePage';
 import AdminUsersPage from './pages/Admin/AdminUsersPage';
@@ -43,12 +44,13 @@ function App() {
           <Route path='/student/profile/' element={<StudentProfile/>}/> 
           <Route path='/student/changePassword/' element={<ChangePassPage/>}/> 
           <Route path='/student/findTutors/' element={<FindTutorsPage/>}/>
-          
+            
           <Route path='/tutor/home/' element={<TutorHomePage/>}/>
           <Route path='/tutor/checklist/' element={<TutorCheklistPage/>}/>
           <Route path='/tutor/checklist/processing' element={<TutorProcessingPage/>}/>
           <Route path='tutor/rejected/' element={<RejectedPage/>}/>
           <Route path='tutor/createslot/' element={<CreateSlotPage/>}/>
+          <Route path='tutor/viewslot/' element={<ViewSlotPage/>}/>
 
           <Route path='/admin/users' element={<AdminUsersPage/>}/>
           <Route path='/admin/tutors' element={<AdminTutorsPage/>}/>

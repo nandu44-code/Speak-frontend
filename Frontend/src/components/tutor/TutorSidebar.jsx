@@ -23,7 +23,7 @@ function TutorSidebar() {
 
   return (
     <div className='w-full'>
-    <nav className={`bg-white shadow-2xl text-indigo-800 font-bold h-screen w-1/5 p-4 ${isOpen ? 'md:block' : 'hidden md:block'}`}>
+    <nav className={`text-indigo-800 font-bold h-screen w-1/5 p-4 ${isOpen ? 'md:block' : 'hidden md:block'}`}>
        <div className="mb-8">
         <h2 className="text-3xl font-bold">Welcome Tutor</h2>
        </div>
@@ -38,6 +38,12 @@ function TutorSidebar() {
             <Link to="/tutor/createslot/" className="block py-2 hover:bg-gray-200" onClick={''}>
                 <BsPeople size={30} className="inline mr-2 hover:text-blue-800" />
                 Create Slots
+            </Link>
+            </li>
+            <li className="hover:scale-110 mb-4">
+            <Link to="/tutor/viewslot/" className="block py-2 hover:bg-gray-200" onClick={''}>
+                <HiOutlineClipboardList size={30} className="inline mr-2 hover:text-blue-800" />
+                View Slots
             </Link>
             </li>
             <li className="hover:scale-110 mb-4 cursor-pointer" onClick={handleLogout}>
