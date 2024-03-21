@@ -84,7 +84,7 @@ function ViewSlotPage() {
             slots.map((slot) => (
               <SingleSlot
                 key={slot.id}
-                date={slot.start_date}
+                startDate={slot.start_date}
                 startTime={slot.start_time}
                 endTime={slot.end_time}
               />
