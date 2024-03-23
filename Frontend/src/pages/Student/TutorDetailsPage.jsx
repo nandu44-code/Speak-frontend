@@ -2,11 +2,41 @@ import React, { useDebugValue, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/Axios";
 import { useDispatch } from "react-redux";
+import SingleSlot from "../../components/tutor/SingleSlot";
 
-function TutorDetailsPage() {
+function TutorSideDetailsPage() {
   const { id } = useParams();
   const [userData, setUserData] = useState(null);
+  const [selectedDate, setSelectedDate] = useState("");
+  const [user, setUser] = useState("");
+  const [slots, setSlots] = useState([]);
+
+  const handleChange = (e) => {
+    setSelectedDate(e.target.value);
+  };
+
   const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const request = await api.get(
+        `slot/slots/filter/?selected_date=${selectedDate}&user=${id}`
+      );
+      console.log(request.data);
+      const response = request.data;
+      setSlots(response);
+      // console.log(slots)
+    } catch (error) {
+      console.error("Error searching slots:", error);
+      toast.error("Error searching slots");
+    }
+  };
+
+  useEffect(() => {
+    console.log(slots);
+  }, [slots]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,29 +50,6 @@ function TutorDetailsPage() {
     fetchData();
   }, [id]);
 
-  const handleApproval = async () => {
-    const credentials = {
-      is_approved: true,
-    };
-    try {
-      const response = await api.patch(`users/${id}/`, credentials);
-      navigate("/admin/requests");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleReject = async () => {
-    const credentials = {
-      is_rejected: true,
-    };
-    try {
-      const response = await api.patch(`users/${id}/`, credentials);
-      navigate("/admin/requests");
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
 
   return (
     <div className="flex flex-col items-center m-10 bg-stone-200 rounded-3xl p-10">
@@ -94,31 +101,56 @@ function TutorDetailsPage() {
           <p className="font-thintext-2xl mb-4">
             {userData.tutor.teaching_style}
           </p>
-          {/* <img
-            src={userData.tutor.certificates}
-            className="w-60 h-20 cursor-pointer mb-4"
-            alt="Certificates"
-          /> */}
         </div>
       </div>
       )}
-
-      <div className="flex justify-evenly w-full">
-        <button
-          className="bg-gradient-to-br from-purple-600 to-blue-500 text-white py-2 px-8 rounded-md hover:bg-opacity-0 focus:ring-4 focus:outline-none focus:ring-blue-300"
-          onClick={handleApproval}
-        >
-          Accept
-        </button>
-        <button
-          className="bg-gradient-to-br from-purple-600 to-blue-500 text-white py-2 px-8 rounded-md hover:bg-opacity-0"
-          onClick={handleReject}
-        >
-          Reject
-        </button>
-      </div>
+     <div className="w-auto ml-80 bg-stone-200 h-28 rounded-2xl px-4 py-2 mt-32">
+            {/* <h2 className="text-xl font-bold mb-4">Search Slots by Date</h2> */}
+            <form onSubmit={handleSubmit} className="flex items-center">
+              {" "}
+              {/* Added flex and items-center class */}
+              <div className="mb-4">
+                <label
+                  htmlFor="selectedDate"
+                  className="block text-gray-700 font-bold mb-2"
+                >
+                  Select Date
+                </label>
+                <input
+                  type="date"
+                  id="selectedDate"
+                  name="selectedDate"
+                  value={selectedDate}
+                  onChange={handleChange}
+                  className="border border-gray-300 rounded-md p-2 w-full"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                className="bg-indigo-900 w-80 text-white px-4 py-2 mt-4 rounded-md hover:bg-indigo-600 ml-2"
+              >
+                Search Slots
+              </button>
+            </form>
+          </div>
+          <div className="ml-96 mt-8">
+          {slots.length > 0 ? (
+            slots.map((slot) => (
+              <SingleSlot
+                key={slot.id}
+                startDate={slot.start_date}
+                startTime={slot.start_time}
+                endTime={slot.end_time}
+                onDelete={() => handleDeleteSlot(slot.id)}
+              />
+            ))
+          ) : (
+            <p>No results found</p>
+          )}
+        </div>
     </div>
   );
 }
 
-export default TutorDetailsPage;
+export default TutorSideDetailsPage;

@@ -3,6 +3,7 @@ import TutorSidebar from "../../components/tutor/TutorSidebar";
 import api from "../../services/Axios";
 import { jwtDecode } from "jwt-decode";
 import SingleSlot from "../../components/tutor/SingleSlot";
+import { toast } from "react-toastify";
 
 function ViewSlotPage() {
   const [selectedDate, setSelectedDate] = useState("");
@@ -38,6 +39,18 @@ function ViewSlotPage() {
     } catch (error) {
       console.error("Error searching slots:", error);
       toast.error("Error searching slots");
+    }
+  };
+
+  const handleDeleteSlot = async (id) => {
+    try {
+      await api.delete(`slot/slots/${id}/`);
+      
+      setSlots(slots.filter(slot => slot.id !== id));
+      toast.success('Slot deleted successfully')
+    } catch (error) {
+      console.error("Error deleting slot:", error);
+      toast.error("Error deleting slot");
     }
   };
 
@@ -87,6 +100,7 @@ function ViewSlotPage() {
                 startDate={slot.start_date}
                 startTime={slot.start_time}
                 endTime={slot.end_time}
+                onDelete={() => handleDeleteSlot(slot.id)}
               />
             ))
           ) : (

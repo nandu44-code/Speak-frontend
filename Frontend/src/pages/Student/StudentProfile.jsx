@@ -73,7 +73,7 @@ function StudentProfile() {
       toast.error("Image is not selected");
       return;
     }
-
+    console.log("image here")
     const storageRef = ref(firebaseStore);
     const imageRef = ref(storageRef, `images/${imageUpload.name}`);
 
@@ -82,9 +82,8 @@ function StudentProfile() {
         getDownloadURL(snapshot.ref)
           .then((url) => {
             setImageUrl(url);
-            updateImage(url); // Pass the URL to updateImage function
+            updateImage(url); 
             toast.success("Image uploaded successfully");
-            // getMyProfile(access.user)
           })
           .catch((error) => {
             console.log("Error retrieving URL:", error);
@@ -109,7 +108,7 @@ function StudentProfile() {
 
     await dispatch(changeProfileImage(credentials));
   };
-
+  
   return (
     <>
       <Navbar />
@@ -133,7 +132,7 @@ function StudentProfile() {
                   <TailSpin />
                 </div>
               ) : (
-                // Render the image when it is loaded
+                
                 <img
                   src={
                     userprofile && userprofile.profile_image
