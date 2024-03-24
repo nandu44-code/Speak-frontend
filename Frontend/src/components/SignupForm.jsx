@@ -7,17 +7,15 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { TailSpin } from "react-loader-spinner";
-// import Loader from 'react-loader-spinner/dist/loader/CradleLoader';
 
 function SignUpForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loading = useSelector((state) => state.user.loading);
-  // const [selectedOption, setSelectedOption] = useState('');
-  const [formData, setformData] = useState({
+  const [formData, setFormData] = useState({
     username: "",
-    first_name:"",
-    last_name:"",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -26,72 +24,118 @@ function SignUpForm() {
     is_student: false,
   });
 
+  const [errors, setErrors] = useState({
+    username: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    selectedOption: "",
+  });
+
+  const [success,setSuccess] = useState(false)
+
   const handleChange = (e) => {
-    setformData({
+    const { name, value } = e.target;
+    setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+
+    let errorMessage = "";
+
+    switch (name) {
+      case "username":
+        if (value.trim() === "") {
+          errorMessage = "Username is required";
+        } else {
+          const usernameRegex =
+            /^(?=.*[a-zA-Z].*[a-zA-Z].*[a-zA-Z].*[a-zA-Z])[a-zA-Z0-9_!@#$%^&*()+=\-[\]{};':"|,.<>/?]{4,}$/;
+          if (!usernameRegex.test(value)) {
+            errorMessage = "username should contain atleast 4 alphabets";
+          }
+        }
+        break;
+
+      case "first_name":
+        if (value.trim() === "") {
+          errorMessage = "first name required";
+        } else {
+          const first_nameRegex = /^[a-zA-Z\s]+$/;
+          if (!first_nameRegex.test(value)) {
+            errorMessage = "name should not contain any symbols or digits";
+          }
+        }
+        break;
+
+      case "last_name":
+        if (value.trim() === "") {
+          errorMessage = "last name required";
+        } else {
+          const last_nameRegex = /^[a-zA-Z\s]+$/;
+          if (!last_nameRegex.test(value)) {
+            errorMessage = "name should not contain any symbols or digits";
+          }
+        }
+
+        break;
+      case "email":
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          errorMessage = "Please enter a valid email address.";
+        }
+        break;
+      case "password":
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+        if (!passwordRegex.test(value)) {
+          errorMessage =
+            "Password must be at least 8 characters, contain one uppercase letter, one lowercase letter, and one digit.";
+        }
+        break;
+      case "confirmPassword":
+        if (value !== formData.password) {
+          errorMessage = "Password and Confirm Password must match.";
+        }
+        break;
+      default:
+        break;
+    }
+
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: errorMessage,
+    }));
+
+    
+   const isErrorsEmpty = Object.values(errors).every(value => value === "");
+   if (isErrorsEmpty){
+    setSuccess(true)
+   }else{
+    setSuccess(false)
+   }
+   console.log(errors)
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
-   
+
     if (
-      formData.username.split(" ").join("") != "" &&
-      formData.email != "" &&
-      formData.password != "" &&
-      formData.confirmPassword != ""
+      formData.username.trim() !== "" &&
+      formData.email !== "" &&
+      formData.password !== "" &&
+      formData.confirmPassword !== ""
     ) {
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-      if (!passwordRegex.test(formData.password)) {
-        toast.error(
-          "Password must be at least 8 characters, contain one uppercase letter, one lowercase letter, and one digit."
-        );
-        return;
-      }
-
-      // Email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email)) {
-        toast.error("Please enter a valid email address.");
-        return;
-      }
-
-      // Username length validation
-      const minUsernameLength = 3;
-      if (formData.username.length < minUsernameLength) {
-        toast.error(
-          `Username must be at least ${minUsernameLength} characters.`
-        );
-        return;
-      }
-
-      // Matching password and confirm password
-      if (formData.password !== formData.confirmPassword) {
-        toast.error("Password and Confirm Password must match.");
-        return;
-      }
-
-      // Checking if a radio button is selected
-      if (!formData.selectedOption) {
-        toast.error("Please choose student or tutor.");
-        return;
-      }
-
-      if (formData.selectedOption == "tutor") {
-        formData.is_tutor = true;
-      } else {
-        formData.is_student = true;
-      }
+      // Perform other validations here if needed
 
       const credentials = {
         username: formData.username,
         email: formData.email,
         password: formData.password,
-        is_tutor: formData.is_tutor,
-        is_student: formData.is_student,
+        is_tutor: formData.selectedOption === "tutor",
+        is_student: formData.selectedOption === "student",
         first_name: formData.first_name,
-        last_name: formData.last_name
+        last_name: formData.last_name,
       };
 
       try {
@@ -101,7 +145,7 @@ function SignUpForm() {
         console.error("Error during registration:", error);
       }
     } else {
-      toast.error("Enter the valid credentials.");
+      toast.error("Enter valid credentials.");
     }
   };
 
@@ -111,14 +155,18 @@ function SignUpForm() {
 
   return (
     <div className="flex flex-row">
-      <div className="w-3/5 mr-2">
-        <img src={imageSrc} className="w-full h-screen p-2"></img>
+      <div className="w-3/5 mr-2 sm:hidden md:block lg:block xl:block 2xl:block hidden">
+        <img
+          src={imageSrc}
+          className="w-full h-screen p-2"
+          alt="signup-image"
+        ></img>
       </div>
-      <div className="w-1/3 mx-auto bg-transparent mt-32">
+      <div className="w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 2xl:w-1/3 mx-auto bg-transparent mt-32">
         <h2 className="text-2xl font-bold mb-4 text-blue-800">
           Create an Account
         </h2>
-        <form onSubmit={handleRegister} className="space-y-4 ">
+        <form onSubmit={handleRegister} className="space-y-4">
           <div>
             <input
               type="text"
@@ -130,8 +178,11 @@ function SignUpForm() {
               placeholder="Username..."
               required
             />
+            {errors.username && (
+              <p className="text-red-500 text-sm">{errors.username}</p>
+            )}
           </div>
-          <div className="flex flex-row ">
+          <div className="flex flex-col">
             <input
               type="text"
               id="first_name"
@@ -142,7 +193,12 @@ function SignUpForm() {
               placeholder="First Name"
               required
             />
-              <input
+            {errors.first_name && (
+              <p className="text-red-500 text-sm">{errors.first_name}</p>
+            )}
+          </div>
+          <div className="flex flex-col">
+            <input
               type="text"
               id="last_name"
               name="last_name"
@@ -152,7 +208,12 @@ function SignUpForm() {
               placeholder="Last Name"
               required
             />
+            {errors.last_name && (
+              <p className="text-red-500 text-sm">{errors.last_name}</p>
+            )}
           </div>
+
+          
           <div>
             <input
               type="email"
@@ -164,6 +225,9 @@ function SignUpForm() {
               placeholder="Email..."
               required
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email}</p>
+            )}
           </div>
           <div>
             <input
@@ -173,9 +237,12 @@ function SignUpForm() {
               value={formData.password}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 focus:border-2"
-              placeholder="password..."
+              placeholder="Password..."
               required
             />
+            {errors.password && (
+              <p className="text-red-500 text-sm">{errors.password}</p>
+            )}
           </div>
           <div>
             <input
@@ -185,9 +252,12 @@ function SignUpForm() {
               value={formData.confirmPassword}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 focus:border-2"
-              placeholder="confirm password..."
+              placeholder="Confirm Password..."
               required
             />
+            {errors.confirmPassword && (
+              <p className="text-red-500 text-sm">{errors.confirmPassword}</p>
+            )}
           </div>
           <div>
             <label className="mr-20 flex text-fuchsia-900 font-semibold mt-5">
@@ -214,12 +284,18 @@ function SignUpForm() {
               Register as a student
             </label>
           </div>
-          <button
+         {success? <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            className="w-full bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-blue-600"
           >
             {loading ? <TailSpin /> : "Sign Up"}
-          </button>
+          </button>: <button
+            type="submit"
+            className="w-full bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-blue-600"
+            disabled
+          >
+            {loading ? <TailSpin /> : "Sign Up"}
+          </button>}
           <h4>Already have an account?</h4>
           <h4
             className="text-indigo-800 cursor-pointer"
@@ -228,9 +304,8 @@ function SignUpForm() {
             click here to sign in
           </h4>
         </form>
-      
-     </div>
-     </div>
+      </div>
+    </div>
   );
 }
 
