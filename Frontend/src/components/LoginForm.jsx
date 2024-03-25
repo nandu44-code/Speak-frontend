@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Login } from '../features/userSlice';
 import {jwtDecode} from 'jwt-decode';
-import imageSrc from "../assets/images/signupPageImage.jpg";
+import imageSrc from "../assets/images/female-tourists-spread-their-arms-held-their-wings.jpg";
 
 function LoginForm() {
 
@@ -95,7 +95,7 @@ function LoginForm() {
             required
           />
         </div>
-        <button type="submit" className="w-full cursor-wait bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 ">
+        <button type="submit" className="w-full cursor-wait bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-blue-600 ">
          Log in
         </button>
         <h4 className='text-md'>Don't have an account?</h4>
