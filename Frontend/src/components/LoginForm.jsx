@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Login } from '../features/userSlice';
 import {jwtDecode} from 'jwt-decode';
-import imageSrc from "../assets/images/female-tourists-spread-their-arms-held-their-wings.jpg";
+import imageSrc from "../assets/images/2148165893.jpg";
 
 function LoginForm() {
 
@@ -64,8 +64,8 @@ function LoginForm() {
 
   return (
     <div className="flex flex-row">
-    <div className="w-3/5 mr-2">
-      <img src={imageSrc} className="w-full h-screen p-2"></img>
+    <div className="w-3/5">
+      <img src={imageSrc} className="w-full h-screen"></img>
     </div>
     <div className="w-1/3 mx-auto bg-transparent mt-32">
    

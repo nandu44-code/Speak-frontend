@@ -155,10 +155,10 @@ function SignUpForm() {
 
   return (
     <div className="flex flex-row">
-      <div className="w-3/5 mr-2 sm:hidden md:block lg:block xl:block 2xl:block hidden">
+      <div className="w-3/5 sm:hidden md:block lg:block xl:block 2xl:block hidden">
         <img
           src={imageSrc}
-          className="w-full h-screen p-2"
+          className="w-full h-screen"
           alt="signup-image"
         ></img>
       </div>
