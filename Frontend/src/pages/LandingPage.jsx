@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
-import Header from "../components/Header";
+import Hero from "../components/Hero";
 import FeatureCard from "../components/FeatureCard";
 import { BiWorld } from "react-icons/bi";
 import { FaCommentDots } from "react-icons/fa6";
@@ -11,7 +11,7 @@ function LandingPage() {
   return (
     <div>
       <Navbar />
-      <Header />
+      <Hero />
         <div className="flex flex-col justify-evenly lg:flex-row xl:flex-row md:flex-col md:justify-center sm:flex-col m-4">
           <FeatureCard
             icon={<BiWorld color="blue" />}
