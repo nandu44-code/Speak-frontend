@@ -59,7 +59,6 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* Navigation links */}
         {is_student? 
         <div className="flex">
           <div className="hidden md:flex space-x-10  mx-6">
