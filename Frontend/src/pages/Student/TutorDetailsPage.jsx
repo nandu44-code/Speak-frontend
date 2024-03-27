@@ -135,7 +135,7 @@ function TutorSideDetailsPage() {
       </div>
       <div className="flex justify-center items-center">
         <div
-          className="w-1/2 mx-4  flex justify-center items-center bg-gray-600 h-28 rounded-2xl px-4 py-2 my-20"
+          className="w-1/2 mx-4  flex justify-center items-center bg-stone-400 h-28 rounded-2xl px-4 py-2 my-20"
           id="slots"
         >
           {/* <h2 className="text-xl font-bold mb-4">Search Slots by Date</h2> */}
@@ -181,7 +181,7 @@ function TutorSideDetailsPage() {
             />
           ))
         ) : (
-          <p>No results found</p>
+          <p className="text-red-600">No results found</p>
         )}
       </div>
     </>
