@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
 import './App.css';
 
+
 //auth related pages
 import LandingPage from './pages/LandingPage';
 import SignUpPage from './pages/Auth/SignUpPage';
@@ -12,6 +13,7 @@ import OtpPgae from './pages/Auth/OtpPgae';
 import StudentHomePage from './pages/Student/StudentHomePage';
 import StudentProfile from './pages/Student/StudentProfile';
 import ChangePassPage from './pages/Student/ChangePassPage';
+
 //Tutor related pages
 import TutorCheklistPage from './pages/Tutor/TutorCheklistPage';
 import TutorHomePage from './pages/Tutor/TutorHomePage';
@@ -33,6 +35,8 @@ import TutorDetailsPage from './pages/Admin/TutorDetailsPage';
 function App() {
   
   return (
+
+
    <Router> 
       <>  
         <Routes>

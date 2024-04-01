@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 function CreateSlotForm() {
   const [formData, setFormData] = useState({
-    user: "",
+    created_by: "",
     start_date: "",
     end_date: "",
     start_time: "",
@@ -17,13 +17,14 @@ function CreateSlotForm() {
     const access = jwtDecode(token);
 
     if (access.is_tutor) {
+      console.log('tutor')
       setFormData((prevFormData) => ({
         ...prevFormData,
-        user: access.user,
+         created_by: access.user,
       }));
     }
   }, []);
-
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     console.log(formData);
