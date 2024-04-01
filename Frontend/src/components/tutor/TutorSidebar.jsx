@@ -27,11 +27,11 @@ function TutorSidebar() {
   return (
     // <div className='w-2/5'>
     <nav
-      className={`text-indigo-800 font-bold h-screen border-2 border-gray-600 rounded-2xl w-1/5 p-4 ${
+      className={`text-indigo-800 font-bold h-full border-x-4 border-t-4 border-blue-600 rounded-md w-1/5 p-4 m-4 ${
         isOpen ? "md:block" : "hidden md:block"
       }`}
     >
-      <div className="mb-8">
+      <div className="">
         <h2 className="text-3xl font-bold bg-gradient-to-r from-violet-500 to-indigo-900 text-transparent bg-clip-text">
           Welcome Tutor
         </h2>
