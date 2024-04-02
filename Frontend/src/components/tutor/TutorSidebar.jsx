@@ -8,6 +8,7 @@ import {
   HiOutlineDocumentReport,
   HiOutlineClipboardList,
 } from "react-icons/hi";
+import { RiLogoutBoxLine } from "react-icons/ri";
 
 function TutorSidebar() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function TutorSidebar() {
   return (
     // <div className='w-2/5'>
     <nav
-      className={`text-indigo-800 font-bold h-full border-x-4 border-t-4 border-blue-600 rounded-md w-1/5 p-4 m-4 ${
+      className={`text-indigo-800 font-bold h-screen border-l-8  border-r-2 shadow-xl shadow-black border-indigo-800 rounded-md w-1/5 p-4 m-4 ${
         isOpen ? "md:block" : "hidden md:block"
       }`}
     >
@@ -38,10 +39,10 @@ function TutorSidebar() {
       </div>
       <hr className="my-2 bg-gray-900 "></hr>
       <ul>
-        <li className="hover:scale-110 mb-4">
+        <li className="hover:scale-110 mb-4 bg-stone-300 rounded-2xl">
           <Link
             to="/tutor/home/"
-            className="block py-2 hover:bg-gray-200"
+            className="block py-2 text-lg hover:bg-gray-200"
             onClick={toggleSidebar}
           >
             <BsHouseDoor
@@ -50,22 +51,22 @@ function TutorSidebar() {
             />
             Dashboard
           </Link>
-          <hr className="my-2 bg-gray-900 "></hr>
+        
         </li>
-        <li className="hover:scale-110 mb-4">
+        <li className="hover:scale-110 mb-4  bg-stone-300 rounded-2xl">
           <Link
             to="/tutor/createslot/"
-            className="block py-2 hover:bg-gray-200"
+            className="block py-2 text-lg hover:bg-gray-200"
             onClick={""}
           >
             <BsPeople size={30} className="inline mr-2 hover:text-blue-800" />
             Create Slots
           </Link>
         </li>
-        <li className="hover:scale-110 mb-4">
+        <li className="hover:scale-110 mb-4  bg-stone-300 rounded-2xl">
           <Link
             to="/tutor/viewslot/"
-            className="block py-2 hover:bg-gray-200"
+            className="block py-2 text-lg hover:bg-gray-200"
             onClick={""}
           >
             <HiOutlineClipboardList
@@ -76,15 +77,15 @@ function TutorSidebar() {
           </Link>
         </li>
         <li
-          className="hover:scale-110 mb-4 cursor-pointer"
+          className="hover:scale-105 duration-500 mb-4 cursor-pointer rounded-2xl"
           onClick={handleLogout}
         >
-          <p className="block py-2 hover:bg-gray-200">
-            <HiOutlineClipboardList
+          <p className="block py-2 text-blue-800 ">
+            <RiLogoutBoxLine
               size={20}
-              className="inline mr-2 hover:text-blue-800"
+              className="inline mr-2"
             />
-            logout
+            Log out
           </p>
         </li>
       </ul>

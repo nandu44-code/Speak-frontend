@@ -6,7 +6,7 @@ function CreateSlotPage() {
   return (
     <div className="flex">
       <TutorSidebar />
-      <div className="mx-auto my-10 flex-grow">
+      <div className="flex items-center px-40">
         <CreateSlotForm />
       </div>
     </div>

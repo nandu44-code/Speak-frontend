@@ -30,7 +30,7 @@ function ViewSlotPage() {
     e.preventDefault();
     try {
       const request = await api.get(
-        `slot/slots/filter/?selected_date=${selectedDate}&user=${user}`
+        `slot/slots/filter/?selected_date=${selectedDate}&created_by=${user}`
       );
       console.log(request.data);
       const response = request.data;
