@@ -1,28 +1,32 @@
 import React from "react";
 import Confetti from "react-confetti";
 import paymentSuccessGif from '../../assets/images/payment.gif'
+import { BsCheck2Circle } from "react-icons/bs";
+
 const PaymentSuccess = () => {
   return (
-<div className="flex flex-col h-screen shadow-lg shadow-stone-700 justify-center items-center">
+<div className="flex flex-col h-full justify-center items-center mt-32">
       {/* Payment successful message */}
-      <div className="text-center shadow-2xl shadow-green-300 p-8 rounded-lg">
-        <h1 className="text-4xl font-bold text-green-500 mb-4">
+      <div className="text-center shadow-2xl shadow-green-800 p-8 rounded-lg h-96">
+        <h1 className="text-4xl font-bold text-indigo-800 mb-4 animate-bounce">
           Payment Successful!
         </h1>
+      {/* <img src={paymentSuccessGif} alt="Payment Successful GIF" className='w-1/2 ml-24'/> */}
+      <BsCheck2Circle size={100} color={'green'} className="ml-40 mt-16 animate-bounce"/>
+      <p className="text-lg font-extralight text-indigo-700">Thank you for booking the slots Happy learning for you.</p>
       </div>
       
       {/* Image */}
-      <img src={paymentSuccessGif} alt="Payment Successful GIF" className='w-1/4 animate-left-to-right'/>
       
       {/* Confetti */}
       <div className="mt-8">
         <Confetti
           width="1600"
           height="1200"
-          numberOfPieces={100} // Number of confetti pieces
-          recycle={true}
+          numberOfPieces={500} // Number of confetti pieces
+          recycle={false}
           gravity={0.3} // Example gravity value
-          wind={0.1} // Example wind value
+          wind={0} // Example wind value
         />
       </div>
     </div>
