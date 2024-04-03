@@ -1,6 +1,5 @@
 import React from "react";
 import Confetti from "react-confetti";
-import paymentSuccessGif from '../../assets/images/payment.gif'
 import { BsCheck2Circle } from "react-icons/bs";
 
 const PaymentSuccess = () => {
@@ -11,22 +10,17 @@ const PaymentSuccess = () => {
         <h1 className="text-4xl font-bold text-indigo-800 mb-4 animate-bounce">
           Payment Successful!
         </h1>
-      {/* <img src={paymentSuccessGif} alt="Payment Successful GIF" className='w-1/2 ml-24'/> */}
       <BsCheck2Circle size={100} color={'green'} className="ml-40 mt-16 animate-bounce"/>
       <p className="text-lg font-extralight text-indigo-700">Thank you for booking the slots Happy learning for you.</p>
-      </div>
-      
-      {/* Image */}
-      
-      {/* Confetti */}
+      </div>      
       <div className="mt-8">
         <Confetti
           width="1600"
           height="1200"
-          numberOfPieces={200} // Number of confetti pieces
+          numberOfPieces={200}
           recycle={false}
-          gravity={0.5} // Example gravity value
-          wind={0} // Example wind value
+          gravity={0.5} 
+          wind={0} 
         />
       </div>
     </div>
