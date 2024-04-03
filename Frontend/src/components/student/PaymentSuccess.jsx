@@ -23,9 +23,9 @@ const PaymentSuccess = () => {
         <Confetti
           width="1600"
           height="1200"
-          numberOfPieces={500} // Number of confetti pieces
+          numberOfPieces={200} // Number of confetti pieces
           recycle={false}
-          gravity={0.3} // Example gravity value
+          gravity={0.5} // Example gravity value
           wind={0} // Example wind value
         />
       </div>
