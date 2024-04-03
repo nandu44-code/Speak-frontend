@@ -2,37 +2,60 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import api from "../../services/Axios";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+
 
 const SingleSlot = ({ key, startDate, startTime, endTime, onDelete }) => {
-  const stripePromise = loadStripe(
-    "pk_test_51OzPCTSBJxztjkDCY7itY03YR8Q8GJPZc0YHDlPuppVnH9p5Cdi0XSxBxF2ed9Udpt4C2zxGfgIHadmmY4eyqtHq006TvM57pG"
-  );
-
+  
   const handleDelete = () => {
     onDelete();
   };
 
   const handleBooking = async () => {
-    const token = localStorage.getItem("accessToken");
-    const access = jwtDecode(token);
-
-    const credentials = {
-      slot: key,
-      user: access.user,
-    };
-
+    // const token = localStorage.getItem("accessToken");
+    // const access = jwtDecode(token);
+    // const credentials = {
+    //   slot: key,
+    //   user: access.user,
+    // };
+    // try {
+    //   const response = await api.post("slot/bookings/", credentials);
+    //   if (response.data.status) {
+    //     if (response.data.status === 200) {
+    //       console.log("slot booked");
+    //     } else {
+    //       console.log("something went wrong");
+    //     }
+    //   }
+    // } catch (error) {
+    //   console.error("Error booking slot:", error);
+    // }
+    const stripePromise = loadStripe(
+      "pk_test_51OzPCTSBJxztjkDCY7itY03YR8Q8GJPZc0YHDlPuppVnH9p5Cdi0XSxBxF2ed9Udpt4C2zxGfgIHadmmY4eyqtHq006TvM57pG"
+    );
+      
+    const stripe = await stripePromise
     try {
-      const response = await api.post("slot/bookings/", credentials);
-      if (response.data.status) {
-        if (response.data.status === 200) {
-          console.log("slot booked");
-        } else {
-          console.log("something went wrong");
-        }
+      const sessionId = await createCheckoutSession();
+      if (sessionId) {
+          stripe.redirectToCheckout({
+              sessionId: sessionId
+          });
+      } else {
+          console.error('Failed to create Checkout Session');
       }
-    } catch (error) {
-      console.error("Error booking slot:", error);
+  } catch (error) {
+      console.error('Error:', error);
+  }
+  };
+
+  const createCheckoutSession = async () => {
+    try {
+      const response = await api.post("payments/create-checkout-session/");
+      return response.data.id;
+    } catch (error){
+      console.log("error",error);
+      return null;
     }
   };
 
