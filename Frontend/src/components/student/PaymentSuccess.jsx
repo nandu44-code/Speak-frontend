@@ -5,19 +5,19 @@ const PaymentSuccess = () => {
   return (
 <div className="flex flex-col h-screen shadow-lg shadow-stone-700 justify-center items-center">
       {/* Payment successful message */}
-      <div className="text-center shadow-2xl shadow-green-500 p-8 rounded-lg animate-bounce">
-        <h1 className="text-4xl font-bold text-green-800 mb-4">
+      <div className="text-center shadow-2xl shadow-green-300 p-8 rounded-lg">
+        <h1 className="text-4xl font-bold text-green-500 mb-4">
           Payment Successful!
         </h1>
       </div>
       
       {/* Image */}
-      <img src={paymentSuccessGif} alt="Payment Successful GIF" className='w-1/4'/>
+      <img src={paymentSuccessGif} alt="Payment Successful GIF" className='w-1/4 animate-left-to-right'/>
       
       {/* Confetti */}
       <div className="mt-8">
         <Confetti
-          width="full"
+          width="1600"
           height="1200"
           numberOfPieces={100} // Number of confetti pieces
           recycle={true}
