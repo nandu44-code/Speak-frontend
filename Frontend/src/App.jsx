@@ -24,6 +24,8 @@ import RejectedPage from './pages/Tutor/RejectedPage';
 import CreateSlotPage from './pages/Tutor/CreateSlotPage';
 import ViewSlotPage from './pages/Tutor/ViewSlotPage';
 import TutorSideDetailsPage from './pages/Student/TutorDetailsPage';
+import ViewBookingsPage from './pages/Tutor/ViewBookingsPage';
+
 //admin related pages
 import AdminHomePage from './pages/Admin/AdminHomePage';
 import AdminUsersPage from './pages/Admin/AdminUsersPage';
@@ -59,6 +61,7 @@ function App() {
           <Route path='tutor/rejected/' element={<RejectedPage/>}/>
           <Route path='tutor/createslot/' element={<CreateSlotPage/>}/>
           <Route path='tutor/viewslot/' element={<ViewSlotPage/>}/>
+          <Route path='tutor/viewbookings/' element={<ViewBookingsPage/>}/>
 
           <Route path='/admin/users' element={<AdminUsersPage/>}/>
           <Route path='/admin/tutors' element={<AdminTutorsPage/>}/>

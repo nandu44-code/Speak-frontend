@@ -53,7 +53,7 @@ function TutorSidebar() {
           </Link>
         
         </li>
-        <li className="hover:scale-110 mb-4  bg-stone-300 rounded-2xl">
+        <li className="hover:scale-110 mb-4  bg-stone-300 rounded-2xl ">
           <Link
             to="/tutor/createslot/"
             className="block py-2 text-lg hover:bg-gray-200"
@@ -74,6 +74,19 @@ function TutorSidebar() {
               className="inline mr-2 hover:text-blue-800"
             />
             View Slots
+          </Link>
+        </li>
+        <li className="hover:scale-110 mb-4  bg-stone-300 rounded-2xl">
+          <Link
+            to="/tutor/viewbookings/"
+            className="block py-2 text-lg hover:bg-gray-200"
+            onClick={""}
+          >
+            <HiOutlineClipboardList
+              size={30}
+              className="inline mr-2 hover:text-blue-800"
+            />
+            View Bookings
           </Link>
         </li>
         <li
