@@ -34,9 +34,6 @@ import AdminRequestsPage from './pages/Admin/AdminRequestsPage';
 import RequestDetailsPage from './pages/Admin/RequestDetailsPage';
 import AdminTutorsPage from './pages/Admin/AdminTutorsPage';
 import TutorDetailsPage from './pages/Admin/TutorDetailsPage';
-import ViewBookingsStudent from './pages/Student/ViewBookingsStudent';
-import ViewBookingsStudent from './pages/Student/ViewBookingsStudent';
-
 
 function App() {
   
