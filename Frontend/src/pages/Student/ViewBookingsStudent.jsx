@@ -25,7 +25,7 @@ function ViewBookingsStudent() {
         <StudentProfileSidebar/>
     
       <div className="container mx-auto px-4 py-8">
-        <div className="bg-indigo-700 text-white px-4 py-2 mb-10 rounded-lg text-lg font-bold">
+        <div className="bg-stone-400 text-indigo-900 px-4 py-2 mb-10 rounded-lg text-lg font-bold">
             View Your bookings
         </div>
         <div className="flex justify-center mb-4">
