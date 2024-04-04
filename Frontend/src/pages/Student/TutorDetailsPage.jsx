@@ -174,6 +174,7 @@ function TutorSideDetailsPage() {
           slots.map((slot) => (
             <SingleSlot
               key={slot.id}
+              id={slot.id}
               startDate={slot.start_date}
               startTime={slot.start_time}
               endTime={slot.end_time}

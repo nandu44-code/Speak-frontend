@@ -28,7 +28,7 @@ function TutorSidebar() {
   return (
     // <div className='w-2/5'>
     <nav
-      className={`text-indigo-800 font-bold h-screen border-l-8  border-r-2 shadow-xl shadow-black border-indigo-800 rounded-md w-1/5 p-4 m-4 ${
+      className={`text-indigo-800 font-bold h-screen border-l-8  border-r-2 shadow-xl shadow-black bg-gradient-to-b from-stone-400 to-indigo-200 border-indigo-800 rounded-md w-1/5 p-4 m-4 ${
         isOpen ? "md:block" : "hidden md:block"
       }`}
     >

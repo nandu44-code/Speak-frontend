@@ -5,8 +5,13 @@ import api from "../../services/Axios";
 import { jwtDecode } from "jwt-decode";
 
 
-const SingleSlot = ({ key, startDate, startTime, endTime, onDelete }) => {
-  
+const SingleSlot = ({ key,id, startDate, startTime, endTime, onDelete }) => {
+  const slot_id = id
+  console.log(key)
+  const  token =localStorage.getItem('accessToken')
+  const access = jwtDecode(token)
+  const user_id = access.user
+
   const handleDelete = () => {
     onDelete();
   };
@@ -51,7 +56,12 @@ const SingleSlot = ({ key, startDate, startTime, endTime, onDelete }) => {
 
   const createCheckoutSession = async () => {
     try {
-      const response = await api.post("payments/create-checkout-session/");
+      const credentials ={
+        slot:slot_id,
+        booked_by:user_id
+      }
+      console.log(credentials)
+      const response = await api.post("payments/create-checkout-session/", credentials);
       return response.data.id;
     } catch (error){
       console.log("error",error);

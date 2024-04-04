@@ -7,20 +7,20 @@ import { toast } from "react-toastify";
 
 function ViewSlotPage() {
   const [selectedDate, setSelectedDate] = useState("");
-  const [user, setUser] = useState("");
+  // const [user, setUser] = useState("");
   const [slots, setSlots] = useState([]);
   const handleChange = (e) => {
     setSelectedDate(e.target.value);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    const access = jwtDecode(token);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("accessToken");
+  //   const access = jwtDecode(token);
 
-    if (access.is_tutor) {
-      setUser(access.user);
-    }
-  }, []);
+  //   if (access.is_tutor) {
+  //     setUser(access.user);
+  //   }
+  // }, []);
 
   useEffect(() => {
     console.log(slots);
@@ -28,6 +28,14 @@ function ViewSlotPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("accessToken");
+    const access = jwtDecode(token);
+    let user = ''; // Define user variable outside of the if block
+  
+    if (access.is_tutor) {
+      user = access.user; // Assign value to user variable
+    }
+  
     try {
       const request = await api.get(
         `slot/slots/filter/?selected_date=${selectedDate}&created_by=${user}`
@@ -41,6 +49,7 @@ function ViewSlotPage() {
       toast.error("Error searching slots");
     }
   };
+  
 
   const handleDeleteSlot = async (id) => {
     try {
@@ -56,11 +65,11 @@ function ViewSlotPage() {
 
   return (
     <div className="flex">
-      <div className="w-6">
+      
         <TutorSidebar />
-      </div>
+      
       <div className="flex flex-col">
-        <div className="flex justify-center ml-96">
+        <div className="flex justify-center">
           <div className="w-auto ml-80 bg-stone-200 h-28 rounded-2xl px-4 py-2 mt-32">
             {/* <h2 className="text-xl font-bold mb-4">Search Slots by Date</h2> */}
             <form onSubmit={handleSubmit} className="flex items-center">
@@ -97,6 +106,7 @@ function ViewSlotPage() {
             slots.map((slot) => (
               <SingleSlot
                 key={slot.id}
+                id={slot.id}
                 startDate={slot.start_date}
                 startTime={slot.start_time}
                 endTime={slot.end_time}
