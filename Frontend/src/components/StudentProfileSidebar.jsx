@@ -26,6 +26,12 @@ const StudentProfileSidebar = () => {
             Change password
           </Link>
         </li>
+        <li className="hover:scale-110 mb-4">
+          <Link to="/student/viewBookings/" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
+            <HiOutlineClipboardList size={20} className="inline mr-2 hover:text-blue-800" />
+            View bookings
+          </Link>
+        </li>
       </ul>
       <div className="md:hidden">
         <button onClick={toggleSidebar}>Toggle Sidebar</button>

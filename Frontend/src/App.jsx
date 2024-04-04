@@ -14,6 +14,7 @@ import StudentHomePage from './pages/Student/StudentHomePage';
 import StudentProfile from './pages/Student/StudentProfile';
 import ChangePassPage from './pages/Student/ChangePassPage';
 import PaymentSuccessPage from './pages/Student/PaymentSuccessPage';
+import ViewBookingsStudent from './pages/Student/ViewBookingsStudent';
 
 //Tutor related pages
 import TutorCheklistPage from './pages/Tutor/TutorCheklistPage';
@@ -33,6 +34,8 @@ import AdminRequestsPage from './pages/Admin/AdminRequestsPage';
 import RequestDetailsPage from './pages/Admin/RequestDetailsPage';
 import AdminTutorsPage from './pages/Admin/AdminTutorsPage';
 import TutorDetailsPage from './pages/Admin/TutorDetailsPage';
+import ViewBookingsStudent from './pages/Student/ViewBookingsStudent';
+import ViewBookingsStudent from './pages/Student/ViewBookingsStudent';
 
 
 function App() {
@@ -54,6 +57,7 @@ function App() {
           <Route path='/student/findTutors/' element={<FindTutorsPage/>}/>
           <Route path='/student/TutorDetails/:id' element={<TutorSideDetailsPage/>}/>
           <Route path='/student/paymentSuccess/' element={<PaymentSuccessPage/>}/>
+          <Route path='/student/viewBookings/' element={<ViewBookingsStudent/>}/>
 
           <Route path='/tutor/home/' element={<TutorHomePage/>}/>
           <Route path='/tutor/checklist/' element={<TutorCheklistPage/>}/>
