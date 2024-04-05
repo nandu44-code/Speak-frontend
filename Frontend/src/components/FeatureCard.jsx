@@ -2,7 +2,7 @@ import React from 'react';
 
 const CustomCard = ({ icon, heading, paragraph }) => {
   return (
-    <div className="w-full bg-gray-300 rounded-xl p-5 m-2 hover:scale-105 hover:border-b-4 border-indigo-900  duration-700 hover:rounded-3xl cursor-pointer 
+    <div className="w-full bg-stone-100 rounded-xl p-5 m-2 hover:scale-105 hover:border-b-4 border-indigo-900  duration-700 hover:rounded-3xl cursor-pointer shadow-md shadow-black 
                     sm:w-5/6 md:w-3/4 lg:w-1/4 xl:w-1/4 2xl:w-1/4 ">
       <div className="flex flex-row">
         {icon && React.cloneElement(icon, { size: '4rem' })}

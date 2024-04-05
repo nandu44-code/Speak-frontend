@@ -47,7 +47,7 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="bg-neutral-400 hover:border-b-1 hover:duration-1000 border-indigo-900 border-transparent p-4 bg-fixed z-10">
+    <nav className="bg-white hover:border-b-1 hover:duration-1000 border-indigo-900 border-transparent p-4 bg-fixed z-10">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="flex-shrink-0">
