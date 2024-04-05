@@ -25,7 +25,7 @@ function Hero() {
   }, []);
 
   return (
-    <div className="relative bg-white bg-cover bg-dark flex flex-row-reverse items-center justify-center mt-0 w-full h-min opacity-95">
+    <div className="relative bg-white pt-14 bg-cover bg-dark flex flex-row-reverse items-center justify-center mt-0 w-full h-min opacity-95">
       <div className="relative flex flex-col justify-center items-center w-full h-full lg:w-1/2 rounded-2xl p-10 leading-tight">
         <h1
           className="font-medium text-indigo-900 text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-7xl select-none font-serif"

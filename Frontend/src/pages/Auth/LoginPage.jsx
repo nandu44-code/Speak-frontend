@@ -5,7 +5,7 @@ function LoginPage() {
   return (
     <div className='flex flex-col'>
       <Navbar/>
-      <div>
+      <div className='pt-14'>
         <LoginForm/>  
       </div>
     </div>
