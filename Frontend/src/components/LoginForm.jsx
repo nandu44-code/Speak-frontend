@@ -64,10 +64,10 @@ function LoginForm() {
 
   return (
     <div className="flex flex-row">
-    <div className="w-3/5 sm:hidden md:block lg:block xl:block 2xl:block hidden">
+    <div className="w-2/4 sm:hidden md:block lg:block xl:block 2xl:block hidden">
       <img src={imageSrc} className="w-full h-screen"></img>
     </div>
-    <div className="w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 2xl:w-1/3 mx-auto h-full bg-transparent mt-32 shadow-md shadow-black p-2 mb-4 rounded-lg">
+    <div className="w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 2xl:w-1/3 mx-auto h-full bg-transparent mt-32 shadow-md shadow-black p-2 mb-4 rounded-lg">
       <h2 className="text-2xl font-bold mb-4 text-blue-800">Log in here....</h2>
       <form className="space-y-4" onSubmit={handleLogin} method='post'>
         <div>
