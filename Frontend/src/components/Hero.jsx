@@ -12,7 +12,7 @@ function Hero() {
  
 
   return (
-    <div className="relative bg-white pt-24 bg-cover bg-dark flex flex-row-reverse items-center justify-center mt-0 w-full h-min opacity-95 shadow-2xl shadow-balck">
+    <div className="relative bg-white pt-24 bg-cover bg-dark flex flex-row-reverse items-center justify-center mt-0 w-full h-min opacity-95">
       <div className="relative flex flex-col justify-center items-center w-full h-full lg:w-1/2 rounded-2xl p-10 leading-tight">
         <h1
           className="font-bold text-indigo-900 text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-7xl select-none"
