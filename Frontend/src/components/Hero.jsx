@@ -4,43 +4,32 @@ import heroimage1 from "../assets/images/heroimage1.jpg";
 import heroimage2 from "../assets/images/heroimage2.jpg";
 import heroimage3 from "../assets/images/heroimage3.jpg";
 import heroimage4 from "../assets/images/heroimage4.jpg";
+import { FaArrowRight } from "react-icons/fa";
 
 function Hero() {
   const backgroundImageUrl =
     "/assets/images/pexels-andrea-piacquadio-3772511.jpg";
-  const [colorIndex, setColorIndex] = useState(0);
-
-  const colors = [
-    "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-    "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
-    "linear-gradient(45deg, #00CED1 30%, #4682B4 90%)",
-  ]; // Add more colors as needed
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setColorIndex((prevIndex) => (prevIndex + 1) % colors.length);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
+ 
 
   return (
-    <div className="relative bg-white pt-14 bg-cover bg-dark flex flex-row-reverse items-center justify-center mt-0 w-full h-min opacity-95">
+    <div className="relative bg-white pt-24 bg-cover bg-dark flex flex-row-reverse items-center justify-center mt-0 w-full h-min opacity-95 shadow-2xl shadow-balck">
       <div className="relative flex flex-col justify-center items-center w-full h-full lg:w-1/2 rounded-2xl p-10 leading-tight">
         <h1
-          className="font-medium text-indigo-900 text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-7xl select-none font-serif"
-          style={{ color: colors[colorIndex] }}
+          className="font-bold text-indigo-900 text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-7xl select-none"
         >
-          Online English Tutor Available Right Now!!!
+          Online English Tutor Available Right Now!
         </h1>
-        <p className="mt-5 text-gray-700 text-sm sm:text-md md:text-lg lg:text-base xl:text-xl select-none font-medium font-serif">
+        <p className="mt-5 text-gray-800 text-sm sm:text-md md:text-lg lg:text-base xl:text-xl select-none font-medium font-serif">
           Private online sessions with native English speakers
         </p>
         <button
-          className="mt-8 bg-indigo-900 hover:bg-indigo-600 text-white py-3 px-6 rounded-lg font-semibold text-lg focus:outline-none animate-bounce"
-          style={{ background: colors[colorIndex] }}
+          className="mt-8 bg-indigo-950 hover:bg-indigo-800 text-white py-3 px-6 rounded-lg font-semibold text-lg focus:outline-none animate-bounce flex flex-row"
+          // style={{ background: colors[colorIndex] }}
         >
           Book Now
+          <span className="mt-2 ml-10">
+            <FaArrowRight />
+          </span>
         </button>
       </div>
       <div className="flex flex-row justify-center items-end w-full h-full sm:w-3/4 sm:flex-row sm:flex-wrap md:w-1/2 md:flex-row md:flex-wrap lg:w-1/2 lg:flex-row lg:flex-wrap">
@@ -77,7 +66,6 @@ function Hero() {
         </div>
       </div>
     </div>
-    
   );
 }
 
