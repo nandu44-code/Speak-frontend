@@ -34,6 +34,7 @@ import AdminRequestsPage from './pages/Admin/AdminRequestsPage';
 import RequestDetailsPage from './pages/Admin/RequestDetailsPage';
 import AdminTutorsPage from './pages/Admin/AdminTutorsPage';
 import TutorDetailsPage from './pages/Admin/TutorDetailsPage';
+import AdminBookings from './pages/Admin/AdminBookings';
 
 function App() {
   
@@ -70,6 +71,8 @@ function App() {
           <Route path='/admin/requests' element={<AdminRequestsPage/>}/>
           <Route path='/admin/requests/detail/:id' element={<RequestDetailsPage/>}/>
           <Route path='/admin/tutors/detail/:id' element={<TutorDetailsPage/>}/>
+          <Route path='/admin/bookings' element={<AdminBookings/>}/>
+          
         </Routes>
       </>
    </Router>

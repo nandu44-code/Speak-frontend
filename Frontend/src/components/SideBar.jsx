@@ -47,6 +47,12 @@ const Sidebar = () => {
           </Link>
         </li>
         <li className="hover:scale-110 mb-4">
+          <Link to="/admin/bookings" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
+            <IoMdSchool size={30} className="inline mr-2 hover:text-blue-800" />
+            Bookings
+          </Link>
+        </li>
+        <li className="hover:scale-110 mb-4">
           <Link to="/admin/requests/" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
             <HiOutlineDocumentReport size={30} className="inline mr-2 hover:text-blue-800" />
             Requests

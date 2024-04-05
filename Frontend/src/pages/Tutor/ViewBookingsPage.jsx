@@ -21,6 +21,7 @@ function ViewBookingsPage() {
         console.log(status,tutor)
       try {
         const response = await api.get(`slot/bookings/filter/${tutor}/${status}`);
+        console.log(response.data)
         setBookings(response.data);
       } catch (error) {
         console.error("Error fetching bookings:", error);

@@ -11,6 +11,7 @@ import { GrSchedule } from "react-icons/gr";
 
 function TutorSideDetailsPage() {
   const { id } = useParams();
+  console.log(id)
   const [userData, setUserData] = useState(null);
   // const currentdate = new Date();
   const [selectedDate, setSelectedDate] = useState(
@@ -28,8 +29,9 @@ function TutorSideDetailsPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("aneesh",id)
       const request = await api.get(
-        `slot/slots/filter/?selected_date=${selectedDate}&user=${id}`
+        `slot/slots/filter/?selected_date=${selectedDate}&created_by=${id}`
       );
       console.log(request.data);
       const response = request.data;
@@ -50,6 +52,7 @@ function TutorSideDetailsPage() {
       try {
         const response = await api.get(`user/${id}/`);
         setUserData(response.data);
+        setUser(id)
       } catch (error) {
         console.error();
       }
@@ -178,6 +181,7 @@ function TutorSideDetailsPage() {
               startDate={slot.start_date}
               startTime={slot.start_time}
               endTime={slot.end_time}
+              is_booked={slot.is_booked}
               onDelete={() => handleDeleteSlot(slot.id)}
             />
           ))

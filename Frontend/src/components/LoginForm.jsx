@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Login } from '../features/userSlice';
 import {jwtDecode} from 'jwt-decode';
-import imageSrc from "../assets/images/2148165893.jpg";
+import imageSrc from "../assets/images/12953573_Data_security_05.jpg";
 
 function LoginForm() {
 

@@ -5,7 +5,7 @@ import api from "../../services/Axios";
 import { jwtDecode } from "jwt-decode";
 
 
-const SingleSlot = ({ key,id, startDate, startTime, endTime, onDelete }) => {
+const SingleSlot = ({ key,id, startDate, startTime, endTime, onDelete,is_booked }) => {
   const slot_id = id
   console.log(key)
   const  token =localStorage.getItem('accessToken')
@@ -80,20 +80,24 @@ const SingleSlot = ({ key,id, startDate, startTime, endTime, onDelete }) => {
           <p className="text-red-700 font-semibold">End Time: {endTime}</p>
         </div>
         {location.pathname === "/tutor/viewslot/" ? (
-          <button
-            onClick={handleDelete}
-            className="border-2 border-red-500 text-red-900 px-4 py-2 rounded-md hover:bg-red-400 hover:text-white hover:cursor-pointer"
-          >
-            Delete
-          </button>
-        ) : (
-          <button
-            className="border-2 border-red-500 text-red-900 px-4 py-2 rounded-md hover:bg-red-600 hover:text-white hover:cursor-pointer"
-            onClick={handleBooking}
-          >
-            Book
-          </button>
-        )}
+  <button
+    onClick={handleDelete}
+    className="border-2 border-red-500 text-red-900 px-4 py-2 rounded-md hover:bg-red-400 hover:text-white hover:cursor-pointer"
+  >
+    Delete
+  </button>
+) : (
+  <button
+    className={`border-2 border-red-500 text-red-900 px-4 py-2 rounded-md ${
+      is_booked ? 'bg-gray-400 cursor-not-allowed' : 'hover:bg-red-600 hover:text-white hover:cursor-pointer'
+    }`}
+    onClick={is_booked ? null : handleBooking}
+    disabled={is_booked}
+  >
+    {is_booked ? "Booked" : "Book"}
+  </button>
+)}
+
       </div>
     </div>
   );
