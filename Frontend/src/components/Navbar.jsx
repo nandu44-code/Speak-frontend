@@ -47,7 +47,7 @@ function Navbar() {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-neutral-200 hover:bg-stone-400 mx-5 hover:duration-1000 border-indigo-900 border-transparent p-4 bg-fixed z-10 rounded-full shadow-md shadow-black">
+    <nav className="fixed top-0 left-0 right-0 bg-neutral-200 hover:bg-stone-200 mx-5 hover:duration-1000 border-indigo-900 border-transparent p-4 bg-fixed z-10 rounded-full shadow-md shadow-black">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="flex-shrink-0">

@@ -12,7 +12,7 @@ function Footer() {
             
         </div>
         <div className='m-5'>
-            <h1 className="text-xl text-white">Social links</h1>
+            <h1 className="text-xl text-white underline">Social links</h1>
             <h1 className="text-md text-white mt-2 hover:underline">Instagram</h1>
             <h1 className="text-md text-white mt-2 hover:underline">Facebook</h1>
             <h1 className="text-md text-white mt-2 hover:underline">Twitter</h1>
