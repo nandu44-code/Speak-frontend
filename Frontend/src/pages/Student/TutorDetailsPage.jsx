@@ -63,7 +63,7 @@ function TutorSideDetailsPage() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center m-10 bg-gray-100  p-10 shadow-sm shadow-black">
+      <div className="flex flex-col mt-24 items-center p-10 bg-gray-100  shadow-sm shadow-black">
         {userData && (
           <img
             className="w-40 h-40 cursor-pointer mb-6"

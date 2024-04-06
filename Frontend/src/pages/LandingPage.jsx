@@ -5,7 +5,7 @@ import FeatureCard from "../components/FeatureCard";
 import { BiWorld } from "react-icons/bi";
 import { FaCommentDots } from "react-icons/fa6";
 import { TbSettingsCog } from "react-icons/tb";
-
+import Footer from "../components/Footer";
 
 function LandingPage() {
   return (
@@ -32,6 +32,7 @@ function LandingPage() {
             learning style and individual goals."
           />
         </div>
+      <Footer/>
     </div>
   );
 }
