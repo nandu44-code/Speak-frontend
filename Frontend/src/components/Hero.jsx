@@ -12,7 +12,7 @@ function Hero() {
  
 
   return (
-    <div className="relative bg-stone-400 pt-24 bg-cover bg-dark flex flex-row-reverse items-center justify-center mt-0 w-full h-min opacity-95">
+    <div className="relative  rounded-r-full rounded-b-2xl rounded-l-full rounded-t-2xl pt-24 bg-cover bg-dark flex flex-row-reverse items-center justify-center mt-0 w-full h-min opacity-95 border-l-8 border-stone-100 border-b-8">
       <div className="relative flex flex-col justify-center items-center w-full h-full lg:w-1/2 rounded-2xl p-10 leading-tight">
         <h1
           className="font-bold text-indigo-900 text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-7xl select-none"
@@ -23,7 +23,7 @@ function Hero() {
           Private online sessions with native English speakers
         </p>
         <button
-          className="mt-8 bg-indigo-950 hover:bg-indigo-800 text-white py-3 px-6 rounded-lg font-semibold text-lg focus:outline-none animate-bounce flex flex-row"
+          className="mt-8 bg-indigo-700 hover:bg-indigo-800 text-white py-3 px-6 rounded-lg font-semibold text-lg focus:outline-none animate-bounce flex flex-row"
           // style={{ background: colors[colorIndex] }}
         >
           Book Now
@@ -37,7 +37,7 @@ function Hero() {
           <img
             src={heroimage3}
             alt="Description of the image"
-            className="rounded-sm shadow-2xl w-full h-full"
+            className="rounded-sm shadow-2xl shadow-black w-full h-full"
           />
         </div>
         <div
@@ -47,21 +47,21 @@ function Hero() {
           <img
             src={heroimage1}
             alt="Description of the image"
-            className="rounded-sm shadow-2xl w-full h-full"
+            className="rounded-sm shadow-md shadow-black w-full h-full"
           />
         </div>
         <div className="relative w-1/2 h-1/2 m-4 rounded-2xl">
           <img
             src={heroimage2}
             alt="Description of the image"
-            className="rounded-sm shadow-2xl w-full h-1/2"
+            className="rounded-sm shadow-md shadow-black w-full h-1/2"
           />
         </div>
         <div className="relative w-1/4 h-1/4 m-4 rounded-2xl">
           <img
             src={heroimage4}
             alt="Description of the image"
-            className="rounded-sm shadow-2xl w-full h-full"
+            className="rounded-sm shadow-2xl shadow-black w-full h-full"
           />
         </div>
       </div>
