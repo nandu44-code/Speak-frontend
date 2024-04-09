@@ -114,7 +114,7 @@ function StudentProfile() {
       <Navbar />
       <div className="flex">
         <StudentprofileSidebar className="justify-start" />
-        <div className="ml-72 mt-20">
+        <div className="ml-72 mt-20 pt-28">
           <div className="max-w-md mx-auto bg-white shadow-stone-950 rounded-md border-2 px-8 pt-6 pb-8 mb-4 text-center relative ">
             <input
               type="file"

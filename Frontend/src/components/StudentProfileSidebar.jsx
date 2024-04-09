@@ -12,7 +12,7 @@ const StudentProfileSidebar = () => {
   };
 
   return (
-    <nav className={`bg-transparent text-indigo-800 font-bold h-screen w-1/5 p-4  ${isOpen ? 'md:block' : 'hidden md:block'}`}>
+    <nav className={`bg-transparent pt-28 text-indigo-800 font-bold h-screen w-1/5 p-4  ${isOpen ? 'md:block' : 'hidden md:block'}`}>
       <ul>
         <li className="hover:scale-110 mb-4">
           <Link to="/student/profile/" className="block py-2 hover:bg-gray-200" onClick={toggleSidebar}>
