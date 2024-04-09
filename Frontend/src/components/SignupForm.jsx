@@ -158,7 +158,7 @@ function SignUpForm() {
       <div className="w-1/2 sm:hidden md:block lg:block xl:block 2xl:block flex justify-center items-center ">
         <img
           src={imageSrc}
-          className="w-1/2 h-1/2"
+          className="w-full h-full"
           alt="signup-image"
         ></img>
       </div>
