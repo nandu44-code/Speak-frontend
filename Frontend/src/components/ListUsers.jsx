@@ -3,23 +3,27 @@ import api from "../services/Axios";
 
 function ListUsers() {
   const [users, setUsers] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   let id = 0
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await api.get("users/");
+        const response = await api.get(`users/?page=${page}`);
         if (response.status === 200) {
           console.log("Fetched all the users");
           console.log(response.data);
-          setUsers(response.data);
+          setUsers(response.data.results);
+          setTotalPages(response.data.count);
         }
       } catch (error) {
         console.log("Error:", error);
       }
     };
 
-    fetchUsers();
-  }, []);
+    fetchUsers(); 
+  }, [page]);
 
   const blockOrUnblockUser = async (id, isBlocked) => {
     try {
@@ -36,6 +40,10 @@ function ListUsers() {
     } catch (error) {
       console.log("Error:", error);
     }
+  };
+
+  const handlePageChange = (page) => {
+    setPage(page);
   };
 
   return (
@@ -55,7 +63,7 @@ function ListUsers() {
           </thead>
           <tbody>
             {users.map((user, index) => (
-              user.is_student ? (
+              // user.is_student ? (
                 <tr key={index}>
                   <td className="border border-gray-400 px-4 py-2">{++id}</td>
                   <td className="border border-gray-400 px-4 py-2">{user.username}</td>
@@ -72,10 +80,14 @@ function ListUsers() {
                     
                   </td>
                 </tr>
-              ) : null
+              // ) : null
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="mt-10">
+        <button onClick={() => handlePageChange(page - 1)} disabled={page === 1} className="bg-sky-700 px-4 py-2 mx-4 text-white rounded-md">Previous</button>
+        <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages} className="bg-sky-700 px-4 py-2 mx-4 text-white rounded-md">Next</button>
       </div>
     </div>
   );
