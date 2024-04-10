@@ -23,7 +23,7 @@ const Sidebar = () => {
   };
 
   return (
-    <nav className={`bg-white shadow-2xl text-indigo-800 font-bold h-screen w-1/5 p-4  ${isOpen ? 'md:block' : 'hidden md:block'}`}>
+    <nav className={`bg-stone-300 shadow-2xl text-indigo-800 font-bold h-screen w-1/5 p-4  ${isOpen ? 'md:block' : 'hidden md:block'}`}>
       <div className="mb-8">
         <h2 className="text-3xl font-bold">Welcome Admin</h2>
       </div>
