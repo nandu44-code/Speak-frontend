@@ -5,6 +5,7 @@ function ListUsers() {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm,setSearchTerm] = useState('')
 
   let id = 0;
   useEffect(() => {
@@ -48,6 +49,33 @@ function ListUsers() {
     setPage(page);
   };
 
+  const searchUsers = async (e) => {
+    const searchTerm = e.target.value;
+    setSearchTerm(searchTerm);
+    
+    try {
+      setLoading(true);
+      if (searchTerm.trim() !== "") {
+        const response = await api.get(`user-search/?search=${searchTerm}`);
+        setUsers(response.data);
+      } else {
+        try {
+          const response = await api.get(`/users/page=${page}`);
+          if (response.status === 200) {
+            console.log("Fetched all the users");
+            console.log(response.data);
+            setUsers(response.data);
+          }
+        } catch (error) {
+          console.log("Error:", error);
+        }
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="mx-10 mt-20">
       <div className="overflow-x-auto">
@@ -55,8 +83,8 @@ function ListUsers() {
         type="search"
         placeholder="search..."
         className="rounded-full 2xl:w-96 w-56 placeholder-indigo-950 placeholder:font-bold px-4 py-2 mb-5 focus:bg-white bg-stone-200"
-        onChange={''}
-        value={''}
+        onChange={searchUsers}
+        value={searchTerm}
       /> 
         <table className="table-auto border-collapse hover:table-fixed bg-gray-700">
           <caption class="caption-top mb-4 text-2xl font-bold text-gray-600">
