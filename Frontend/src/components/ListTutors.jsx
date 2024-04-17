@@ -6,12 +6,13 @@ function ListTutors() {
     const [users, setUsers] = useState([]);
     const [id,setId] = useState(null)
     const navigate = useNavigate()
+
     useEffect(() => {
       const fetchUsers = async () => {
         try {
-          const response = await api.get("users/");
+          const response = await api.get("tutors/");
           if (response.status === 200) {
-            console.log("Fetched all the users");
+            console.log("Fetched all the tutors");
             console.log(response.data);
             setUsers(response.data);
           }
@@ -27,6 +28,7 @@ function ListTutors() {
       try {
         const response = await api.patch(`users/${id}/`, { is_active: !isBlocked });
         if (response.status === 200) {
+          console.log('response status of the blocking is 200')
           const updatedUsers = users.map(user => {
             if (user.id === id) {
               return { ...user, is_active: !isBlocked };
@@ -61,23 +63,24 @@ function ListTutors() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
-              (user.is_tutor && user.is_approved)? (
+            {users.map((user, index) => ((
                 <tr key={index}>
                   <td className="border border-gray-400 px-4 py-2">{user.id}</td>
                   <td className="border border-gray-400 px-4 py-2">{user.username}</td>
                   <td className="border border-gray-400 px-4 py-2">{user.email}</td>
                   <td className="border border-gray-400 px-4 py-2">
 
-                  {user.is_active ? <button className='bg-red-700 p-2 m-2 font-bold rounded text-white' onClick={() => blockOrUnblockUser(user.id, user.is_active)}
-                    >Block </button>: <button
+                  {user.is_active ? (<button className='bg-red-700 p-2 m-2 font-bold rounded text-white' onClick={() => blockOrUnblockUser(user.id, user.is_active)}
+                    >Block </button>)
+                    :( <button
                     className='bg-green-600 p-2 m-2 rounded text-white font-bold'
                     onClick={() => blockOrUnblockUser(user.id, user.is_active)}
-                  >UnBlock</button>}
+                  >UnBlock</button>)
+                  }
                   <button className="bg-blue-900 p-2 m-2 rounded font-bold text-white hover:bg-blue-800" onClick={() =>{setId(user.id)}}>View Details</button>
                   </td>
                 </tr>
-              ) : null
+              ) 
             ))}
           </tbody>
         </table>

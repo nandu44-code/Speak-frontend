@@ -35,10 +35,12 @@ import RequestDetailsPage from './pages/Admin/RequestDetailsPage';
 import AdminTutorsPage from './pages/Admin/AdminTutorsPage';
 import TutorDetailsPage from './pages/Admin/TutorDetailsPage';
 import AdminBookings from './pages/Admin/AdminBookings';
+import UserProtectedRoute from './Routes/ProtectedRoute';
 
 function App() {
   
   return (
+
 
 
    <Router> 
@@ -48,9 +50,10 @@ function App() {
           <Route path='register/' element={<SignUpPage/>} />
           <Route path='/login/' element={<LoginPage/>} />
           <Route path='/otp/' element={<OtpPgae/>}/>
+          
 
-          <Route path='/student/home/' element={<StudentHomePage/>}/>
-          <Route path='/student/profile/' element={<StudentProfile/>}/> 
+          <Route path='/student/home/' element={<UserProtectedRoute ><StudentHomePage/>  </UserProtectedRoute> }/>
+          <Route path='/student/profile/' element={<UserProtectedRoute><StudentProfile/></UserProtectedRoute>}/> 
           <Route path='/student/changePassword/' element={<ChangePassPage/>}/> 
           <Route path='/student/findTutors/' element={<FindTutorsPage/>}/>
           <Route path='/student/TutorDetails/:id' element={<TutorSideDetailsPage/>}/>
