@@ -6,6 +6,7 @@ function ListUsers() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm,setSearchTerm] = useState('')
+  const [loading, setLoading] = useState(false)
 
   let id = 0;
   useEffect(() => {
@@ -57,7 +58,8 @@ function ListUsers() {
       setLoading(true);
       if (searchTerm.trim() !== "") {
         const response = await api.get(`user-search/?search=${searchTerm}`);
-        setUsers(response.data);
+        console.log(response.data)
+        setUsers(response.data.results);
       } else {
         try {
           const response = await api.get(`/users/page=${page}`);
