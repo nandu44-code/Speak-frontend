@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 function ListTutors() {
     const [users, setUsers] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const [id,setId] = useState(null)
     const navigate = useNavigate()
 
@@ -22,11 +24,16 @@ function ListTutors() {
       };
   
       fetchUsers();
-    }, []);
+    }, [page]);
+
+    const handlePageChange = (page) => {
+      setPage(page);
+    };
+  
   
     const blockOrUnblockUser = async (id, isBlocked) => {
       try {
-        const response = await api.patch(`tutor/${id}/`, { is_active: !isBlocked });
+        const response = await api.patch(`tutorlist/${id}/`, { is_active: !isBlocked });
         if (response.status === 200) {
           console.log('response status of the blocking is 200', response)
           const updatedUsers = users.map(user => {
@@ -85,7 +92,23 @@ function ListTutors() {
           </tbody>
         </table>
       </div>
-    </div>      
+    </div>  
+    <div className="mt-10">
+        <button
+          onClick={() => handlePageChange(page - 1)}
+          disabled={page === 1}
+          className="bg-indigo-800 px-4 py-2 mx-4 text-white rounded-md cursor-pointer hover:bg-indigo-900"
+        >
+          Previous
+        </button>
+        <button
+          onClick={() => handlePageChange(page + 1)}
+          disabled={page === totalPages}
+          className="bg-indigo-800 px-4 py-2 mx-4 text-white rounded-md cursor-pointer hover:bg-indigo-900"
+        >
+          Next
+        </button>
+      </div>    
     </div>
   )
 }

@@ -46,9 +46,9 @@ function ListUsers() {
     }
   };
 
-  const handlePageChange = (page) => {
-    setPage(page);
-  };
+    const handlePageChange = (page) => {
+      setPage(page);
+    };
 
   const searchUsers = async (e) => {
     const searchTerm = e.target.value;
