@@ -26,9 +26,9 @@ function ListTutors() {
   
     const blockOrUnblockUser = async (id, isBlocked) => {
       try {
-        const response = await api.patch(`users/${id}/`, { is_active: !isBlocked });
+        const response = await api.patch(`tutor/${id}/`, { is_active: !isBlocked });
         if (response.status === 200) {
-          console.log('response status of the blocking is 200')
+          console.log('response status of the blocking is 200', response)
           const updatedUsers = users.map(user => {
             if (user.id === id) {
               return { ...user, is_active: !isBlocked };
