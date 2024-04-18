@@ -29,8 +29,8 @@ function ListBookings() {
           <thead>
             <tr>
               <th className="px-4 py-5">ID</th>
-              <th className="px-20 py-5">Booked By(id)</th>
-              <th className="px-20 py-5">Created by(id)</th>
+              <th className="px-20 py-5">Booked By</th>
+              <th className="px-20 py-5">Created by</th>
               <th className="px-20 py-5">Date</th>
               <th className="px-20 py-5">Time</th>
               <th className="px-20 py-5">status</th>
@@ -40,8 +40,8 @@ function ListBookings() {
             {bookings.map((booking, index) => (
               <tr key={index}>
                 <td className="border border-gray-400 px-4 py-2">{index + 1}</td>
-                <td className="border border-gray-400 px-4 py-2">{booking.booked_by}</td>
-                <td className="border border-gray-400 px-4 py-2">{booking.slot_details.created_by}</td>
+                <td className="border border-gray-400 px-4 py-2">{booking.booked_by_details.username}</td>
+                <td className="border border-gray-400 px-4 py-2">{booking.slot_details.created_by.username}</td>
                 <td className="border border-gray-400 px-4 py-2">{booking.slot_details.start_date}</td>
                 <td className="border border-gray-400 px-4 py-2">{booking.slot_details.start_time} to {booking.slot_details.end_time}</td>
                 <td className="border border-gray-400 px-4 py-2 text-red-600 font-bold">{booking.status}</td>

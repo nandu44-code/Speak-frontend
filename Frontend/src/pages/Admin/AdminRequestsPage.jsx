@@ -45,7 +45,7 @@ function AdminRequestsPage() {
           <p className="font-medium text-stone-700 text-2xl mb-20">Requests</p>
 
           {(pendingRequests.length === 0 ? 
-          <p>no pending Requests</p>
+          <p className="text-red-500">No Pending Requests</p>
           :pendingRequests.map((tutor,index) => (
             <div key={index} className="border-b p-4 flex bg-stone-300 mt-10 mb-10 rounded-2xl hover:scale-110 duration-500 hover:bg-neutral-400 cursor-pointer" onClick={() =>{setId(tutor.id)}}>
               <img src={tutor.profile_image} className="rounded w-32 h-32 mr-10"></img>
