@@ -27,7 +27,7 @@ function ViewBookingsStudent() {
   const handleCancelBooking = async (slot) =>{
     console.log(slot)
     try{
-        const response = await api.delete(`slot/booking/${slot}/delete`)
+        const response = await api.delete(`slot/booking/${slot}/delete/`)
     }
     catch (error){
         console.error("error in deleting")
@@ -40,7 +40,7 @@ function ViewBookingsStudent() {
       <div className="flex flex-row">
         <StudentProfileSidebar />
 
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-96 py-8">
           <div className="bg-stone-400 text-indigo-900 px-4 py-2 mb-10 rounded-lg text-lg font-bold">
             View Your bookings
           </div>
@@ -74,16 +74,19 @@ function ViewBookingsStudent() {
                 className="bg-stone-300 shadow-md rounded-md p-4 mb-4"
               >
                 <p className="text-indigo-900 font-bold text-xl">
-                  Status: {booking.status}
+                  Booked by: {booking.booked_by_details.username}
                 </p>
                 <p className="text-indigo-900 font-bold text-xl">
-                  Date: {booking.slots_data.start_date}
+                  Status: {booking.slot_details.status}
                 </p>
                 <p className="text-indigo-900 font-bold text-xl">
-                  Start time: {booking.slots_data.start_time}
+                  Date: {booking.slot_details.start_date}
                 </p>
                 <p className="text-indigo-900 font-bold text-xl">
-                  End time: {booking.slots_data.end_time}
+                  Start time: {booking.slot_details.start_time}
+                </p>
+                <p className="text-indigo-900 font-bold text-xl">
+                  End time: {booking.slot_details.end_time}
                 </p>
                 {booking.status=='pending'?<button className="px-4 py-2 bg-red-500 text-white border-2 border-red-900 rounded-lg mt-10 cursor-pointer " onClick={()=>handleCancelBooking(booking.slot)}>cancel</button>:<div></div>}
               </div>

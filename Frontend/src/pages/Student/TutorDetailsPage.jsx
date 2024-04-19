@@ -34,7 +34,7 @@ function TutorSideDetailsPage() {
         `slot/slots/filter/?selected_date=${selectedDate}&created_by=${id}`
       );
       console.log(request.data);
-      const response = request.data;
+      const response = request.data.results;
       setSlots(response);
       // console.log(slots)
     } catch (error) {

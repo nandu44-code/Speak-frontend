@@ -41,7 +41,7 @@ function ViewSlotPage() {
         `slot/slots/filter/?selected_date=${selectedDate}&created_by=${user}`
       );
       console.log(request.data);
-      const response = request.data;
+      const response = request.data.results;
       setSlots(response);
       // console.log(slots)
     } catch (error) {

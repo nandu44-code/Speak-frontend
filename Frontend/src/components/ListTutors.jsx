@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 function ListTutors() {
     const [users, setUsers] = useState([]);
+    const [searchTerm,setSearchTerm] = useState('')
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [id,setId] = useState(null)
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -55,11 +57,47 @@ function ListTutors() {
           navigate(`/admin/tutors/detail/${id}`)
       }
     },[id])
+
+    const searchUsers = async (e) => {
+      const searchTerm = e.target.value;
+      setSearchTerm(searchTerm);
+      
+      try {
+        setLoading(true);
+        if (searchTerm.trim() !== "") {
+          const response = await api.get(`tutor-search/?search=${searchTerm}`);
+          console.log(response.data)
+          setUsers(response.data.results);
+        } else {
+          try {
+            const response = await api.get(`/users/page=${page}`);
+            if (response.status === 200) {
+              console.log("Fetched all the users");
+              console.log(response.data);
+              setUsers(response.data);
+            }
+          } catch (error) {
+            console.log("Error:", error);
+          }
+        }
+      } catch (error) {
+        console.log("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
   return (
     <div>
     <div className="ml-56 mt-20">
       <h1 className="text-2xl font-medium text-red-400 mb-10">Tutors</h1>
       <div className="overflow-x-auto">
+      <input
+        type="search"
+        placeholder="search..."
+        className="rounded-full 2xl:w-96 w-56 placeholder-indigo-950 placeholder:font-bold px-4 py-2 mb-5 focus:bg-white bg-stone-200"
+        onChange={searchUsers}
+        value={searchTerm}
+      /> 
         <table className="table-auto border-collapse">
           <thead>
             <tr>

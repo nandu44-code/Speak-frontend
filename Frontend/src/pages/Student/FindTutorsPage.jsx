@@ -43,7 +43,8 @@ function FindTutorsPage() {
       setLoading(true);
       if (searchTerm.trim() !== "") {
         const response = await api.get(`tutor-search/?search=${searchTerm}`);
-        setTutors(response.data);
+        print(searchTerm)
+        setTutors(response.data.results);
       } else {
         try {
           const response = await api.get("/tutors/");

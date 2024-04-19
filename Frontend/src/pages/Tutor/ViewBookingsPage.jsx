@@ -5,7 +5,7 @@ import api from '../../services/Axios'
 import { jwtDecode } from "jwt-decode";
 
 function ViewBookingsPage() {
-  const [status, setStatus] = useState("Pending");
+  const [status, setStatus] = useState("pending");
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function ViewBookingsPage() {
     const fetchBookings = async () => {
         console.log(status,tutor)
       try {
-        const response = await api.get(`slot/bookings/filter/${tutor}/${status}`);
+        const response = await api.get(`/slot/bookings-listing/?tutor=${tutor}&status=${status}`);
         console.log(response.data)
         setBookings(response.data);
       } catch (error) {
@@ -46,49 +46,55 @@ function ViewBookingsPage() {
           <div className="flex space-x-4 mt-4">
             <button
               className={`${
-                status === "Pending"
+                status === "pending"
                   ? "bg-indigo-500 text-white"
                   : "bg-gray-300 text-gray-700"
               } px-4 py-2 rounded-md`}
-              onClick={() => handleOptionClick("Pending")}
+              onClick={() => handleOptionClick("pending")}
             >
               Pending
             </button>
             <button
               className={`${
-                status === "Approved"
+                status === "approved"
                   ? "bg-blue-500 text-white"
                   : "bg-gray-300 text-gray-700"
               } px-4 py-2 rounded-md`}
-              onClick={() => handleOptionClick("Approved")}
+              onClick={() => handleOptionClick("approved")}
             >
               Approved
             </button>
           </div>
           <div className="mt-4 border border-gray-200 p-4 rounded-md">
-            <table className="table-auto">
-              {/* Table headers */}
-              <thead>
+          <table className="table-auto border-collapse">
+          <thead>
+            <tr>
+              <th className="px-20 py-5">Booked by</th>
+              <th className="px-20 py-5">Date</th>
+              <th className="px-20 py-5">Start time</th>
+              <th className="px-20 py-5">End time</th>
+              <th className="px-20 py-5">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {bookings.map((booking) => ((
                 <tr>
-                  <th>Booked By</th>
-                  <th>Start Time</th>
-                  <th>End Time</th>
-                  {/* Add more columns as needed */}
+                  <td className="border border-gray-400 px-4 py-2">{booking.booked_by_details.username}</td>
+                  <td className="border border-gray-400 px-4 py-2">{booking.slot_details.start_date}</td>
+                  <td className="border border-gray-400 px-4 py-2">{booking.slot_details.start_time}</td>
+                  <td className="border border-gray-400 px-4 py-2">{booking.slot_details.end_time}</td>
+                  <td className="border border-gray-400 px-4 py-2">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                      Approve
+                    </button>
+                  </td>
+                  
+                  
                 </tr>
-              </thead>
-              {/* Table body */}
-              <tbody>
-                {/* Map over bookings and render rows */}
-                {bookings.map((booking) => (
-                  <tr key={booking.id}>
-                    <td>{booking.booked_by}</td>
-                    {/* <td>{booking.startTime}</td>
-                    <td>{booking.endTime}</td> */}
-                    {/* Add more columns as needed */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+              ) 
+            ))}
+          </tbody>
+        </table>
           </div>
         </div>
       </div>

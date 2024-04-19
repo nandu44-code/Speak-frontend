@@ -3,11 +3,14 @@ import api from '../services/Axios';
 
 function ListBookings() {
   const [bookings, setBookings] = useState([]);
+  const [page,setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1);
+
 
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await api.get("slot/bookings/all/");
+        const response = await api.get("slot/bookings-all/");
         if (response.status === 200) {
           console.log("Fetched all the bookings");
           console.log(response.data);
@@ -20,6 +23,11 @@ function ListBookings() {
 
     fetchBookings();
   }, []);
+
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
+
 
   return (
     <div className="ml-56 mt-20">
@@ -49,6 +57,22 @@ function ListBookings() {
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="mt-10">
+        <button
+          onClick={() => handlePageChange(page - 1)}
+          disabled={page === 1}
+          className="bg-indigo-800 px-4 py-2 mx-4 text-white rounded-md cursor-pointer hover:bg-indigo-900"
+        >
+          Previous
+        </button>
+        <button
+          onClick={() => handlePageChange(page + 1)}
+          disabled={page === totalPages}
+          className="bg-indigo-800 px-4 py-2 mx-4 text-white rounded-md cursor-pointer hover:bg-indigo-900"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
