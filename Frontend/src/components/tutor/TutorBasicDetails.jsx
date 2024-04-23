@@ -253,7 +253,7 @@ function TutorBasicDetails() {
             Submiting..
           </button>
           :<button
-          className="bg-sky-800 p-2 rounded-md hover:bg-sky-900 text-white font-medium hover:scale-110 duration-500 mb-96"
+          className="bg-sky-800 p-2 rounded-md hover:bg-sky-900 text-white font-medium duration-500 mb-96"
           
         >
           Submit

@@ -7,7 +7,7 @@ function TutorCheklistPage() {
   return (
     <div>
       <Navbar/>
-      <div className="ml-72">
+      <div className="ml-72 pt-20">
         <h5 className="font-semibold text-sky-900 text-3xl mt-7 mb-2">
           Fill Up Your Details
         </h5>

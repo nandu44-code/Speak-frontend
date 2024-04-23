@@ -63,6 +63,7 @@ export const changeUserName = createAsyncThunk(
       const request = await api.patch(`users/${credentials.id}/`, credentials);
       if (request.status === 200) {
         console.log("everything is perfect");
+        console.log(request.data)
         return request.data;
       }
     } catch (error) {
