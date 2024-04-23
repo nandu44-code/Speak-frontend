@@ -208,6 +208,13 @@ function TutorBasicDetails() {
             placeholder="state"
             onChange={(e) => setState(e.target.value)}
           />
+          
+          <input
+            type="text"
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 focus:border-2 mb-4"
+            placeholder="Your English accent"
+            onChange={(e) => setState(e.target.value)}
+          />
           {/* <label htmlFor="fileInput" className="block mt-10 mb-10 text-indigo-500 cursor-pointer">
            Upload your self introduction 
           </label>
@@ -254,7 +261,6 @@ function TutorBasicDetails() {
           </button>
           :<button
           className="bg-sky-800 p-2 rounded-md hover:bg-sky-900 text-white font-medium duration-500 mb-96"
-          
         >
           Submit
         </button>}
