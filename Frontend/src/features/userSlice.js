@@ -132,7 +132,7 @@ export const getUsers = createAsyncThunk("get_users", async () => {
 
 export const getTutors = createAsyncThunk("getTutors", async () => {
   try {
-    const request = await api.get("users/");
+    const request = await api.get("tutorlist/");
     const response = request.data;
     if (request.status == 200) {
       console.log("fetched all the tutors");
@@ -145,6 +145,22 @@ export const getTutors = createAsyncThunk("getTutors", async () => {
     console.log("Error:", error);
   }
 });
+
+export const getTutorRequests = createAsyncThunk("getTutorRequests", async () =>{
+  try{
+    const request = await api.get('requests/');
+    const response = request.data
+    if (request.status == 200){
+      console.log('fetched all the requests');
+      console.log(response.results)
+      // console.log(state)
+      const data = response.results
+      return data
+    }
+  }catch (error) {
+    console.log('Error:', error)
+  }
+})
 
 export const otp_validation = createAsyncThunk(
   "otpValidation",
@@ -269,6 +285,27 @@ const userSlice = createSlice({
         toast.success("welcome to your profile");
       })
       .addCase(getTutorProfile.rejected, (state) => {
+        state.loading = false;
+        Swal.fire({
+          background: "#fff",
+          icon: "error",
+          title: "oops, something went wrong",
+          text: "Try again",
+        });
+      });
+
+      builder
+      .addCase(getTutorRequests.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getTutorRequests.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        console.log(action.payload,'action.payload')
+        console.log(state.user,'state.user')
+       
+      })
+      .addCase(getTutorRequests.rejected, (state) => {
         state.loading = false;
         Swal.fire({
           background: "#fff",
