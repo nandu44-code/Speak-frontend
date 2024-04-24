@@ -25,7 +25,7 @@ function RequestDetailsPage() {
       is_approved: true,
     };
     try {
-      const response = await api.patch(`users/${id}/`, credentials);
+      const response = await api.patch(`tutorlist/${id}/`, credentials);
       navigate("/admin/requests");
     } catch (error) {
       console.log(error);
@@ -37,7 +37,7 @@ function RequestDetailsPage() {
       is_rejected: true,
     };
     try {
-      const response = await api.patch(`users/${id}/`, credentials);
+      const response = await api.patch(`tutorlist/${id}/`, credentials);
       navigate("/admin/requests");
     } catch (error) {
       console.log("error", error);
@@ -103,7 +103,7 @@ function RequestDetailsPage() {
       </div>
       )}
 
-      <div className="flex justify-evenly w-full">
+      <div className="flex justify-evenly w-full mt-10">
         <button
           className="bg-gradient-to-br from-purple-600 to-blue-500 text-white py-2 px-8 rounded-md hover:bg-opacity-0 focus:ring-4 focus:outline-none focus:ring-blue-300"
           onClick={handleApproval}
@@ -111,7 +111,7 @@ function RequestDetailsPage() {
           Accept
         </button>
         <button
-          className="bg-gradient-to-br from-purple-600 to-blue-500 text-white py-2 px-8 rounded-md hover:bg-opacity-0"
+          className="border-red-600 font-semibold border-2 hover:bg-red-500 hover:text-white text-gray-800 px-6 py-2 rounded-lg"
           onClick={handleReject}
         >
           Reject
