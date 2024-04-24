@@ -50,13 +50,17 @@ function LoginForm() {
       else{
         if (access.is_approved){
             navigate('/tutor/home/')
+            console.log('access.is_approvded is true')
         }else if (access.is_rejected){
           console.log('tutor is rejected')
           navigate('/tutor/rejected')
         }
-        else{
+        else if (!access.is_approved && !access.tutor){
           
           navigate('/tutor/checklist/')
+        }
+        else if (access.tutor && !access.is_approved){
+          navigate('/tutor/checklist/processing')
         }
       }
     }
