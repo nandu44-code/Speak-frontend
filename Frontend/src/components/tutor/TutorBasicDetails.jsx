@@ -5,6 +5,7 @@ import {
   changeProfileImage,
   getMyProfile,
   tutorchecklist,
+  getTutorProfile,
 } 
 from "../../features/userSlice";
 import { toast } from "react-toastify";
@@ -93,7 +94,7 @@ function TutorBasicDetails() {
   };
 
   useEffect(() => {
-    dispatch(getMyProfile(access.user));
+    dispatch(getTutorProfile(access.user));
   }, []);
 
   useEffect(() => {
@@ -109,6 +110,7 @@ function TutorBasicDetails() {
       toast.error("Image is not selected");
       return;
     }
+    console.log('its entering here')
     const uuid = uuidv4();
 
     const storageRef = ref(firebaseStore);
@@ -121,6 +123,7 @@ function TutorBasicDetails() {
             // setImageUrl(url);
             updateImage(url); // Pass the URL to updateImage function
             toast.success("Image uploaded successfully");
+            console.log('firebase uploaded url',url)
             // getMyProfile(access.user)
           })
           .catch((error) => {

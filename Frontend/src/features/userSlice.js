@@ -56,6 +56,23 @@ export const getMyProfile = createAsyncThunk("get_my_profile", async (id) => {
   }
 });
 
+
+export const getTutorProfile = createAsyncThunk("get_tutor_profile", async (id) => {
+  try {
+    console.log("its coming here as well");
+    const request = await api.get(`tutorlist/${id}/`);
+    const response = request.data;
+    console.log(response);
+    console.log("profile details calls are gone successfully");
+    if (request.status === 200) {
+      console.log("everything is perfect");
+      return response;
+    }
+  } catch (error) {
+    console.log("Error: ", error);
+  }
+});
+
 export const changeUserName = createAsyncThunk(
   "change_username",
   async (credentials) => {
@@ -76,7 +93,7 @@ export const changeProfileImage = createAsyncThunk(
   "change_profileImage",
   async (credentials) => {
     try {
-      const request = await api.patch(`users/${credentials.id}/`, credentials);
+      const request = await api.patch(`tutorlist/${credentials.id}/`, credentials);
       if (request.status == 200) {
         console.log("profile updated successfully");
         return request.data;
@@ -233,6 +250,25 @@ const userSlice = createSlice({
         toast.success("welcome to your profile");
       })
       .addCase(getMyProfile.rejected, (state) => {
+        state.loading = false;
+        Swal.fire({
+          background: "#fff",
+          icon: "error",
+          title: "oops, something went wrong",
+          text: "Try again",
+        });
+      });
+
+      builder
+      .addCase(getTutorProfile.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getTutorProfile.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+        toast.success("welcome to your profile");
+      })
+      .addCase(getTutorProfile.rejected, (state) => {
         state.loading = false;
         Swal.fire({
           background: "#fff",
