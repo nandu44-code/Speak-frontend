@@ -121,7 +121,7 @@ function AdminRequestsPage() {
             <p className="text-red-500">No Pending Requests</p>
           ) : (
             pendingRequests.user.map((tutor, index) => (
-              <div key={index} className="border-b p-4 flex bg-stone-300 mt-10 mb-10 rounded-lg hover:scale-105 duration-500 cursor-pointer shadow-lg shadow-gray-500" onClick={() => {setId(tutor.id)}}>
+              <div key={index} className="border-b px-16 py-4 flex bg-stone-100 mt-10 mb-10 rounded-lg hover:scale-105 duration-500 cursor-pointer shadow-md shadow-gray-800" onClick={() => {setId(tutor.id)}}>
                 <img src={tutor.profile_image} className="rounded w-32 h-32 mr-10"></img>
                 <div className="flex-col ">
                  <p className="font-bold text-2xl">{tutor.username || "no username"}</p>
