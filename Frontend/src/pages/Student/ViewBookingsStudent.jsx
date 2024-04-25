@@ -40,7 +40,7 @@ function ViewBookingsStudent() {
       <div className="flex flex-row">
         <StudentProfileSidebar />
 
-        <div className="container mx-auto px-96 py-8">
+        <div className="container mx-auto px-96 py-8 pt-28">
           <div className="bg-stone-400 text-indigo-900 px-4 py-2 mb-10 rounded-lg text-lg font-bold">
             View Your bookings
           </div>
@@ -56,9 +56,9 @@ function ViewBookingsStudent() {
               Pending
             </button>
             <button
-              onClick={() => handleStatusChange("approved")}
+              onClick={() => handleStatusChange("confirmed")}
               className={`px-4 py-2 rounded-md ${
-                status === "approved"
+                status === "confirmed"
                   ? "bg-blue-500 text-white"
                   : "bg-gray-200 text-gray-700"
               }`}
@@ -71,21 +71,21 @@ function ViewBookingsStudent() {
             {bookings.map((booking) => (
               <div
                 key={booking.id}
-                className="bg-stone-300 shadow-md rounded-md p-4 mb-4"
+                className="bg-white shadow-md shadow-gray-700 rounded-md p-4 mb-4"
               >
-                <p className="text-indigo-900 font-bold text-xl">
-                  Booked by: {booking.booked_by_details.username}
+                <p className="text-indigo-950 font-normal text-lg">
+                  Created by: {booking.slot_details.created_by.username}
                 </p>
-                <p className="text-indigo-900 font-bold text-xl">
-                  Status: {booking.slot_details.status}
+                <p className="text-indigo-900 font-semibold text-xl">
+                  Status: {booking.status}
                 </p>
-                <p className="text-indigo-900 font-bold text-xl">
+                <p className="text-indigo-900 font-semibold text-xl">
                   Date: {booking.slot_details.start_date}
                 </p>
-                <p className="text-indigo-900 font-bold text-xl">
+                <p className="text-indigo-900 font-semibold text-lg">
                   Start time: {booking.slot_details.start_time}
                 </p>
-                <p className="text-indigo-900 font-bold text-xl">
+                <p className="text-indigo-900 font-semibold text-xl">
                   End time: {booking.slot_details.end_time}
                 </p>
                 {booking.status=='pending'?<button className="px-4 py-2 bg-red-500 text-white border-2 border-red-900 rounded-lg mt-10 cursor-pointer " onClick={()=>handleCancelBooking(booking.slot)}>cancel</button>:<div></div>}

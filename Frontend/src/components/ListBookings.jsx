@@ -33,9 +33,9 @@ function ListBookings() {
     <div className="ml-56 mt-20">
       <h1 className="text-2xl font-medium text-red-700 mb-10">Bookings</h1>
       <div className="overflow-x-auto">
-        <table className="table-auto border-collapse">
+        <table className="table-auto border-collapse hover:table-fixed bg-gray-600 rounded-md">
           <thead>
-            <tr>
+            <tr className='bg-gray-300 divide-x-2'>
               <th className="px-4 py-5">ID</th>
               <th className="px-20 py-5">Booked By</th>
               <th className="px-20 py-5">Created by</th>
@@ -47,12 +47,12 @@ function ListBookings() {
           <tbody>
             {bookings.map((booking, index) => (
               <tr key={index}>
-                <td className="border border-gray-400 px-4 py-2">{index + 1}</td>
-                <td className="border border-gray-400 px-4 py-2">{booking.booked_by_details.username}</td>
-                <td className="border border-gray-400 px-4 py-2">{booking.slot_details.created_by.username}</td>
-                <td className="border border-gray-400 px-4 py-2">{booking.slot_details.start_date}</td>
-                <td className="border border-gray-400 px-4 py-2">{booking.slot_details.start_time} to {booking.slot_details.end_time}</td>
-                <td className="border border-gray-400 px-4 py-2 text-red-600 font-bold">{booking.status}</td>
+                <td className="border border-gray-400 px-4 py-2 text-white">{index + 1}</td>
+                <td className="border border-gray-400 px-4 py-2 text-white">{booking.booked_by_details.username}</td>
+                <td className="border border-gray-400 px-4 py-2 text-white">{booking.slot_details.created_by.username}</td>
+                <td className="border border-gray-400 px-4 py-2 text-white">{booking.slot_details.start_date}</td>
+                <td className="border border-gray-400 px-4 py-2 text-white">{booking.slot_details.start_time} to {booking.slot_details.end_time}</td>
+                <td className="border border-gray-400 px-4 py-2 text-white font-semibold">{booking.status}</td>
               </tr>
             ))}
           </tbody>

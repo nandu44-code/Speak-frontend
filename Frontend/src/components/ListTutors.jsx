@@ -10,6 +10,7 @@ function ListTutors() {
     const [id,setId] = useState(null)
     const [loading, setLoading] = useState(false)
     const navigate = useNavigate()
+    let si_no=1
 
     useEffect(() => {
       const fetchUsers = async () => {
@@ -98,22 +99,22 @@ function ListTutors() {
         onChange={searchUsers}
         value={searchTerm}
       /> 
-        <table className="table-auto border-collapse">
+        <table className="table-auto border-collapse hover:table-fixed bg-gray-600 rounded-md">
           <thead>
-            <tr>
-              <th className="px-4 py-5">ID</th>
-              <th className="px-20 py-5">Name</th>
-              <th className="px-20 py-5">Email</th>
-              <th className="px-20 py-5">Actions</th>
+            <tr className="bg-gray-300 divide-x-2">
+              <th className="px-20 py-5 text-gray-600">SI.NO</th>
+              <th className="px-20 py-5 text-gray-600">Name</th>
+              <th className="px-20 py-5 text-gray-600">Email</th>
+              <th className="px-20 py-5 text-gray-600">Actions</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user, index) => ((
-                <tr key={index}>
-                  <td className="border border-gray-400 px-4 py-2">{user.id}</td>
-                  <td className="border border-gray-400 px-4 py-2">{user.username}</td>
-                  <td className="border border-gray-400 px-4 py-2">{user.email}</td>
-                  <td className="border border-gray-400 px-4 py-2">
+                <tr key={index} className="hover:bg-gray-700 cursor-pointer">
+                  <td className="border border-gray-100 px-4 py-2 text-white">{si_no++}</td>
+                  <td className="border border-gray-100 px-4 py-2 text-white">{user.username}</td>
+                  <td className="border border-gray-100 px-4 py-2 text-white">{user.email}</td>
+                  <td className="border border-gray-100 px-4 py-2 text-white">
 
                   {user.is_active ? (<button className='bg-red-700 p-2 m-2 font-bold rounded text-white' onClick={() => blockOrUnblockUser(user.id, user.is_active)}
                     >Block </button>)

@@ -35,6 +35,14 @@ function ViewBookingsPage() {
     setStatus(option);
   };
 
+  const handleApproval = (bookingId) => {
+
+    console.log('handleApproval function is here')
+    console.log(bookingId)
+    const response = api.patch(`/slot/booking-view/${bookingId}/`,{status:'confirmed'})
+    console.log(response)
+  }
+
   return (
     <div className="flex flex-row">
       <TutorSidebar />
@@ -60,7 +68,7 @@ function ViewBookingsPage() {
                   ? "bg-blue-500 text-white"
                   : "bg-gray-300 text-gray-700"
               } px-4 py-2 rounded-md`}
-              onClick={() => handleOptionClick("approved")}
+              onClick={() => handleOptionClick("confirmed")}
             >
               Approved
             </button>
@@ -79,17 +87,17 @@ function ViewBookingsPage() {
           <tbody>
             {bookings.map((booking) => ((
                 <tr>
-                  <td className="border border-gray-400 px-4 py-2">{booking.booked_by_details.username}</td>
+                  <td className="border border-gray-400 px-4 py-2 cursor-pointer " oC>{booking.booked_by_details.username}</td>
                   <td className="border border-gray-400 px-4 py-2">{booking.slot_details.start_date}</td>
                   <td className="border border-gray-400 px-4 py-2">{booking.slot_details.start_time}</td>
                   <td className="border border-gray-400 px-4 py-2">{booking.slot_details.end_time}</td>
                   <td className="border border-gray-400 px-4 py-2">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                    {booking.status=='pending'?<button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700" onClick={() =>handleApproval(booking.slot)}>
                       Approve
                     </button>
+                    :
+                    <button>None</button>}
                   </td>
-                  
-                  
                 </tr>
               ) 
             ))}
