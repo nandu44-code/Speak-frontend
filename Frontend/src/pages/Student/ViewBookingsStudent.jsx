@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import StudentProfileSidebar from "../../components/StudentProfileSidebar";
 import Navbar from "../../components/Navbar";
 import { jwtDecode } from "jwt-decode";
+import Swal from 'sweetalert2'
 import api from "../../services/Axios";
 
 function ViewBookingsStudent() {
@@ -24,15 +25,47 @@ function ViewBookingsStudent() {
     }
   };
 
-  const handleCancelBooking = async (slot) =>{
-    console.log(slot)
-    try{
-        const response = await api.delete(`slot/booking/${slot}/delete/`)
-    }
-    catch (error){
-        console.error("error in deleting")
-    }
-  }
+  // const handleCancelBooking = async (slot) =>{
+  //   console.log(slot)
+  //   try{
+  //       const response = await api.delete(`slot/booking/${slot}/delete/`)
+  //   }
+  //   catch (error){
+  //       console.error("error in deleting")
+  //   }
+  // }
+
+
+  const handleCancelBooking = async (slot) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await api.delete(`slot/booking/${slot}/delete/`);
+          const request = await api.get(
+            `slot/student/bookings/filter/${user}/${status}`
+          );
+          setBookings(request.data);
+  
+          Swal.fire(
+            "Cancelled!",
+            "Your booking has been cancelled.",
+            "success"
+          );
+        } catch (error) {
+          console.error("error in deleting");
+          Swal.fire("Error!", "Failed to cancel booking.", "error");
+        }
+      }
+    });
+  };
 
   return (
     <>

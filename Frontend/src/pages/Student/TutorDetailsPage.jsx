@@ -63,7 +63,7 @@ function TutorSideDetailsPage() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col mt-24 items-center p-10 bg-gray-100  shadow-sm shadow-black">
+      <div className="flex flex-col mt-24 items-center p-10 bg-gray-100  shadow-md shadow-black">
         {userData && (
           <img
             className="w-40 h-40 cursor-pointer mb-6"
@@ -75,14 +75,14 @@ function TutorSideDetailsPage() {
         <div className="bg-slate-100 p-6 rounded-xl w-full mb-6">
           {/* <p className="font-bold text-2xl text-gray-500">Basic Details</p> */}
           <div className="flex flex-row justify-center mb-2">
-            <p className="font-bold text-2xl text-violet-900 ml-2">
+            <p className="font-bold text-lg text-violet-950 ml-2">
               {userData && userData.first_name}
               <span className="mx-1">&nbsp;</span>
               {userData && userData.last_name}
             </p>
           </div>
 
-          <p className="font-bold text-2xl text-violet-900 mb-2">
+          <p className="font-semibold text-xl text-violet-900 mb-2">
             {userData && userData.email}
           </p>
 
@@ -96,23 +96,22 @@ function TutorSideDetailsPage() {
           </div>
         </div>
         <a href="#slots" className="w-full flex justify-center">
-          <button className="flex justify-center bg-white text-black font-medium text-lg px-4 py-2 m-2 w-1/2 border-2 border-blue-600 rounded-md hover:border-2 hover:border-indigo-400 hover:text-black hover:bg-gray-200">
+          <button className="flex justify-center bg-white text-black font-medium text-lg px-4 py-2 m-2 w-1/2  rounded-md hover: hover:border-indigo-400 hover:text-black hover:bg-gray-100 shadow-lg shadow-black">
             <GrSchedule className="mt-1 mx-4" />
             Schedule
           </button>
         </a>
         <div className="flex w-1/2 justify-around my-5 sm:flex-row md:flex-col lg:flex-col xl:flex-row 2xl:flex-row">
-          <button className="flex bg-indigo-900 text-white px-4 py-1 my-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
+          <button className="flex bg-sky-700 text-white px-4 py-2 my-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
             <RiUserFollowLine className="mt-1 mx-5" size={22} />
             Follow
           </button>
-          <button className="flex bg-indigo-900 text-white px-4 py-1 my-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
+          <button className="flex bg-blue-600 text-white px-4 py-2 my-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
             {" "}
             <AiOutlineMessage className="mt-1 mx-5" size={22} />
             Message
           </button>
-          <button className="flex bg-indigo-900 text-white px-4 py-1 my-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
-            <BiHide className="mt-1 mx-5" size={22} />
+          <button className="flex bg-purple-900 text-white px-4 py-2 my-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
             Hide tutor
           </button>
         </div>
@@ -120,16 +119,16 @@ function TutorSideDetailsPage() {
         {userData && (
           <div>
             <div className="bg-gray-100 rounded-xl p-4 m-2">
-              <p className="font-bold text-2xl text-violet-900 mb-4">
+              <p className="font-normal text-2xl text-violet-900 mb-4">
                 {userData.username}
               </p>
-              <p className="font-normal mb-4">
+              <p className="font-normal mb-4 text-xl">
                 {userData.tutor.introduction_description}
               </p>
             </div>
             <div className="bg-gray-100 rounded-xl p-4">
-              <label className="font-bold text-xl mb-2">Teaching style</label>
-              <p className="font-thintext-2xl mb-4">
+              <label className="font-semibold text-xl mb-2">Teaching style</label>
+              <p className="font-normal text-xl mb-4">
                 {userData.tutor.teaching_style}
               </p>
             </div>
@@ -138,7 +137,7 @@ function TutorSideDetailsPage() {
       </div>
       <div className="flex justify-center items-center">
         <div
-          className="w-1/2 mx-4  flex justify-center items-center bg-stone-400 h-28 rounded-2xl px-4 py-2 my-20"
+          className="w-1/2 mx-4  flex justify-center items-center bg-stone-200 h-28 rounded-2xl px-4 py-2 my-20"
           id="slots"
         >
           {/* <h2 className="text-xl font-bold mb-4">Search Slots by Date</h2> */}
@@ -148,7 +147,7 @@ function TutorSideDetailsPage() {
             <div className="mb-4">
               <label
                 htmlFor="selectedDate"
-                className="block text-white font-bold mb-2 cursor-pointer"
+                className="block text-gray-600 font-semibold mb-2 cursor-pointer"
               >
                 Select Date
               </label>
