@@ -1,24 +1,20 @@
-import React from 'react'
-import ChangePass from '../../components/ChangePass'
-import StudentProfileSidebar from '../../components/StudentProfileSidebar'
-import Navbar from '../../components/Navbar'
+import React from "react";
+import ChangePass from "../../components/ChangePass";
+import StudentProfileSidebar from "../../components/StudentProfileSidebar";
+import Navbar from "../../components/Navbar";
 
 function ChangePassPage() {
   return (
     <div>
-        <Navbar />
+      <Navbar />
       <div className="flex">
-        <StudentProfileSidebar/>
-        <div className='ml-72 mt-20'>
-
-        <ChangePass/>
-
+        <StudentProfileSidebar />
+        <div className="ml-72 mt-60">
+          <ChangePass />
         </div>
-      
       </div>
-       
     </div>
-  )
+  );
 }
 
-export default ChangePassPage
+export default ChangePassPage;
