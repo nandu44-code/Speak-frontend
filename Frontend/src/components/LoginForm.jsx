@@ -3,12 +3,15 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Login } from '../features/userSlice';
 import {jwtDecode} from 'jwt-decode';
+
 import imageSrc from "../assets/images/12953573_Data_security_05.jpg";
+import Modal from './modal/Modal';
 
 function LoginForm() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [showModal,setShowModal] = useState(false)
 
   
   const handleClickSignUp = () => {
@@ -68,6 +71,7 @@ function LoginForm() {
 
   return (
     <div className="flex flex-row">
+       {showModal && <Modal onClose={()=> setShowModal(false)}/>}
     <div className="w-2/4 sm:hidden md:block lg:block xl:block 2xl:block hidden">
       <img src={imageSrc} className="w-full h-screen"></img>
     </div>
@@ -98,7 +102,10 @@ function LoginForm() {
             required
           />
         </div>
-        <button type="submit" className="w-full cursor-wait bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-blue-600 ">
+        <div className='flex justify-start px-2'>
+          <h4 className='text-indigo-800 cursor-pointer' onClick={()=> {setShowModal(true)}}>forgot password?</h4>
+        </div>
+        <button type="submit" className="w-full cursor-pointer bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-blue-600 ">
          Log in
         </button>
         <h4 className='text-md'>Don't have an account?</h4>
