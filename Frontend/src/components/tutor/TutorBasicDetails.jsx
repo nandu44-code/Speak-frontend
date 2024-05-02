@@ -23,6 +23,7 @@ function TutorBasicDetails() {
   const [selfIntro, setSelfIntro] = useState("");
   const [teachingStyle, setTeachingStyle] = useState("");
   const [profileImage, setProfileImage] = useState(null);
+  const [selectedAccent,setSelectedAccent] = useState('')
   const [selfIntroVideo, setSelfIntroVideo] = useState(null);
   const [certificates, setCertificates] = useState(null);
 
@@ -38,13 +39,22 @@ function TutorBasicDetails() {
   const token = localStorage.getItem("accessToken");
   const access = jwtDecode(token);
 
+  const handleAccent = (e) => {
+    setSelectedAccent(e.target.value)
+    console.log(e.target.value)
+  }
+
   const formSubmit = (e) => {
+
     e.preventDefault();
     if (country.split(" ").join(" ") == "") {
       toast.error("country should not be empty");
     } else if (state.split(" ").join("") == "") {
       toast.error("state should not be empty");
-    } else if (selfIntro.split(" ").join("") == "" ){
+    }else if (selectedAccent == 'None'){
+      toast.error('accent should not be none ')
+    } 
+    else if (selfIntro.split(" ").join("") == "" ){
       toast.error(
         "self introduction should not be empty."
       );
@@ -83,6 +93,7 @@ function TutorBasicDetails() {
         country: country,
         introduction_description: selfIntro,
         teaching_style: teachingStyle,
+        dialect: selectedAccent,
         certificates: url,
         user: access.user
       };
@@ -212,12 +223,6 @@ function TutorBasicDetails() {
             onChange={(e) => setState(e.target.value)}
           />
           
-          <input
-            type="text"
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500 focus:border-2 mb-4"
-            placeholder="Your English accent"
-            onChange={(e) => setState(e.target.value)}
-          />
           {/* <label htmlFor="fileInput" className="block mt-10 mb-10 text-indigo-500 cursor-pointer">
            Upload your self introduction 
           </label>
@@ -231,6 +236,20 @@ function TutorBasicDetails() {
             }}
           /> */}
 
+        <select name="englishAccent" id="englishAccent" value={selectedAccent} onChange={handleAccent} className="px-2 py-2 border-2 border-gray-200 my-2 rounded-md">
+            
+            <option value="None">None</option>
+            <option value="british">British</option>
+            <option value="american">American</option>
+            <option value="australian">Australian</option>
+            <option value="canadian">Canadian</option>
+            <option value="indian">Indian</option>
+            <option value="southafrican">South African</option>
+            <option value="irish">Irish</option>
+            <option value="newzealand">New Zealand</option>
+            <option value="singaporean">Singaporean</option>
+            <option value="caribbean">Caribbean</option>
+        </select>
           <textarea
             className="w-full px-3 py-2 border mb-4 rounded-md focus:outline-none focus:border-blue-500 focus:border-2"
             placeholder="self introduction.  (self intro should atlest contain 100 words.) "
