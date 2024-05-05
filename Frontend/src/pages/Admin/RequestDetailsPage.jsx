@@ -1,6 +1,7 @@
 import React, { useDebugValue, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/Axios";
+import Sidebar from "../../components/SideBar";
 import { useDispatch } from "react-redux";
 
 function RequestDetailsPage() {
@@ -45,6 +46,8 @@ function RequestDetailsPage() {
   };
 
   return (
+    <div className="flex">
+      <Sidebar />
     <div className="flex flex-col items-center m-10 bg-stone-200 rounded-3xl p-10">
       {userData && (
         <img
@@ -91,14 +94,15 @@ function RequestDetailsPage() {
         </div>
         <div className="bg-gray-100 rounded-xl p-4">
           <label className="font-bold text-xl mb-2">Teaching style</label>
-          <p className="font-thintext-2xl mb-4">
+          <p className="font-thin text-2xl mb-4">
             {userData.tutor.teaching_style}
           </p>
-          {/* <img
+          <img
             src={userData.tutor.certificates}
             className="w-60 h-20 cursor-pointer mb-4"
-            alt="Certificates"
-          /> */}
+            alt="No certifcates"
+          />
+          <img src='https://firebasestorage.googleapis.com/v0/b/speakfiles-37868.appspot.com/o/certificates%2FScreenshot%20(152).png_f836e4f2-20b2-40bf-998b-7d72240b2b46?alt=media&token=f6f3a1de-651b-44ad-b4fa-37b9c0277f4d'/>
         </div>
       </div>
       )}
@@ -118,6 +122,8 @@ function RequestDetailsPage() {
         </button>
       </div>
     </div>
+    </div>
+
   );
 }
 
