@@ -15,7 +15,7 @@ function FindTutorsPage() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await api.get("/tutors/");
+        const response = await api.get("tutors/");
         if (response.status === 200) {
           console.log("Fetched all the users");
           console.log(response.data);

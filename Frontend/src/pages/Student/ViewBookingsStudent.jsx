@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import StudentProfileSidebar from "../../components/StudentProfileSidebar";
 import Navbar from "../../components/Navbar";
 import { jwtDecode } from "jwt-decode";
 import Swal from "sweetalert2";
 import api from "../../services/Axios";
+import { useNavigate } from "react-router-dom";
 
 function ViewBookingsStudent() {
   const [status, setStatus] = useState("pending");
+  const [id, setId] = useState(null);
   const [bookings, setBookings] = useState([]);
   const token = localStorage.getItem("accessToken");
   const access = jwtDecode(token);
   let user = access.user;
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (id != null) {
+      navigate(`/student/TutorDetails/${id}`);
+      console.log("object");
+    }
+  }, [id]);
 
   const handleStatusChange = async (newStatus) => {
     setStatus(newStatus);
@@ -61,7 +71,7 @@ function ViewBookingsStudent() {
     <Navbar />
     <div className=" w-full h-36"></div>
     <div className="flex flex-row ">
-      <StudentProfileSidebar />
+      <StudentProfileSidebar className='' />
       <div className="flex flex-col items-center justify-center w-full mx-10">
           <div className="bg-stone-200 text-indigo-900 px-4 py-2 mb-10 rounded-lg text-lg font-bold w-full">
             View Your bookings
@@ -106,9 +116,11 @@ function ViewBookingsStudent() {
                   key={booking.id}
                   className="bg-white shadow-md shadow-gray-700 rounded-md p-4 mb-4 "
                 >
-                  <p className="text-indigo-950 font-normal text-lg">
-                    {booking.slot_details.created_by.username}
-                  </p>
+                 
+                    <p className="text-indigo-950 font-normal text-lg hover:text-indigo-500 hover:cursor-pointer" onClick={() => {setId(booking.slot_details.created_by.id)}}>
+                      {booking.slot_details.created_by.username}
+                    </p>
+                  
                   <p className="text-indigo-900 font-semibold text-xl">
                     Status: {booking.status}
                   </p>
