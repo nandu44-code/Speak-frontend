@@ -102,12 +102,13 @@ function AdminRequestsPage() {
 
   console.log('tutors',tutors)
   if (tutors.user){
-    setPendingRequests(tutors);
+    setPendingRequests(tutors.tutor);
+    console.log(tutors.tutor)
   }else{
     setPendingRequests([])
   }
  
- 
+
 }, [tutors]);
 
  return (
@@ -117,7 +118,7 @@ function AdminRequestsPage() {
         <Sidebar />
         <div className="flex flex-col mt-10 ml-96">
           <p className="font-medium text-stone-700 text-2xl mb-20">Requests</p>
-          {pendingRequests && pendingRequests.length === 0 ? (
+          {pendingRequests.length === 0 ? (
             <p className="text-red-500">No Pending Requests</p>
           ) : (
             pendingRequests.user.map((tutor, index) => (

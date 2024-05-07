@@ -41,6 +41,28 @@ function ViewBookingsPage() {
     console.log(bookingId)
     const response = api.patch(`/slot/booking-view/${bookingId}/`,{status:'confirmed'})
     console.log(response)
+
+    const token = localStorage.getItem("accessToken");
+    const access = jwtDecode(token);
+    let tutor = '';
+    if (access.is_tutor) {
+      tutor = access.user; 
+    }
+
+    const fetchBookings = async () => { 
+        console.log(status,tutor)
+      try {
+        const response = await api.get(`/slot/bookings-listing/?tutor=${tutor}&status=${status}`);
+        console.log(response.data)
+        setBookings(response.data);
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    };
+
+    fetchBookings();
+
+
   }
 
   return (
