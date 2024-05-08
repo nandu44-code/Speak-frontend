@@ -28,7 +28,7 @@ function TutorSidebar() {
   return (
     // <div className='w-2/5'>
     <nav
-      className={`text-indigo-800 font-bold h-screen border-l-8  border-r-2 shadow-xl shadow-black bg-gradient-to-b from-stone-400 to-indigo-200 border-indigo-800 rounded-md w-1/5 p-4 m-4 ${
+      className={`text-indigo-800 font-bold h-screen border-l-8  border-r-2 shadow-xl shadow-black bg-gradient-to-b from-gray-300 to-stone-300 border-indigo-800 rounded-md w-1/5 p-4 m-4 ${
         isOpen ? "md:block" : "hidden md:block"
       }`}
     >
@@ -38,8 +38,8 @@ function TutorSidebar() {
         </h2>
       </div>
       <hr className="my-2 bg-gray-900 "></hr>
-      <ul>
-        <li className="hover:scale-110 mb-4 bg-stone-300 rounded-2xl">
+      <ul className="mt-20">
+        <li className="hover:scale-110 mb-4 bg-stone-100 rounded-md flex justify-start">
           <Link
             to="/tutor/home/"
             className="block py-2 text-lg hover:bg-gray-200"
@@ -47,36 +47,46 @@ function TutorSidebar() {
           >
             <BsHouseDoor
               size={30}
-              className="inline mr-2 hover:text-blue-800"
+              className="inline mr-2 ml-4 hover:text-blue-800"
             />
             Dashboard
           </Link>
         
         </li>
-        <li className="hover:scale-110 mb-4  bg-stone-300 rounded-2xl ">
+        <li className="hover:scale-110 mb-10 bg-stone-100 rounded-md  flex justify-start">
           <Link
             to="/tutor/createslot/"
             className="block py-2 text-lg hover:bg-gray-200"
             onClick={""}
           >
-            <BsPeople size={30} className="inline mr-2 hover:text-blue-800" />
-            Create Slots
+            <BsPeople size={30} className="inline mr-2 ml-4 hover:text-blue-800" />
+            Profile
+            </Link>
+        </li>
+        <li className="hover:scale-110 mb-4  bg-stone-100 rounded-md flex justify-start">
+          <Link
+            to="/tutor/createslot/"
+            className="block py-2 text-lg hover:bg-gray-200"
+            onClick={""}
+          >
+            <BsPeople size={30} className="inline mr-2 hover:text-blue-800 ml-4" />
+            Time Slots
           </Link>
         </li>
-        <li className="hover:scale-110 mb-4  bg-stone-300 rounded-2xl">
+        <li className="hover:scale-110 mb-4  bg-stone-100 rounded-md flex justify-start">
           <Link
             to="/tutor/viewslot/"
-            className="block py-2 text-lg hover:bg-gray-200"
+            className="block py-2 text-lg hover:bg-gray-100"
             onClick={""}
           >
             <HiOutlineClipboardList
               size={30}
-              className="inline mr-2 hover:text-blue-800"
+              className="inline mr-2 hover:text-blue-800 ml-4"
             />
             View Slots
           </Link>
         </li>
-        <li className="hover:scale-110 mb-4  bg-stone-300 rounded-2xl">
+        <li className="hover:scale-110 mb-4  bg-stone-100 rounded-md flex justify-start">
           <Link
             to="/tutor/viewbookings/"
             className="block py-2 text-lg hover:bg-gray-200"
@@ -84,16 +94,16 @@ function TutorSidebar() {
           >
             <HiOutlineClipboardList
               size={30}
-              className="inline mr-2 hover:text-blue-800"
+              className="inline mr-2 hover:text-blue-800 ml-4"
             />
             View Bookings
           </Link>
         </li>
         <li
-          className="hover:scale-105 duration-500 mb-4 cursor-pointer rounded-2xl"
+          className="hover:bg-red-600 duration-500 mb-4 cursor-pointer rounded-md bg-red-500 mt-10"
           onClick={handleLogout}
         >
-          <p className="block py-2 text-blue-800 ">
+          <p className="block py-2 text-white  font-normal">
             <RiLogoutBoxLine
               size={20}
               className="inline mr-2"
