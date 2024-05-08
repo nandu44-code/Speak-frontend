@@ -102,7 +102,7 @@ function AdminRequestsPage() {
 
   console.log('tutors',tutors)
   if (tutors.user){
-    setPendingRequests(tutors.tutor);
+    setPendingRequests(tutors.tutor );
     console.log(tutors.tutor)
   }else{
     setPendingRequests([])
