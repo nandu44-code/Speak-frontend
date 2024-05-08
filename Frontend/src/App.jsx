@@ -36,6 +36,7 @@ import AdminTutorsPage from './pages/Admin/AdminTutorsPage';
 import TutorDetailsPage from './pages/Admin/TutorDetailsPage';
 import AdminBookings from './pages/Admin/AdminBookings';
 import UserProtectedRoute from './Routes/ProtectedRoute';
+import TutorProfile from './components/tutor/TutorProfile';
 
 function App() {
   
@@ -67,6 +68,7 @@ function App() {
           <Route path='tutor/createslot/' element={<CreateSlotPage/>}/>
           <Route path='tutor/viewslot/' element={<ViewSlotPage/>}/>
           <Route path='tutor/viewbookings/' element={<ViewBookingsPage/>}/>
+          <Route path='tutor/profile/' element={<TutorProfile/>}/>
 
           <Route path='/admin/users' element={<AdminUsersPage/>}/>
           <Route path='/admin/tutors' element={<AdminTutorsPage/>}/>
