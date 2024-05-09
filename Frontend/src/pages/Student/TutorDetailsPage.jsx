@@ -101,7 +101,7 @@ function TutorSideDetailsPage() {
             Schedule
           </button>
         </a>
-        <div className="flex w-1/2 justify-around my-5 sm:flex-row md:flex-col lg:flex-col xl:flex-row 2xl:flex-row">
+        <div className="flex w-1/2 justify-between my-5 sm:flex-row md:flex-col lg:flex-col xl:flex-row 2xl:flex-row">
           <button className="flex bg-sky-700 text-white px-4 py-2 my-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
             <RiUserFollowLine className="mt-1 mx-5" size={22} />
             Follow

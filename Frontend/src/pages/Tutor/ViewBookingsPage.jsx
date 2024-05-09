@@ -7,7 +7,12 @@ import { jwtDecode } from "jwt-decode";
 function ViewBookingsPage() {
   const [status, setStatus] = useState("pending");
   const [bookings, setBookings] = useState([]);
+  const [date,setDate] = useState()
+  const currentDate = new Date();
+  // const currentTime = currentDate.getTime();
 
+  console.log(currentDate)
+  
   useEffect(() => {
     // Fetch bookings based on the selected option when it changes
     const token = localStorage.getItem("accessToken");
