@@ -55,7 +55,7 @@ function TutorSidebar() {
         </li>
         <li className="hover:scale-110 mb-10 bg-stone-100 rounded-md  flex justify-start">
           <Link
-            to="/tutor/createslot/"
+            to="/tutor/profile/"
             className="block py-2 text-lg hover:bg-gray-200"
             onClick={""}
           >
