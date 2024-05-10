@@ -47,7 +47,7 @@ function ViewBookingsStudent() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await api.delete(`slot/booking/${slot}/delete/`);
+          const response = await api.patch(`slot/booking/${slot}/cancel/`);
           const request = await api.get(
             `slot/student/bookings/filter/${user}/${status}`
           );

@@ -15,6 +15,7 @@ import StudentProfile from './pages/Student/StudentProfile';
 import ChangePassPage from './pages/Student/ChangePassPage';
 import PaymentSuccessPage from './pages/Student/PaymentSuccessPage';
 import ViewBookingsStudent from './pages/Student/ViewBookingsStudent';
+import WalletPage from './pages/Student/WalletPage';
 
 //Tutor related pages
 import TutorCheklistPage from './pages/Tutor/TutorCheklistPage';
@@ -37,6 +38,7 @@ import TutorDetailsPage from './pages/Admin/TutorDetailsPage';
 import AdminBookings from './pages/Admin/AdminBookings';
 import UserProtectedRoute from './Routes/ProtectedRoute';
 import TutorProfile from './components/tutor/TutorProfile';
+import { Wallet } from 'lucide-react';
 
 function App() {
   
@@ -60,6 +62,7 @@ function App() {
           <Route path='/student/TutorDetails/:id' element={<TutorSideDetailsPage/>}/>
           <Route path='/student/paymentSuccess/' element={<PaymentSuccessPage/>}/>
           <Route path='/student/viewBookings/' element={<ViewBookingsStudent/>}/>
+          <Route path='/student/wallet/' element={<WalletPage/>}/>
 
           <Route path='/tutor/home/' element={<TutorHomePage/>}/>
           <Route path='/tutor/checklist/' element={<TutorCheklistPage/>}/>

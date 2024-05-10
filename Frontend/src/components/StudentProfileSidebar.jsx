@@ -20,6 +20,12 @@ const StudentProfileSidebar = () => {
            Basic Details
           </Link>
         </li>
+        <li className="hover:scale-110 mb-4">
+          <Link to="/student/wallet/" className="block py-2 bg-zinc-300 hover:bg-gray-200 rounded-lg" onClick={toggleSidebar}>
+            <BsHouseDoor size={20} className="inline mr-2 hover:text-blue-800" />
+          Wallet          
+        </Link>
+        </li>
         <li className="hover:scale-105 mb-4">
           <Link to="/student/changePassword/" className="block py-2 bg-zinc-300 hover:bg-gray-200 rounded-lg" onClick={toggleSidebar}>
             <HiOutlineClipboardList size={20} className="inline mr-2 hover:text-blue-800" />
