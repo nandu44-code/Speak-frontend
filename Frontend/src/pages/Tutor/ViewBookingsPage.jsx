@@ -119,11 +119,15 @@ function ViewBookingsPage() {
                   <td className="border border-gray-400 px-4 py-2">{booking.slot_details.start_time}</td>
                   <td className="border border-gray-400 px-4 py-2">{booking.slot_details.end_time}</td>
                   <td className="border border-gray-400 px-4 py-2">
-                    {booking.status=='pending'?<button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700" onClick={() =>handleApproval(booking.slot)}>
+                    {booking.status=='pending'?
+                    <div>
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700" onClick={() =>handleApproval(booking.slot)}>
                       Approve
                     </button>
+                    <button className="bg-red-500 px-4 py-2 text-white rounded-md mx-2">Cancel</button>
+                    </div>
                     :
-                    <button>None</button>}
+                    <button className="bg-red-500 text-white px-4 py-2 rounded-md">Cancel</button>}
                   </td>
                 </tr>
               ) 
