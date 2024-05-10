@@ -12,7 +12,7 @@ function ViewBookingsPage() {
   // const currentTime = currentDate.getTime();
 
   console.log(currentDate)
-  
+
   useEffect(() => {
     // Fetch bookings based on the selected option when it changes
     const token = localStorage.getItem("accessToken");
@@ -75,7 +75,7 @@ function ViewBookingsPage() {
       <TutorSidebar />
       <div className="flex w-full justify-center">
         <div className="flex flex-col items-center mt-4">
-          <div className="w-96 p-8 pb-4 bg-stone-400 text-center text-2xl text-white font-bold rounded-md">
+          <div className="w-96 p-6 bg-stone-400 text-center text-2xl text-white font-bold rounded-md shadow-md shadow-gray-700">
             Bookings
           </div>
           <div className="flex space-x-4 mt-4">
@@ -91,7 +91,7 @@ function ViewBookingsPage() {
             </button>
             <button
               className={`${
-                status === "approved"
+                status === "confirmed"
                   ? "bg-blue-500 text-white"
                   : "bg-gray-300 text-gray-700"
               } px-4 py-2 rounded-md`}
@@ -112,7 +112,7 @@ function ViewBookingsPage() {
             </tr>
           </thead>
           <tbody>
-            {bookings.map((booking) => ((
+            {bookings?bookings.map((booking) => ((
                 <tr>
                   <td className="border border-gray-400 px-4 py-2 cursor-pointer ">{booking.booked_by_details.username}</td>
                   <td className="border border-gray-400 px-4 py-2">{booking.slot_details.start_date}</td>
@@ -127,7 +127,7 @@ function ViewBookingsPage() {
                   </td>
                 </tr>
               ) 
-            ))}
+            )):<p>No bookings found</p>}
           </tbody>
         </table>
           </div>
