@@ -10,19 +10,23 @@ function FindTutorsPage() {
   const [id, setId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState();
+  const [option,setOption] = useState()
 
   const navigate = useNavigate();
   useEffect(() => {
     const fetchUsers = async () => {
+      setLoading(true)
       try {
         const response = await api.get("tutors/");
         if (response.status === 200) {
           console.log("Fetched all the users");
           console.log(response.data);
           setTutors(response.data);
+          setLoading(false)
         }
       } catch (error) {
         console.log("Error:", error);
+        setLoading(false)
       }
     };
 
@@ -36,6 +40,18 @@ function FindTutorsPage() {
     }
   }, [id]);
 
+//  const filterTutors = async(e) =>{
+
+//   setOption(e.target.value)
+//   console.log(e.target.value)
+//   setLoading(true)
+//   const response = api.get(`tutor-filter/?search=${e.target.value}`);
+//   console.log(response.data.results)
+//   setTutors(response.data.results)
+//   setLoading(false)
+
+//  }
+   
   const searchTutors = async (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
@@ -72,11 +88,30 @@ function FindTutorsPage() {
       </p>
       <input
         type="search"
-        placeholder="search..."
-        className="rounded-full 2xl:w-96 w-56 placeholder-indigo-950 placeholder:font-bold px-4 py-2 my-10 focus:bg-gray-200 bg-stone-200"
+        placeholder="Search..."
+        className="rounded-lg 2xl:w-96 w-56 b-2 border-indigo-800 placeholder-indigo-950 placeholder:font-bold px-4 py-2 my-20 focus:bg-indigo-300 focus:text-white focus-within:text-white bg-stone-200"
         onChange={searchTutors}
         value={searchTerm}
       />
+      <button className="bg-indigo-800 text-white px-4 py-2 rounded-md">
+        Search
+      </button>
+      {/* <div className="w-full">
+      <label className="font-bold text-lg text-indigo-800 px-4">Filter by:</label>
+      <select name="englishAccent" id="englishAccent" value={option} onChange={filterTutors} className="px-2 py-2 border-2 border-gray-200 my-2 rounded-md">
+            <option value="None">None</option>
+            <option value="british">British</option>
+            <option value="american">American</option>
+            <option value="australian">Australian</option>
+            <option value="canadian">Canadian</option>
+            <option value="indian">Indian</option>
+            <option value="southafrican">South African</option>
+            <option value="irish">Irish</option>
+            <option value="newzealand">New Zealand</option>
+            <option value="singaporean">Singaporean</option>
+            <option value="caribbean">Caribbean</option>
+        </select>
+      </div> */}
       {loading ? (
         <div className="flex justify-center items-center mt-60">
           <TailSpin className="h-16 w-16 text-indigo-600" />

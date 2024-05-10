@@ -101,7 +101,7 @@ function ViewSlotPage() {
             </form>
           </div>
         </div>
-        <div className="ml-96 mt-8">
+        <div className="ml-96 mt-8 flex-wrap ">
           {slots.length > 0 ? (
             slots.map((slot) => (
               <SingleSlot
@@ -110,6 +110,7 @@ function ViewSlotPage() {
                 startDate={slot.start_date}
                 startTime={slot.start_time}
                 endTime={slot.end_time}
+                is_booked={slot.is_booked}
                 onDelete={() => handleDeleteSlot(slot.id)}
               />
             ))
