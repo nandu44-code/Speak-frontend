@@ -172,7 +172,7 @@ function ViewBookingsPage() {
                           {booking.status === 'pending' ? (
                             <div>
                               <button
-                                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 mb-4"
                                 onClick={() => handleApproval(booking.slot)}
                               >
                                 Approve

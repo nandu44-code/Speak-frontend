@@ -165,7 +165,17 @@ function ViewBookingsStudent() {
                   <p className="text-indigo-900 font-semibold text-xl">
                     End time: {booking.slot_details.end_time}
                   </p>
-                  {booking.status === "confirmed" ? (
+
+                  {(booking.status == "pending") &&  (
+                    <button
+                      className="px-4 py-2 bg-red-500 text-white border-2 border-red-900 rounded-lg mt-10 cursor-pointer "
+                      onClick={() => handleCancelBooking(booking.slot)}
+                    >
+                      cancel
+                    </button>
+                  ) }
+
+                  {booking.status === "confirmed" && (
                       <div>
                         <p>{booking.room_id}</p>
                         <button
@@ -174,11 +184,13 @@ function ViewBookingsStudent() {
                         >
                           Copy Room ID
                         </button>
+                        <button
+                              className="px-4 py-2 mx-2 bg-red-500 text-white border-2 border-red-900 rounded-lg mt-10 cursor-pointer "
+                              onClick={() => handleCancelBooking(booking.slot)}
+                    >
+                      cancel
+                    </button>
                       </div>
-                    ) : (
-                      <p>
-                        After tutor approval you will get a room id
-                      </p>
                     )}
 
                     {isCurrentTimeBetween(
@@ -194,16 +206,7 @@ function ViewBookingsStudent() {
                       </button>
                     </>
                    )}
-                  {booking.status == "pending" ? (
-                    <button
-                      className="px-4 py-2 bg-red-500 text-white border-2 border-red-900 rounded-lg mt-10 cursor-pointer "
-                      onClick={() => handleCancelBooking(booking.slot)}
-                    >
-                      cancel
-                    </button>
-                  ) : (
-                    <div></div>
-                  )}
+                 
                 </div>
               ))}
             </div>
