@@ -91,6 +91,37 @@ function ViewBookingsPage() {
       });
   };
 
+  const handleCancelBooking = async (slot) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, cancel it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await api.patch(`slot/booking/${slot}/cancel/`);
+          const request = await api.get(
+            `slot/student/bookings/filter/${user}/${status}`
+          );
+          setBookings(request.data);
+
+          Swal.fire(
+            "Cancelled!",
+            "Your booking has been cancelled.",
+            "success"
+          );
+        } catch (error) {
+          console.error("error in deleting");
+          Swal.fire("Error!", "Failed to cancel booking.", "error");
+        }
+      }
+    });
+  };
+
   const handleJoinRoom = useCallback(() => {
     navigate(`/room/${roomID}/`);
   }, [navigate, roomID]);
@@ -177,7 +208,7 @@ function ViewBookingsPage() {
                               >
                                 Approve
                               </button>
-                              <button className="bg-red-500 px-4 py-2 text-white rounded-md mx-2">Cancel</button>
+                              <button className="bg-red-500 px-4 py-2 text-white rounded-md mx-2"  onClick={() => handleCancelBooking(booking.slot)} >Cancel</button>
                             </div>
                           ) : (
                             <>
@@ -198,7 +229,7 @@ function ViewBookingsPage() {
                                 </>
                               ) : (
                                 booking.status !== 'completed' && (
-                                  <button className="bg-red-500 text-white px-4 py-2 rounded-md">Cancel</button>
+                                  <button className="bg-red-500 text-black px-4 py-2 rounded-md" onClick={() => handleCancelBooking(booking.slot)}>Cancel</button>
                                 )
                               )}
                             </>
