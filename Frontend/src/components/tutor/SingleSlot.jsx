@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import api from "../../services/Axios";
 import { jwtDecode } from "jwt-decode";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const SingleSlot = ({ key,id, startDate, startTime, endTime, onDelete,is_booked }) => {
@@ -12,30 +14,63 @@ const SingleSlot = ({ key,id, startDate, startTime, endTime, onDelete,is_booked 
   const  token =localStorage.getItem('accessToken')
   const access = jwtDecode(token)
   const user_id = access.user
-
+  const navigate = useNavigate()
   const handleDelete = () => {
     onDelete();
   };
 
+const handleWalletBooking = async () => {
+    const token = localStorage.getItem('accessToken');
+    const access = jwtDecode(token);
+    const user_id = access.user;
+  
+    try {
+      const response = await api.get(`user-wallet/${user_id}/`);
+      console.log(response);
+  
+      if (response.data.balance >= 2500) {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Pay using Wallet",
+        }).then(async (result) => {
+          if (result.isConfirmed) {
+            try {
+              const credentials = {
+                slot: slot_id,
+                booked_by: user_id,
+                amount: 2500,
+              };
+              const response = await api.post(`slot/bookings/create/`, credentials);
+              if (response.status === 201 ){
+                navigate('/student/paymentSuccess/')
+              }
+            } catch (error) {
+              console.error("Error creating booking:", error);
+             
+            }
+          }
+        });
+      } else {
+        Swal.fire(
+          "Cancelled!",
+          "Your booking has been cancelled.",
+          "success"
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching user wallet:", error);
+      // Handle error while fetching user wallet
+    }
+  };
+  
+
   const handleBooking = async () => {
-    // const token = localStorage.getItem("accessToken");
-    // const access = jwtDecode(token);
-    // const credentials = {
-    //   slot: key,
-    //   user: access.user,
-    // };
-    // try {
-    //   const response = await api.post("slot/bookings/", credentials);
-    //   if (response.data.status) {
-    //     if (response.data.status === 200) {
-    //       console.log("slot booked");
-    //     } else {
-    //       console.log("something went wrong");
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.error("Error booking slot:", error);
-    // }
+    
     const stripePromise = loadStripe(
       "pk_test_51OzPCTSBJxztjkDCY7itY03YR8Q8GJPZc0YHDlPuppVnH9p5Cdi0XSxBxF2ed9Udpt4C2zxGfgIHadmmY4eyqtHq006TvM57pG"
     );
@@ -97,16 +132,21 @@ const SingleSlot = ({ key,id, startDate, startTime, endTime, onDelete,is_booked 
             </button>
           )
         ) : (
+          <div className='flex flex-row'>
           <button
-            className={`border-2 border-red-500 text-red-900 px-4 py-2 rounded-md ${
+            className={`border-2 border-red-500 text-red-900 px-4 py-2 mx-2 rounded-md ${
               is_booked ? 'bg-gray-400 cursor-not-allowed' : 'hover:bg-red-600 hover:text-white hover:cursor-pointer'
             }`}
             onClick={is_booked ? null : handleBooking}
             disabled={is_booked}
           >
-            {is_booked ? "Booked" : "Book"}
+            {is_booked ? "Booked" : "Pay with Stripe"}
           </button>
+    
+          {!is_booked && <button className="bg-blue-700 text-white px-4 py-2 rounded-md" onClick={()=>handleWalletBooking(id)}>Pay with wallet</button>}
+          </div>
         )}
+        
       </div>
     </div>
   );
