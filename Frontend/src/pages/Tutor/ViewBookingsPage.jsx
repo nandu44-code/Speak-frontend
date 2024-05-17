@@ -54,13 +54,26 @@ function ViewBookingsPage() {
     }
   };
 
-  const isCurrentTimeBetween = (startTime, endTime) => {
-    const now = new Date();
-    const start = new Date(now.toDateString() + " " + startTime);
-    const end = new Date(now.toDateString() + " " + endTime);
-    return now >= start && now <= end;
+  const handleCompleted = async (bookingId) => {
+    try {
+      await api.patch(`/slot/booking-view/${bookingId}/`, { status: 'completed' });
+      const token = localStorage.getItem("accessToken");
+      const access = jwtDecode(token);
+      const tutor = access.user;
+      const response = await api.get(`/slot/bookings-listing/?tutor=${tutor}&status=${status}`);
+      setBookings(response.data);
+    } catch (error) {
+      console.error("Error completing booking:", error);
+    }
   };
 
+  const isCurrentTimeBetween = (startTime, endTime, startDate) => {
+    const now = new Date();
+    const startDateTime = new Date(startDate + " " + startTime);
+    const endDateTime = new Date(startDate + " " + endTime);
+    return now >= startDateTime && now <= endDateTime;
+  };
+  
   const isCurrentTimeAfterEndTime = (endTime) => {
     const now = new Date();
     const end = new Date(now.toDateString() + " " + endTime);
@@ -107,6 +120,14 @@ function ViewBookingsPage() {
             >
               Approved
             </button>
+            <button
+              className={`${
+                status === "completed" ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-700"
+              } px-4 py-2 rounded-md`}
+              onClick={() => handleOptionClick("completed")}
+            >
+              Completed
+            </button>
           </div>
           <div className="mt-4 border border-gray-200 p-4 rounded-md">
             <table className="table-auto border-collapse">
@@ -139,10 +160,10 @@ function ViewBookingsPage() {
                       </div>
                     </td>
                     <td className="border border-gray-400 px-4 py-2">
-                      {isCurrentTimeAfterEndTime(booking.slot_details.end_time) ? (
+                      {isCurrentTimeAfterEndTime(booking.slot_details.end_time) && booking.status === 'confirmed' ? (
                         <button
-                          className="px-4 py-2 bg-gray-500 text-white font-semibold border-2 border-gray-700 rounded-lg mt-2 cursor-not-allowed"
-                          disabled
+                          className="px-4 py-2 bg-gray-500 text-white font-semibold border-2 border-gray-700 rounded-lg mt-2 cursor-pointer"
+                          onClick={() => handleCompleted(booking.slot)}
                         >
                           Completed
                         </button>
@@ -160,7 +181,7 @@ function ViewBookingsPage() {
                             </div>
                           ) : (
                             <>
-                              {isCurrentTimeBetween(booking.slot_details.start_time, booking.slot_details.end_time) ? (
+                              {isCurrentTimeBetween(booking.slot_details.start_time, booking.slot_details.end_time, booking.slot_details.start_date) ? (
                                 <>
                                   <input
                                     type="text"
@@ -176,7 +197,9 @@ function ViewBookingsPage() {
                                   </button>
                                 </>
                               ) : (
-                                <button className="bg-red-500 text-white px-4 py-2 rounded-md">Cancel</button>
+                                booking.status !== 'completed' && (
+                                  <button className="bg-red-500 text-white px-4 py-2 rounded-md">Cancel</button>
+                                )
                               )}
                             </>
                           )}

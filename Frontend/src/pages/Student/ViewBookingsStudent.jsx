@@ -90,12 +90,13 @@ function ViewBookingsStudent() {
       navigate(`/room/${roomID}/`)
   },[navigate,roomID])
 
-  const isCurrentTimeBetween = (startTime, endTime) => {
+  const isCurrentTimeBetween = (startTime, endTime, startDate) => {
     const now = new Date();
-    const start = new Date(now.toDateString() + " " + startTime);
-    const end = new Date(now.toDateString() + " " + endTime);
-    return now >= start && now <= end;
+    const startDateTime = new Date(startDate + " " + startTime);
+    const endDateTime = new Date(startDate + " " + endTime);
+    return now >= startDateTime && now <= endDateTime;
   };
+  
 
   return (
     <>
