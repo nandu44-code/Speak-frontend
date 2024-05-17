@@ -40,6 +40,8 @@ import UserProtectedRoute from './Routes/ProtectedRoute';
 import TutorProfile from './components/tutor/TutorProfile';
 import { Wallet } from 'lucide-react';
 
+import Room from './pages/Common/Room';
+
 function App() {
   
   return (
@@ -80,6 +82,8 @@ function App() {
           <Route path='/admin/requests/detail/:id' element={<RequestDetailsPage/>}/>
           <Route path='/admin/tutors/detail/:id' element={<TutorDetailsPage/>}/>
           <Route path='/admin/bookings' element={<AdminBookings/>}/>
+
+          <Route path='/room/:roomID/' element={<Room/>} />
           
         </Routes>
       </>

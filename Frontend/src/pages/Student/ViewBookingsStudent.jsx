@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useCallback } from "react";
 import StudentProfileSidebar from "../../components/StudentProfileSidebar";
 import Navbar from "../../components/Navbar";
 import { jwtDecode } from "jwt-decode";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 function ViewBookingsStudent() {
   const [status, setStatus] = useState("pending");
   const [id, setId] = useState(null);
+  const  [roomID,setRoomID] = useState('')
   const [bookings, setBookings] = useState([]);
   const token = localStorage.getItem("accessToken");
   const access = jwtDecode(token);
@@ -64,6 +65,36 @@ function ViewBookingsStudent() {
         }
       }
     });
+  };
+
+  const handleCopyRoomId = (roomId) => {
+    navigator.clipboard.writeText(roomId)
+      .then(() => {
+        Swal.fire(
+          "Copied!",
+          "Room ID copied to clipboard.",
+          "success"
+        );
+      })
+      .catch((error) => {
+        console.error("Error copying to clipboard:", error);
+        Swal.fire(
+          "Error!",
+          "Failed to copy room ID to clipboard.",
+          "error"
+        );
+      });
+  };
+
+  const handleJoinRoom = useCallback(() => {
+      navigate(`/room/${roomID}/`)
+  },[navigate,roomID])
+
+  const isCurrentTimeBetween = (startTime, endTime) => {
+    const now = new Date();
+    const start = new Date(now.toDateString() + " " + startTime);
+    const end = new Date(now.toDateString() + " " + endTime);
+    return now >= start && now <= end;
   };
 
   return (
@@ -133,6 +164,35 @@ function ViewBookingsStudent() {
                   <p className="text-indigo-900 font-semibold text-xl">
                     End time: {booking.slot_details.end_time}
                   </p>
+                  {booking.status === "confirmed" ? (
+                      <div>
+                        <p>{booking.room_id}</p>
+                        <button
+                          className="px-4 py-2 bg-green-500 text-white font-semibold border-2 border-green-700 rounded-lg mt-2 cursor-pointer "
+                          onClick={() => handleCopyRoomId(booking.room_id)}
+                        >
+                          Copy Room ID
+                        </button>
+                      </div>
+                    ) : (
+                      <p>
+                        After tutor approval you will get a room id
+                      </p>
+                    )}
+
+                    {isCurrentTimeBetween(
+                      booking.slot_details.start_time,
+                      booking.slot_details.end_time
+                    ) && (
+                      <>
+                      <input type="text" value={roomID} onChange={(e)=>{setRoomID(e.target.value)}} placeholder='Enter the room ID'/>
+                      <button
+                        className="px-4 py-2 bg-green-500 text-white font-semibold border-2 border-green-700 rounded-lg mt-2 cursor-pointer "
+                      onClick={handleJoinRoom}>
+                        Join
+                      </button>
+                    </>
+                   )}
                   {booking.status == "pending" ? (
                     <button
                       className="px-4 py-2 bg-red-500 text-white border-2 border-red-900 rounded-lg mt-10 cursor-pointer "
