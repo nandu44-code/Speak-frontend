@@ -54,8 +54,15 @@ function WalletPage() {
         <div className="w-full flex justify-center mt-44">
           <div className="w-1/4 flex flex-col shadow-gray-300 shadow-md">
             <p className="font-bold text-2xl">Wallet</p>
-            <p>amount,{amount}</p>
+            { amount?
+
+            <p className="font-bold text-3xl text-gray-700 py-20">₹{amount}</p>:
+            <p className="py-10 text-gray-600">Your wallet is  empty</p>}
+          <div>
+            <p className="text-gray-500">You can buy slots using the amount in your wallet</p>
           </div>
+          </div>
+
         </div>
       </div>
     </>
