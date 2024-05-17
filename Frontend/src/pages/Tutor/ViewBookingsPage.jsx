@@ -74,9 +74,9 @@ function ViewBookingsPage() {
     return now >= startDateTime && now <= endDateTime;
   };
   
-  const isCurrentTimeAfterEndTime = (endTime) => {
+  const isCurrentTimeAfterEndTime = (endTime, startDate) => {
     const now = new Date();
-    const end = new Date(now.toDateString() + " " + endTime);
+    const end = new Date(startDate + " " + endTime);
     return now >= end;
   };
 
@@ -191,7 +191,7 @@ function ViewBookingsPage() {
                       </div>
                     </td>
                     <td className="border border-gray-400 px-4 py-2">
-                      {isCurrentTimeAfterEndTime(booking.slot_details.end_time) && booking.status === 'confirmed' ? (
+                      {isCurrentTimeAfterEndTime(booking.slot_details.end_time, booking.slot_details.start_date) && booking.status === 'confirmed' ? (
                         <button
                           className="px-4 py-2 bg-gray-500 text-white font-semibold border-2 border-gray-700 rounded-lg mt-2 cursor-pointer"
                           onClick={() => handleCompleted(booking.slot)}

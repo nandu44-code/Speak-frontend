@@ -44,6 +44,7 @@ const handleWalletBooking = async () => {
                 slot: slot_id,
                 booked_by: user_id,
                 amount: 2500,
+                status :'pending',
               };
               const response = await api.post(`slot/bookings/create/`, credentials);
               if (response.status === 201 ){

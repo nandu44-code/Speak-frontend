@@ -23,6 +23,29 @@ function ViewBookingsStudent() {
     }
   }, [id]);
 
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      const token = localStorage.getItem("accessToken");
+      if (!token) {
+        console.error("No access token found");
+        return;
+      }
+      const access = jwtDecode(token);
+      
+      const user = access.user;
+
+      try {
+        const response = await api.get(`/slot/student/bookings/filter/${user}/${status}`);
+        setBookings(response.data);
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    };
+
+    fetchBookings();
+  }, [status]);
+
   const handleStatusChange = async (newStatus) => {
     setStatus(newStatus);
     try {
@@ -150,7 +173,7 @@ function ViewBookingsStudent() {
                 >
                  
                     <p className="text-indigo-950 font-normal text-lg hover:text-indigo-500 hover:cursor-pointer" onClick={() => {setId(booking.slot_details.created_by.id)}}>
-                      {booking.slot_details.created_by.username}
+                      {booking.slot_details.created_by.first_name+' '+booking.slot_details.created_by.last_name}
                     </p>
                   
                   <p className="text-indigo-900 font-semibold text-xl">
@@ -195,7 +218,8 @@ function ViewBookingsStudent() {
 
                     {isCurrentTimeBetween(
                       booking.slot_details.start_time,
-                      booking.slot_details.end_time
+                      booking.slot_details.end_time,
+                      booking.slot_details.start_date
                     ) && (
                       <>
                       <input type="text" value={roomID} onChange={(e)=>{setRoomID(e.target.value)}} placeholder='Enter the room ID'/>
