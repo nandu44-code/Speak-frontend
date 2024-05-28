@@ -4,14 +4,20 @@ import api from "../../services/Axios";
 import { useDispatch } from "react-redux";
 import SingleSlot from "../../components/tutor/SingleSlot";
 import Navbar from "../../components/Navbar";
-import { AiOutlineMessage } from "react-icons/ai";
-import { RiUserFollowLine } from "react-icons/ri";
-import { BiHide } from "react-icons/bi";
-import { GrSchedule } from "react-icons/gr";
+import { GiTeacher } from "react-icons/gi";
+import { FaUser } from "react-icons/fa";
+import { FcAbout } from "react-icons/fc";
+import { FaLanguage } from "react-icons/fa6";
+import { MdOutlinePlace } from "react-icons/md";
+
+// import { AiOutlineMessage } from "react-icons/ai";
+// import { RiUserFollowLine } from "react-icons/ri";
+// import { BiHide } from "react-icons/bi";
+// import { GrSchedule } from "react-icons/gr";
 
 function TutorSideDetailsPage() {
   const { id } = useParams();
-  console.log(id)
+  console.log(id);
   const [userData, setUserData] = useState(null);
   // const currentdate = new Date();
   const [selectedDate, setSelectedDate] = useState(
@@ -29,7 +35,7 @@ function TutorSideDetailsPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("aneesh",id)
+      console.log("aneesh", id);
       const request = await api.get(
         `slot/slots/filter/?selected_date=${selectedDate}&created_by=${id}`
       );
@@ -51,8 +57,9 @@ function TutorSideDetailsPage() {
     const fetchData = async () => {
       try {
         const response = await api.get(`user/${id}/`);
+        console.log(response.data);
         setUserData(response.data);
-        setUser(id)
+        setUser(id);
       } catch (error) {
         console.error();
       }
@@ -63,81 +70,122 @@ function TutorSideDetailsPage() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col mt-24 items-center p-10 bg-gray-100  shadow-md shadow-black">
-        {userData && (
-          <img
-            className="w-40 h-40 cursor-pointer mb-6"
-            src={userData.profile_image}
-            alt="Profile"
-          />
-        )}
-
-        <div className="bg-slate-100 p-6 rounded-xl w-full mb-6">
-          {/* <p className="font-bold text-2xl text-gray-500">Basic Details</p> */}
-          <div className="flex flex-row justify-center mb-2">
-            <p className="font-bold text-lg text-violet-950 ml-2">
-              {userData && userData.first_name}
-              <span className="mx-1">&nbsp;</span>
-              {userData && userData.last_name}
-            </p>
-          </div>
-
-          <p className="font-semibold text-xl text-violet-900 mb-2">
-            {userData && userData.email}
-          </p>
-
-          <div className="flex justify-center">
-            <p className="font-semibold text-xl mr-4">
-              {userData && userData.tutor.state}
-            </p>
-            <p className="font-semibold text-xl">
-              {userData && userData.tutor.country}
-            </p>
-          </div>
+      <div className="flex flex-col mt-24 items-center p-5 bg-white shadow-sm shadow-gray-100 ">
+        <div className="flex flex-row p-5 rounded-md mt-4">
+          {userData && (
+            <img
+              className="w-32 h-32 cursor-pointer mb-2 shadow-sm shadow-gray-300 rounded-full hover:scale-150 duration-500"
+              src={userData.profile_image}
+              alt="Profile"
+            />
+          )}
         </div>
-        <a href="#slots" className="w-full flex justify-center">
-          <button className="flex justify-center bg-white text-black font-medium text-lg px-4 py-2 m-2 w-1/2  rounded-md hover: hover:border-indigo-400 hover:text-black hover:bg-gray-100 shadow-lg shadow-black">
-            <GrSchedule className="mt-1 mx-4" />
-            Schedule
-          </button>
-        </a>
-        <div className="flex w-1/2 justify-between my-5 sm:flex-row md:flex-col lg:flex-col xl:flex-row 2xl:flex-row">
-          <button className="flex bg-sky-700 text-white px-4 py-2 my-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
-            <RiUserFollowLine className="mt-1 mx-5" size={22} />
+        <div className="flex flex-row justify-center mb-4">
+          <p className="font-bold text-2xl text-gray-900 ml-2">
+            {userData && userData.first_name}
+            <span className="mx-1">&nbsp;</span>
+            {userData && userData.last_name}
+          </p>
+        </div>
+
+        <div className="flex w-1/2 justify-center my-5 sm:flex-row md:flex-col lg:flex-col xl:flex-row 2xl:flex-row">
+          <button className="flex bg-violet-500 text-white px-5 py-2 m-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
             Follow
           </button>
-          <button className="flex bg-blue-600 text-white px-4 py-2 my-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
+          <a href="#slots" className="">
+            <button className="flex bg-blue-500 text-white px-10 py-2 m-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
+              Schedule
+            </button>
+          </a>
+          <button className="flex bg-sky-400 text-white px-10 py-2 m-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
             {" "}
-            <AiOutlineMessage className="mt-1 mx-5" size={22} />
             Message
-          </button>
-          <button className="flex bg-purple-900 text-white px-4 py-2 my-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
-            Hide tutor
           </button>
         </div>
 
-        {userData && (
-          <div>
-            <div className="bg-gray-100 rounded-xl p-4 m-2">
-              <p className="font-normal text-2xl text-violet-900 mb-4">
-                {userData.username}
-              </p>
-              <p className="font-normal mb-4 text-xl">
-                {userData.tutor.introduction_description}
-              </p>
+        <div className="p-6 rounded-xl w-1/2 mb-6">
+          {userData && (
+            <div>
+              <div className="flex flex-row gap-10">
+              <div className="flex flex-col">
+                <p className="font-normal flex justify-start text-md text-gray-800 mb-4 px-2">
+                  <span className="mr-4 py-1">
+                    <FaUser color="indigo" />
+                  </span>
+                  Username
+                </p>
+                <p className="font-semibold mb-4 flex justify-start text-lg text-gray-800 bg-stone-200 px-4 py-2 rounded-md w-fit">
+                  {userData.username}
+                </p>
+              </div>
+                <div>
+                  <p className="font-normal flex justify-start text-md text-gray-800 mb-4 px-2">
+                    <span className="mr-4 py-1">
+                      <FaLanguage color="orange" />
+                    </span>
+                    Dialect
+                  </p>
+                  <p className="font-semibold mb-4 flex justify-start text-lg text-gray-800 bg-stone-200 px-4 py-2 rounded-md w-fit">
+                    {userData.tutor.dialect}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-normal flex justify-start text-md text-gray-800 mb-4 px-2">
+                    <span className="mr-4 py-1">
+                      <MdOutlinePlace color="green" size={18}/>
+                    </span>
+                    State
+                  </p>
+                  <p className="font-semibold mb-4 flex justify-start text-lg text-gray-800 bg-stone-200 px-4 py-2 rounded-md w-fit">
+                    {userData.tutor.state}
+                  </p>
+                </div>
+                <div>
+                  <p className="font-normal flex justify-start text-md text-gray-800 mb-4 px-2">
+                    <span className="mr-4 py-1">
+                      <MdOutlinePlace color="green" size={18} />
+                    </span>
+                    Country
+                  </p>
+                  <p className="font-semibold mb-4 flex justify-start text-lg text-gray-800 bg-stone-200 px-4 py-2 rounded-md w-fit">
+                    {userData.tutor.country}
+                  </p>
+                </div>
+              </div>
+              
             </div>
-            <div className="bg-gray-100 rounded-xl p-4">
-              <label className="font-semibold text-xl mb-2">Teaching style</label>
-              <p className="font-normal text-xl mb-4">
-                {userData.tutor.teaching_style}
-              </p>
+          )}
+          {userData && (
+            <div>
+              <div className="p-4">
+                <p className="font-normal flex justify-start text-md text-gray-800 mb-4">
+                  <span className="mr-4 py-1">
+                    <FcAbout color="indigo" size={22} />
+                  </span>
+                  About me
+                </p>
+                <p className="font-normal mb-4 text-lg text-gray-800 bg-stone-200 px-4 py-2 rounded-md">
+                  {userData.tutor.introduction_description}
+                </p>
+              </div>
+              <div className="rounded-xl p-4">
+                <p className="font-normal flex justify-start text-md text-gray-800 mb-4">
+                  <span className="mr-4 py-1">
+                    <GiTeacher color="red" />
+                  </span>
+                  Teaching Style
+                </p>
+                <p className="font-normal mb-4 text-lg text-gray-800 bg-stone-200 px-4 py-2 rounded-md">
+                  {userData.tutor.teaching_style}
+                </p>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
       <div className="flex justify-center items-center">
         <div
-          className="w-1/2 mx-4  flex justify-center items-center bg-stone-200 h-28 rounded-2xl px-4 py-2 my-20"
+          className="w-1/2 mx-4  flex justify-center items-center bg-stone-200 h-28 rounded-2xl px-4 py-2 mb-20"
           id="slots"
         >
           {/* <h2 className="text-xl font-bold mb-4">Search Slots by Date</h2> */}
