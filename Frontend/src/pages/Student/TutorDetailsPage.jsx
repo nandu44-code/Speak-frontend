@@ -89,15 +89,15 @@ function TutorSideDetailsPage() {
         </div>
 
         <div className="flex w-1/2 justify-center my-5 sm:flex-row md:flex-col lg:flex-col xl:flex-row 2xl:flex-row">
-          <button className="flex bg-violet-500 text-white px-5 py-2 m-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
+          <button className="flex bg-violet-700 text-white px-5 py-2 m-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
             Follow
           </button>
           <a href="#slots" className="">
-            <button className="flex bg-blue-500 text-white px-10 py-2 m-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
+            <button className="flex bg-blue-600 text-white px-10 py-2 m-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
               Schedule
             </button>
           </a>
-          <button className="flex bg-sky-400 text-white px-10 py-2 m-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
+          <button className="flex bg-sky-500 text-white px-10 py-2 m-3 rounded-md font-semibold hover:bg-indigo-700 duration-1000">
             {" "}
             Message
           </button>
