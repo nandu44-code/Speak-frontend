@@ -24,6 +24,7 @@ function TutorBasicDetails() {
   const [teachingStyle, setTeachingStyle] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [selectedAccent,setSelectedAccent] = useState('')
+  const [preference,setPreference] = useState('')
   const [selfIntroVideo, setSelfIntroVideo] = useState(null);
   const [certificates, setCertificates] = useState(null);
 

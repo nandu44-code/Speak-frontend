@@ -6,13 +6,18 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaCreativeCommonsNcJp } from "react-icons/fa";
 
-export const Register = createAsyncThunk("register", async (credentials) => {
+export const Register = createAsyncThunk("register", async (credentials, { rejectWithValue }) => {
   try {
     const response = await api.post("/register/", credentials);
     return response.data;
   } catch (error) {
     console.error("error", error);
-    throw error;
+    if (error.response && error.response.data && error.response.data.error) {
+      console.error('customised error checking', error.response.data.error);
+      return rejectWithValue(error.response.data.error);
+    } else {
+      return rejectWithValue('Something went wrong. Please try again.');
+    }
   }
 });
 
@@ -227,14 +232,19 @@ const userSlice = createSlice({
           });
         }
       })
-      .addCase(Register.rejected, (state) => {
-        state.loading = false;
+      .addCase(Register.rejected, (state,action) => {
+        console.log('Rejected action:', action);
+        const errorMessage = action.payload || 'Something went wrong';
+        console.log('Error during registration:', errorMessage);
+
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: "Something went wrong! Try again",
+          text: errorMessage,
           footer: '<a href="#">Why do I have this issue?</a>',
         });
+       
+        state.loading = false;
       });
 
     builder

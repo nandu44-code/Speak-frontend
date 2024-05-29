@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { TailSpin } from "react-loader-spinner";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 function SignUpForm() {
   const dispatch = useDispatch();
@@ -117,7 +118,7 @@ function SignUpForm() {
    console.log(errors)
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     if (
@@ -126,7 +127,6 @@ function SignUpForm() {
       formData.password !== "" &&
       formData.confirmPassword !== ""
     ) {
-      // Perform other validations here if needed
 
       const credentials = {
         username: formData.username,
@@ -139,10 +139,11 @@ function SignUpForm() {
       };
 
       try {
-        dispatch(Register(credentials));
+        const resultAction = await dispatch(Register(credentials));
+        const originalPromiseResult = unwrapResult(resultAction);
         navigate("/otp/");
       } catch (error) {
-        console.error("Error during registration:", error);
+        console.error("Error during registration:", error)
       }
     } else {
       toast.error("Enter valid credentials.");
@@ -288,13 +289,13 @@ function SignUpForm() {
             type="submit"
             className="w-full bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-blue-600"
           >
-            {loading ? <TailSpin /> : "Sign Up"}
+            {loading ? 'signing up....' : "Sign Up"}
           </button>: <button
             type="submit"
             className="w-full bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-blue-600"
             disabled
           >
-            {loading ? <TailSpin /> : "Sign Up"}
+            {loading ? 'signing up' : "Sign Up"}
           </button>}
           <h4>Already have an account?</h4>
           <h4
