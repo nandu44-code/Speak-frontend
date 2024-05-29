@@ -102,8 +102,8 @@ function AdminRequestsPage() {
 
   console.log('tutors',tutors)
   if (tutors.user){
-    setPendingRequests(tutors.tutor);
-    console.log(tutors.tutor)
+    setPendingRequests(tutors.user);
+    console.log('pending request',tutors.user)
   }else{
     setPendingRequests([])
   }
@@ -121,7 +121,7 @@ function AdminRequestsPage() {
           {pendingRequests.length === 0 ? (
             <p className="text-red-500">No Pending Requests</p>
           ) : (
-            pendingRequests.user.map((tutor, index) => (
+            pendingRequests.map((tutor, index) => (
               <div key={index} className="border-b px-16 py-4 flex bg-stone-100 mt-10 mb-10 rounded-lg hover:scale-105 duration-500 cursor-pointer shadow-md shadow-gray-800" onClick={() => {setId(tutor.id)}}>
                 <img src={tutor.profile_image} className="rounded w-32 h-32 mr-10"></img>
                 <div className="flex-col ">

@@ -6,8 +6,7 @@ import {
   getMyProfile,
   tutorchecklist,
   getTutorProfile,
-} 
-from "../../features/userSlice";
+} from "../../features/userSlice";
 import { toast } from "react-toastify";
 import { jwtDecode } from "jwt-decode";
 import { TailSpin } from "react-loader-spinner";
@@ -16,6 +15,7 @@ import { app, firebaseStore } from "../../services/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 function TutorBasicDetails() {
   const [country, setCountry] = useState("");
@@ -23,51 +23,53 @@ function TutorBasicDetails() {
   const [selfIntro, setSelfIntro] = useState("");
   const [teachingStyle, setTeachingStyle] = useState("");
   const [profileImage, setProfileImage] = useState(null);
-  const [selectedAccent,setSelectedAccent] = useState('')
-  const [preference,setPreference] = useState('')
+  const [selectedAccent, setSelectedAccent] = useState("");
   const [selfIntroVideo, setSelfIntroVideo] = useState(null);
   const [certificates, setCertificates] = useState(null);
+  const [selectedPreferences, setSelectedPreferences] = useState([]);
 
-  let loading = useSelector((state)=> state.user.loading)
+
+  const preferencesList = [
+    "No proficiency",
+    "Low proficiency",
+    "Intermediate proficiency",
+    "Upper Intermediate proficiency",
+    "High proficiency",
+  ];
+  let loading = useSelector((state) => state.user.loading);
 
   const countryRegex = "^[a-zA-Z]+$";
 
   const userprofile = useSelector((state) => state.user.user);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const token = localStorage.getItem("accessToken");
   const access = jwtDecode(token);
 
   const handleAccent = (e) => {
-    setSelectedAccent(e.target.value)
-    console.log(e.target.value)
-  }
+    setSelectedAccent(e.target.value);
+    console.log(e.target.value);
+  };
 
   const formSubmit = (e) => {
-
     e.preventDefault();
     if (country.split(" ").join(" ") == "") {
       toast.error("country should not be empty");
     } else if (state.split(" ").join("") == "") {
       toast.error("state should not be empty");
-    }else if (selectedAccent == 'None'){
-      toast.error('accent should not be none ')
-    } 
-    else if (selfIntro.split(" ").join("") == "" ){
-      toast.error(
-        "self introduction should not be empty."
-      );
-    } else if (
-      teachingStyle.split(" ").join("") == ""
-    ) {
-      toast.error(
-        "teaching style should not be empty."
-      );
+    } else if (selectedAccent == "None") {
+      toast.error("accent should not be none ");
+    } else if (selfIntro.split(" ").join("") == "") {
+      toast.error("self introduction should not be empty.");
+    } else if (teachingStyle.split(" ").join("") == "") {
+      toast.error("teaching style should not be empty.");
     } else if (certificates === null) {
       toast.error("add relevant certificate");
-    } else {
+    } else if(selectedPreferences.length == 0){
+          toast.error("choose atleast one preference")
+    }else {
       // loading = true
       const uuid = uuidv4();
 
@@ -89,19 +91,19 @@ function TutorBasicDetails() {
 
     const tutorChecklist = async (url) => {
       const credentials = {
-       
         state: state,
         country: country,
         introduction_description: selfIntro,
         teaching_style: teachingStyle,
         dialect: selectedAccent,
+        student_preferences:selectedPreferences,
         certificates: url,
-        user: access.user
+        user: access.user,
       };
       console.log(credentials);
-      await dispatch(tutorchecklist(credentials));
-      navigate('/tutor/checklist/processing')
-
+      const resultAction = await dispatch(tutorchecklist(credentials));
+      const originalPromiseResult = unwrapResult(resultAction);
+      navigate("/tutor/checklist/processing");
     };
   };
 
@@ -116,13 +118,12 @@ function TutorBasicDetails() {
     }
   }, [profileImage]);
 
-
   const uploadImage = () => {
     if (profileImage == null) {
       toast.error("Image is not selected");
       return;
     }
-    console.log('its entering here')
+    console.log("its entering here");
     const uuid = uuidv4();
 
     const storageRef = ref(firebaseStore);
@@ -135,7 +136,7 @@ function TutorBasicDetails() {
             // setImageUrl(url);
             updateImage(url); // Pass the URL to updateImage function
             toast.success("Image uploaded successfully");
-            console.log('firebase uploaded url',url)
+            console.log("firebase uploaded url", url);
             // getMyProfile(access.user)
           })
           .catch((error) => {
@@ -160,6 +161,18 @@ function TutorBasicDetails() {
     };
     await dispatch(changeProfileImage(credentials));
   };
+
+  const handlePreferenceClick = (preference) => {
+    
+    const newSelectedPreferences = [...selectedPreferences];
+    const index = newSelectedPreferences.indexOf(preference);
+    if (index > -1) {
+      newSelectedPreferences.splice(index, 1); // Remove preference if already selected
+    } else {
+      newSelectedPreferences.push(preference); // Add preference if not selected
+    }
+    setSelectedPreferences(newSelectedPreferences);
+  }
   return (
     <div>
       <div className="mt-20 w-full ml-36">
@@ -177,23 +190,22 @@ function TutorBasicDetails() {
           />
 
           <label htmlFor="fileInput">
-              {loading ? (
-                // Render loader while image is loading
-                <div className="mx-auto rounded-full w-32 h-32 mb-4">
-                    <TailSpin />
-                </div>
-              ) : (
-                // Render the image when it is loaded
-                <img
-                  src={
-                    userprofile && userprofile.profile_image
-                      ? userprofile.profile_image
-                      : imageSrc
-                  }
-                 
-                  className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
-                />
-              )}
+            {loading ? (
+              // Render loader while image is loading
+              <div className="mx-auto rounded-full w-32 h-32 mb-4">
+                <TailSpin />
+              </div>
+            ) : (
+              // Render the image when it is loaded
+              <img
+                src={
+                  userprofile && userprofile.profile_image
+                    ? userprofile.profile_image
+                    : imageSrc
+                }
+                className="mx-auto rounded-full w-32 h-32 mb-4 cursor-pointer hover:scale-125 transition duration-500"
+              />
+            )}
 
             {userprofile && userprofile.profile_image ? (
               <h1
@@ -223,7 +235,7 @@ function TutorBasicDetails() {
             placeholder="state"
             onChange={(e) => setState(e.target.value)}
           />
-          
+
           {/* <label htmlFor="fileInput" className="block mt-10 mb-10 text-indigo-500 cursor-pointer">
            Upload your self introduction 
           </label>
@@ -236,9 +248,30 @@ function TutorBasicDetails() {
               setSelfIntroVideo(e.target.files[0]);
             }}
           /> */}
+          <div className="preferences-container">
+            <h2 className="text-lg mb-4">Select Student Preferences</h2>
+            <div className="tabs flex flex-wrap">
+              {preferencesList.map((preference) => (
+                <div
+                  key={preference}
+                  className={`mx-4 text-white px-4 py-2 rounded-md my-4 cursor-pointer  ${selectedPreferences.includes(preference)
+                      ? "bg-sky-950 text-white"
+                      : "bg-sky-800 text-white"
+                  }`} onClick={()=>handlePreferenceClick(preference)}
+                >
+                  {preference}
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <select name="englishAccent" id="englishAccent" value={selectedAccent} onChange={handleAccent} className="px-2 py-2 border-2 border-gray-200 my-2 rounded-md">
-            
+          <select
+            name="englishAccent"
+            id="englishAccent"
+            value={selectedAccent}
+            onChange={handleAccent}
+            className="px-2 py-2 border-2 border-gray-200 my-2 rounded-md"
+          >
             <option value="None">None</option>
             <option value="british">British</option>
             <option value="american">American</option>
@@ -250,7 +283,7 @@ function TutorBasicDetails() {
             <option value="newzealand">New Zealand</option>
             <option value="singaporean">Singaporean</option>
             <option value="caribbean">Caribbean</option>
-        </select>
+          </select>
           <textarea
             className="w-full px-3 py-2 border mb-4 rounded-md focus:outline-none focus:border-blue-500 focus:border-2"
             placeholder="self introduction.  (self intro should atlest contain 100 words.) "
@@ -275,18 +308,18 @@ function TutorBasicDetails() {
               }}
             />
           </div>
-          {loading?
-          <button
-            className="bg-sky-400 p-2 rounded-md hover:bg-sky-900 text-white font-medium hover:scale-110 duration-500 mb-96"
-            type="submit"
-          >
-            Submiting..
-          </button>
-          :<button
-          className="bg-sky-800 p-2 rounded-md hover:bg-sky-900 text-white font-medium duration-500 mb-96"
-        >
-          Submit
-        </button>}
+          {loading ? (
+            <button
+              className="bg-sky-400 p-2 rounded-md hover:bg-sky-900 text-white font-medium hover:scale-110 duration-500 mb-96"
+              type="submit"
+            >
+              Submiting..
+            </button>
+          ) : (
+            <button className="bg-sky-800 p-2 rounded-md hover:bg-sky-900 text-white font-medium duration-500 mb-96">
+              Submit
+            </button>
+          )}
         </div>
       </form>
     </div>

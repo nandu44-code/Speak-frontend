@@ -12,7 +12,7 @@ function TutorCheklistPage() {
           Fill Up Your Details
         </h5>
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row overflow-hidden">
         <TutorSignupsidebar />
         <TutorBasicDetails />
       </div>
