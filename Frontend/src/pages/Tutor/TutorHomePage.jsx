@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import TutorSidebar from "../../components/tutor/TutorSidebar";
 import api from "../../services/Axios";
+import { jwtDecode } from "jwt-decode";
 
 function TutorHomePage() {
   const [loading, setLoading] = useState(false);
   const [pending, setPending] = useState("");
   const [confirmed, setConfirmed] = useState("");
   const [completed, setCompleted] = useState("");
+  const [slotscount, setSlotscount] = useState("")
   useEffect(() => {
     const fetch_bookings_count = async () => {
       setLoading(true);
@@ -21,7 +23,28 @@ function TutorHomePage() {
       }
     };
 
+    const fetch_slots_count = async () => {
+      try{
+
+        const token = localStorage.getItem('accessToken')
+        const access = jwtDecode(token)
+
+        if (!access.is_tutor) {
+          console.error("User is not a tutor");
+          return;
+        }
+        const tutor = access.user;
+
+        const response = await api.get(`/slot/slots-count/${tutor}/`);
+        console.log(response, 'response_slots_count')
+        setSlotscount(response.data.slots_count)
+      }catch (error) {
+          console.log(error,'error is this ')
+      }
+    }
+
     fetch_bookings_count();
+    fetch_slots_count();
     setLoading(false);
   }, []);
 
