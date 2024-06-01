@@ -9,6 +9,9 @@ function AdminHomePage() {
   const [users,setUsers] = useState('')
   const [tutors,setTutors] = useState('')
   const [students,setStudents] = useState('')
+  const [pending,setPending] = useState('')
+  const [confirmed,setConfirmed] = useState('')
+  const [completed,setCompleted] = useState('')
   const [loading,setLoading] = useState(false)
   useEffect(() => {
     const fetchUsersCount = async () => {
@@ -24,7 +27,20 @@ function AdminHomePage() {
       }
     };
 
-    fetchUsersCount();
+    const fetch_bookings_count = async () => {
+      setLoading(true)
+      try {
+        const response = await api.get('/bookings-count/');
+        console.log(response, 'users');
+        setPending(response.data.pending_bookings)
+        setConfirmed(response.data.confirmed_bookings)
+        setCompleted(response.data.completed_bookings)
+      } catch (error) {
+        console.error('Error fetching user count:', error);
+      }
+    };
+
+    fetch_bookings_count();
     setLoading(false)
   }, []);
 
@@ -58,7 +74,7 @@ function AdminHomePage() {
                 datasets: [
                   {
                     label: "Booking",
-                    data: [200, 300, 500],
+                    data: [{pending}, {confirmed}, {completed}],
                     backgroundColor: ["rgba(79, 12, 200,0.6)"],
                     borderColor: ["rgba(75, 192, 192, 1)"],
                     borderWidth: 2,
