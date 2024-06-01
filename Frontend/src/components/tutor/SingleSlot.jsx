@@ -65,6 +65,11 @@ const handleWalletBooking = async () => {
       }
     } catch (error) {
       console.error("Error fetching user wallet:", error);
+      Swal.fire(
+        "Sorry",
+        "Currently you don't have a wallet instance",
+        "error"
+      )
       // Handle error while fetching user wallet
     }
   };

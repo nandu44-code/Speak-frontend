@@ -23,14 +23,7 @@ function ViewSlotPage() {
     setSelectedDate(e.target.value);
   };
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("accessToken");
-  //   const access = jwtDecode(token);
-
-  //   if (access.is_tutor) {
-  //     setUser(access.user);
-  //   }
-  // }, []);
+  
 
   useEffect(() => {
     console.log(slots);
@@ -40,10 +33,10 @@ function ViewSlotPage() {
     const fetch_slots = async () =>{
       const token = localStorage.getItem("accessToken");
       const access = jwtDecode(token);
-      let user = ''; // Define user variable outside of the if block
+      let user = ''; 
     
       if (access.is_tutor) {
-        user = access.user; // Assign value to user variable
+        user = access.user; 
       }
     
       try {

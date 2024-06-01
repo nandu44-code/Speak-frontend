@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../../services/Axios";
 import Navbar from "../../components/Navbar";
+import SingleSlot from "../../components/tutor/SingleSlot";
 import { GiTeacher } from "react-icons/gi";
 import { FaUser } from "react-icons/fa";
 import { FcAbout } from "react-icons/fc";
@@ -24,7 +25,7 @@ function TutorSideDetailsPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("aneesh", id);
+    
       const request = await api.get(
         `slot/slots/filter/?selected_date=${selectedDate}&created_by=${id}`
       );
