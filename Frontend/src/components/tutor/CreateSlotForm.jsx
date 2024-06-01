@@ -90,6 +90,13 @@ function CreateSlotForm() {
       await api.post("slot/slots/", formData);
       toast.success("Slot created successfully");
       console.log("Slot created successfully");
+      setFormData({
+        created_by: "",
+        start_date: "",
+        end_date: "",
+        start_time: "",
+        end_time: "",
+      })
     } catch (error) {
       console.error("Error creating slot:", error);
       toast.error("Error creating slot");
