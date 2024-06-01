@@ -5,8 +5,18 @@ import { jwtDecode } from "jwt-decode";
 import SingleSlot from "../../components/tutor/SingleSlot";
 import { toast } from "react-toastify";
 
+const getFormattedDate = () => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // Add 1 because months are 0-based
+  const day = String(today.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 function ViewSlotPage() {
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(getFormattedDate());
+
+  
   // const [user, setUser] = useState("");
   const [slots, setSlots] = useState([]);
   const handleChange = (e) => {
@@ -25,6 +35,33 @@ function ViewSlotPage() {
   useEffect(() => {
     console.log(slots);
   }, [slots]);
+
+  useEffect(() => {
+    const fetch_slots = async () =>{
+      const token = localStorage.getItem("accessToken");
+      const access = jwtDecode(token);
+      let user = ''; // Define user variable outside of the if block
+    
+      if (access.is_tutor) {
+        user = access.user; // Assign value to user variable
+      }
+    
+      try {
+        const request = await api.get(
+          `slot/slots/filter/?selected_date=${selectedDate}&created_by=${user}`
+        );
+        console.log(request.data);
+        const response = request.data.results;
+        setSlots(response);
+        // console.log(slots)
+      } catch (error) {
+        console.error("Error searching slots:", error);
+        toast.error("Error searching slots");
+      }
+    }
+
+    fetch_slots();
+  },[])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
