@@ -113,10 +113,9 @@ function AdminRequestsPage() {
 
  return (
     <div className="flex-row">
-      {/* <Navbar /> */}
       <div className="flex">
         <Sidebar />
-        <div className="flex flex-col mt-10 ml-96">
+        <div className="flex flex-col mt-10 w-full justify-center items-center">
           <p className="font-medium text-stone-700 text-2xl mb-20">Requests</p>
           {pendingRequests.length === 0 ? (
             <p className="text-red-500">No Pending Requests</p>
