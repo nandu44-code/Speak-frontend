@@ -17,7 +17,7 @@ function AdminHomePage() {
     const fetchUsersCount = async () => {
       setLoading(true)
       try {
-        const response = await api.get('/user-count/');
+        const response = await api.get('user-count/');
         console.log(response, 'users');
         setUsers(response.data.total_users)
         setStudents(response.data.total_students)
@@ -41,6 +41,7 @@ function AdminHomePage() {
     };
 
     fetch_bookings_count();
+    fetchUsersCount();
     setLoading(false)
   }, []);
 

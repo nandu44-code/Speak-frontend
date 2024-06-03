@@ -27,6 +27,7 @@ function TutorBasicDetails() {
   const [selfIntroVideo, setSelfIntroVideo] = useState(null);
   const [certificates, setCertificates] = useState(null);
   const [selectedPreferences, setSelectedPreferences] = useState([]);
+  const [demo,setDemo] = useState('')
 
 
   const preferencesList = [
@@ -112,6 +113,10 @@ function TutorBasicDetails() {
   }, []);
 
   useEffect(() => {
+    dispatch(getTutorProfile(access.user));
+  }, [demo]);
+
+  useEffect(() => {
     if (profileImage !== null) {
       console.log("profile image selcted successfully");
       uploadImage();
@@ -137,6 +142,7 @@ function TutorBasicDetails() {
             updateImage(url); // Pass the URL to updateImage function
             toast.success("Image uploaded successfully");
             console.log("firebase uploaded url", url);
+            setDemo(true)
             // getMyProfile(access.user)
           })
           .catch((error) => {
@@ -236,18 +242,6 @@ function TutorBasicDetails() {
             onChange={(e) => setState(e.target.value)}
           />
 
-          {/* <label htmlFor="fileInput" className="block mt-10 mb-10 text-indigo-500 cursor-pointer">
-           Upload your self introduction 
-          </label>
-          <input
-            type="file"
-            id="fileInput"
-            className="hidden"
-            placeholder="your self introduction video"
-            onChange={(e) => {
-              setSelfIntroVideo(e.target.files[0]);
-            }}
-          /> */}
           <div className="preferences-container">
             <h2 className="text-lg mb-4">Select Student Preferences</h2>
             <div className="tabs flex flex-wrap">
