@@ -28,7 +28,7 @@ const Sidebar = () => {
   return (
     <>
     {isOpen ? (
-      <div className="w-2/5">
+      <div className="w-1/5">
         <aside
           id="default-sidebar"
           className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"

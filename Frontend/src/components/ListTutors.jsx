@@ -88,10 +88,10 @@ function ListTutors() {
     }
   };
   return (
-    <div>
+    <div className="w-full flex flex-col justify-center items-center">
       <div className="mt-20">
         <h1 className="text-2xl font-medium text-red-400 mb-10">Tutors</h1>
-        <div className="overflow-x-auto flex flex-col justify-items-center">
+        <div className="overflow-x-auto ">
           <div>
             <input
               type="search"
@@ -99,65 +99,64 @@ function ListTutors() {
               className="rounded-full 2xl:w-96 w-56 placeholder-indigo-950 placeholder:font-bold px-4 py-2 mb-5 focus:bg-white bg-stone-200"
               onChange={searchUsers}
               value={searchTerm}
-              />
+            />
           </div>
           <div>
-          <table className="table-auto border-collapse hover:table-fixed bg-gray-600 rounded-md">
-            <thead>
-              <tr className="bg-gray-300 divide-x-2">
-                <th className="px-20 py-5 text-gray-600">SI.NO</th>
-                <th className="px-20 py-5 text-gray-600">Name</th>
-                <th className="px-20 py-5 text-gray-600">Email</th>
-                <th className="px-20 py-5 text-gray-600">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user, index) => (
-                <tr key={index} className="hover:bg-gray-700 cursor-pointer">
-                  <td className="border border-gray-100 px-4 py-2 text-white">
-                    {si_no++}
-                  </td>
-                  <td className="border border-gray-100 px-4 py-2 text-white">
-                    {user.username}
-                  </td>
-                  <td className="border border-gray-100 px-4 py-2 text-white">
-                    {user.email}
-                  </td>
-                  <td className="border border-gray-100 px-4 py-2 text-white">
-                    {user.is_active ? (
-                      <button
-                        className="bg-red-700 p-2 m-2 font-bold rounded text-white"
-                        onClick={() =>
-                          blockOrUnblockUser(user.id, user.is_active)
-                        }
-                      >
-                        Block{" "}
-                      </button>
-                    ) : (
-                      <button
-                      className="bg-green-600 p-2 m-2 rounded text-white font-bold"
-                      onClick={() =>
-                        blockOrUnblockUser(user.id, user.is_active)
-                      }
-                      >
-                        UnBlock
-                      </button>
-                    )}
-                    <button
-                      className="bg-blue-900 p-2 m-2 rounded font-bold text-white hover:bg-blue-800"
-                      onClick={() => {
-                        setId(user.id);
-                      }}
-                      >
-                      View Details
-                    </button>
-                  </td>
+            <table className="table-auto border-collapse hover:table-fixed bg-gray-600 rounded-md">
+              <thead>
+                <tr className="bg-gray-300 divide-x-2">
+                  <th className="px-20 py-5 text-gray-600">SI.NO</th>
+                  <th className="px-20 py-5 text-gray-600">Name</th>
+                  <th className="px-20 py-5 text-gray-600">Email</th>
+                  <th className="px-20 py-5 text-gray-600">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-
-              </div>
+              </thead>
+              <tbody>
+                {users.map((user, index) => (
+                  <tr key={index} className="hover:bg-gray-700 cursor-pointer">
+                    <td className="border border-gray-100 px-4 py-2 text-white">
+                      {si_no++}
+                    </td>
+                    <td className="border border-gray-100 px-4 py-2 text-white">
+                      {user.username}
+                    </td>
+                    <td className="border border-gray-100 px-4 py-2 text-white">
+                      {user.email}
+                    </td>
+                    <td className="border border-gray-100 px-4 py-2 text-white">
+                      {user.is_active ? (
+                        <button
+                          className="bg-red-700 p-2 m-2 font-bold rounded text-white"
+                          onClick={() =>
+                            blockOrUnblockUser(user.id, user.is_active)
+                          }
+                        >
+                          Block{" "}
+                        </button>
+                      ) : (
+                        <button
+                          className="bg-green-600 p-2 m-2 rounded text-white font-bold"
+                          onClick={() =>
+                            blockOrUnblockUser(user.id, user.is_active)
+                          }
+                        >
+                          UnBlock
+                        </button>
+                      )}
+                      <button
+                        className="bg-blue-900 p-2 m-2 rounded font-bold text-white hover:bg-blue-800"
+                        onClick={() => {
+                          setId(user.id);
+                        }}
+                      >
+                        View Details
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <div className="mt-10">
