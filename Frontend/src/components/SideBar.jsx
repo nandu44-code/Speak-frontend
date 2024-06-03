@@ -26,8 +26,9 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-2/5">
-      {isOpen ? (
+    <>
+    {isOpen ? (
+      <div className="w-2/5">
         <aside
           id="default-sidebar"
           className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
@@ -117,8 +118,9 @@ const Sidebar = () => {
             </ul>
           </div>
         </aside>
+      </div>
       ) : (
-        <div className="flex justify-start">
+        <div className="flex justify-start items-start w-fit">
           <button className="bg-white text-black mt-10" onClick={toggleSidebar}>
             <MdOutlineLegendToggle
               size={40}
@@ -128,7 +130,7 @@ const Sidebar = () => {
           </button>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
