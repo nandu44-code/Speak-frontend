@@ -1,79 +1,134 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { BsHouseDoor, BsPeople } from 'react-icons/bs';
-import { IoMdSchool } from 'react-icons/io';
-import { HiOutlineDocumentReport, HiOutlineClipboardList } from 'react-icons/hi';
-import { clearUser } from '../features/userSlice';
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { BsHouseDoor, BsPeople } from "react-icons/bs";
+import { IoMdSchool } from "react-icons/io";
+import {
+  HiOutlineDocumentReport,
+  HiOutlineClipboardList,
+} from "react-icons/hi";
+import { MdOutlineLegendToggle } from "react-icons/md";
+import { clearUser } from "../features/userSlice";
 import { RiLogoutBoxLine } from "react-icons/ri";
 
-
-
 const Sidebar = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
-    dispatch((clearUser()))
+    dispatch(clearUser());
     navigate("/login");
   };
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <nav className={`bg-stone-300 shadow-2xl text-gray-800 font-bold h-screen w-1/5 p-4 ${isOpen ? 'md:block' : 'hidden md:block'}`}>
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold">Welcome Admin</h2>
-      </div>
-      <ul className='flex-col'>
-        <li className="hover:scale-110 mb-4 flex items-start ml-5">
-          <Link to="/admin" className="block py-2" onClick={toggleSidebar}>
-            <BsHouseDoor size={25} className="inline mr-2 hover:text-blue-800" />
-            Dashboard
-          </Link>
-        </li>
-        <li className="hover:scale-110 mb-4 flex items-start ml-5">
-          <Link to="/admin/users/" className="block py-2" onClick={''}>
-            <BsPeople size={30} className="inline mr-2 hover:text-blue-800" />
-            Users
-          </Link>
-        </li>
-        <li className="hover:scale-110 mb-4 flex items-start ml-5">
-          <Link to="/admin/tutors" className="block py-2 " onClick={toggleSidebar}>
-            <IoMdSchool size={30} className="inline mr-2 hover:text-blue-800" />
-            Tutors
-          </Link>
-        </li>
-        <li className="hover:scale-110 mb-4 flex items-start ml-5">
-          <Link to="/admin/bookings" className="block py-2" onClick={toggleSidebar}>
-            <IoMdSchool size={30} className="inline mr-2 hover:text-blue-800" />
-            Bookings
-          </Link>
-        </li>
-        <li className="hover:scale-110 mb-4 flex items-start ml-5">
-          <Link to="/admin/requests/" className="block py-2" onClick={toggleSidebar}>
-            <HiOutlineDocumentReport size={30} className="inline mr-2 hover:text-blue-800" />
-            Requests
-          </Link>
-        </li>
-        <li className="hover:scale-110 mb-4 flex items-start ml-5">
-          <Link to="/reports" className="block py-2" onClick={toggleSidebar}>
-            <HiOutlineClipboardList size={30} className="inline mr-2 hover:text-blue-800" />
-            Reports
-          </Link>
-        </li>
-        <li className="hover:scale-110 mb-4 cursor-pointer flex items-start ml-5" onClick={handleLogout}>
-          <p className="block py-2" >
-            <RiLogoutBoxLine size={30} className="inline mr-2 hover:text-blue-800" />
-            logout
-          </p>
-        </li>
-
-      </ul>
-    </nav>
+    <div className="w-2/5">
+      {isOpen ? (
+        <aside
+          id="default-sidebar"
+          className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+          aria-label="Sidebar"
+        >
+          <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+            <div className="flex justify-end ">
+              <p
+                className="text-white hover:bg-gray-200 hover:text-black font-bold text-xl p-2 rounded-full cursor-pointer"
+                onClick={toggleSidebar}
+              >
+                X
+              </p>
+            </div>
+            <div className="text-2xl  text-indigo-600 font-bold my-10">
+              Welcome {}
+            </div>
+            <ul className="space-y-6 font-medium">
+              <li>
+                <Link
+                  to="/admin/"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-stone-500 group bg-gray-700"
+                >
+                  <BsHouseDoor
+                    size={30}
+                    className="inline mr-2 ml-4 hover:text-blue-800"
+                  />
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/users/"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-stone-500 group   bg-gray-700"
+                >
+                  <BsPeople
+                    size={30}
+                    className="inline mr-2 ml-4 hover:text-blue-800"
+                  />
+                  Users
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/tutors/"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-stone-500 group  bg-gray-700"
+                >
+                  <IoMdSchool
+                    size={30}
+                    className="inline mr-2 ml-4 hover:text-blue-800"
+                  />
+                  Tutors
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/requests/"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-stone-500 group  bg-gray-700"
+                >
+                  <HiOutlineDocumentReport
+                    size={30}
+                    className="inline mr-2 ml-4 hover:text-blue-800"
+                  />
+                  Requests
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/bookings/"
+                  className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-stone-500 group  bg-gray-700"
+                >
+                  <HiOutlineClipboardList
+                    size={30}
+                    className="inline mr-2 ml-4 hover:text-blue-800"
+                  />
+                  View bookings
+                </Link>
+              </li>
+              <li>
+                <button
+                  className="flex items-center justify-center w-full my-20 p-3 text-gray-900 bg-red-500 rounded-lg dark:text-white hover:bg-red-600"
+                  onClick={handleLogout}
+                >
+                  Log out
+                </button>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      ) : (
+        <div className="flex justify-start">
+          <button className="bg-white text-black mt-10" onClick={toggleSidebar}>
+            <MdOutlineLegendToggle
+              size={40}
+              color="white"
+              className="bg-indigo-700"
+            />
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 
