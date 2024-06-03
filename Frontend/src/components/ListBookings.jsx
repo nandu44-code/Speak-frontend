@@ -30,7 +30,7 @@ function ListBookings() {
 
 
   return (
-    <div className="ml-56 mt-20">
+    <div className="flex flex-col justify-center items-center mt-20 w-full">
       <h1 className="text-2xl font-medium text-red-700 mb-10">Bookings</h1>
       <div className="overflow-x-auto">
         <table className="table-auto border-collapse hover:table-fixed bg-gray-600 rounded-md">
