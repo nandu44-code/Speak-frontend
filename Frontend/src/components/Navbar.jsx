@@ -9,11 +9,10 @@ function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // const is_authenticated = useSelector((state) => state.user.is_authenticated);
-  const [is_authenticated,setIs_authenticated] = useState(false)
+  const [is_authenticated, setIs_authenticated] = useState(false);
   const [is_tutor, setIs_tutor] = useState(false);
-  const [is_rejected, setIs_rejected] = useState(false)
-  const [is_student,setIs_student] = useState(false)
-  
+  const [is_rejected, setIs_rejected] = useState(false);
+  const [is_student, setIs_student] = useState(false);
 
   const handleClickSignUp = () => {
     navigate("/register/");
@@ -37,12 +36,12 @@ function Navbar() {
     if (token) {
       const decodedToken = jwtDecode(token);
       const is_tutor = decodedToken.is_tutor;
-      const is_rejected = decodedToken.is_rejected
-      const is_student = decodedToken.is_student
-      setIs_authenticated(true)
+      const is_rejected = decodedToken.is_rejected;
+      const is_student = decodedToken.is_student;
+      setIs_authenticated(true);
       setIs_tutor(is_tutor);
-      setIs_rejected(is_rejected)
-      setIs_student(is_student)
+      setIs_rejected(is_rejected);
+      setIs_student(is_student);
     }
   }, []);
 
@@ -59,47 +58,53 @@ function Navbar() {
           </Link>
         </div>
 
-        {is_student? 
-        <div className="flex">
-          <div className="hidden md:flex space-x-10  mx-6">
-           
-            <Link
-              to="/"
-              className="text-purple-950 font-bold text-lg hover:scale-110  hover:text-indigo-900 duration-500"
-            >
-              Home
-            </Link>
+        {is_student ? (
+          <div className="flex">
+            <div className="hidden md:flex space-x-10  mx-6">
+              <Link
+                to="/"
+                className="text-purple-950 font-bold text-lg hover:scale-110  hover:text-indigo-900 duration-500"
+              >
+                Home
+              </Link>
+            </div>
+            <div className="hidden md:flex space-x-10  mx-6">
+              <Link
+                to="/student/findTutors/"
+                className="text-purple-950 font-bold text-lg hover:scale-110  hover:text-indigo-900 duration-500"
+              >
+                Find Tutor
+              </Link>
+            </div>
+            <div className="hidden md:flex space-x-10  mx-6">
+              <Link
+                to="/chat/"
+                className="text-purple-950 font-bold text-lg hover:scale-110  hover:text-indigo-900 duration-500"
+              >
+                Chats
+              </Link>
+            </div>
           </div>
-          <div className="hidden md:flex space-x-10  mx-6">
-        <Link
-              to="/student/findTutors/"
-              className="text-purple-950 font-bold text-lg hover:scale-110  hover:text-indigo-900 duration-500"
-            >
-              Find Tutor
-            </Link>
-            
-           
-          </div>
-        </div>
-        :
-            null}
+        ) : null}
 
-        {is_authenticated  ? (
+        {is_authenticated ? (
           <>
             {is_tutor ? (
-              is_rejected?(<Link to="/tutor/rejected">
-              <FaUser
-                size={24}
-                className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
-              />
-            </Link>):(
-              <Link to="/tutor/checklist">
-              <FaUser
-                size={24}
-                className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
-              />
-            </Link>)
-              
+              is_rejected ? (
+                <Link to="/tutor/rejected">
+                  <FaUser
+                    size={24}
+                    className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
+                  />
+                </Link>
+              ) : (
+                <Link to="/tutor/checklist">
+                  <FaUser
+                    size={24}
+                    className="cursor-pointer text-purple-950  hover:scale-110  hover:text-indigo-900 duration-500"
+                  />
+                </Link>
+              )
             ) : (
               <Link to="/student/profile/">
                 <FaUser
