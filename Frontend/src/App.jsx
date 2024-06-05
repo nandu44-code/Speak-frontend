@@ -41,6 +41,7 @@ import TutorProfile from './components/tutor/TutorProfile';
 import { Wallet } from 'lucide-react';
 
 import Room from './pages/Common/Room';
+import ChatPage from './pages/Common/ChatPage';
 
 function App() {
   
@@ -84,6 +85,7 @@ function App() {
           <Route path='/admin/bookings' element={<AdminBookings/>}/>
 
           <Route path='/room/:roomID/' element={<Room/>} />
+          <Route path='/chat/' element={<ChatPage/>} />
           
         </Routes>
       </>
