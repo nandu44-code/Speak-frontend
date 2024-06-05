@@ -20,11 +20,11 @@ function ChatPage() {
   const [selectedUser, setSelectedUser] = useState(users[0]);
 
   return (
-    <div className="flex flex-col">
-      <div className="mb-20">
+    <div className="flex flex-col h-screen">
+      <div className="flex-none">
         <Navbar />
       </div>
-      <div className="flex">
+      <div className="flex flex-1">
         <UserList users={users} onSelectUser={setSelectedUser} />
         <ChatWindow
           selectedUser={selectedUser}
