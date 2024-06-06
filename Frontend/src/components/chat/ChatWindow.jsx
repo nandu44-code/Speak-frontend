@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect,useRef } from "react";
 
 const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
@@ -14,7 +14,7 @@ const formatTimestamp = (timestamp) => {
   
 const ChatWindow = ({ selectedUser, messages, onSendMessage }) => {
   const [message, setMessage] = useState("");
-
+  const messagesEndRef = useRef(null);
   const handleInputChange = (e) => {
     setMessage(e.target.value);
   };
@@ -25,6 +25,12 @@ const ChatWindow = ({ selectedUser, messages, onSendMessage }) => {
       setMessage("");   
     }
   };
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [selectedUser, messages]);
 
   return (
     <>
@@ -68,6 +74,7 @@ const ChatWindow = ({ selectedUser, messages, onSendMessage }) => {
               </div>
             ))}
           </div>
+          <div ref={messagesEndRef}/>
           <div className="p-4 bg-gray-300 rounded-md flex-none flex sticky bottom-1">
             <input
               type="text"
