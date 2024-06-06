@@ -9,22 +9,27 @@ const UserList = ({ users, onSelectUser }) => {
         placeholder="Search users"
       />
       <ul>
-        {users.map((user) => (
-          <li
-            key={user.id}
-            className="p-4 hover:bg-gray-200 cursor-pointer"
-            onClick={() => onSelectUser(user)}
-          >
-            <div className="flex gap-3">
-              <img
-                src="https://media.istockphoto.com/id/1486287149/photo/group-of-multiracial-asian-business-participants-casual-chat-after-successful-conference-event.jpg?s=1024x1024&w=is&k=20&c=3IFYpgorUA9326qw3vLib5M-4jEobA_ck3Wromjyyb0="
-                className="w-10 h-10 rounded-full"
-              />
-              <p className='mr-10 font-bold text-gray-700'>{user.name}</p>
-              <p className="font-thin text-sm">{user.last_message}</p>
-            </div>
-          </li>
-        ))}
+        {users.length === 0 ? (
+          <p>No users found</p>
+        ) : (
+          users.map((user) => (
+            <li
+              key={user.id}
+              className="p-4 hover:bg-gray-200 cursor-pointer"
+              onClick={() => onSelectUser(user)}
+            >
+              <div className="flex gap-3">
+                <img
+                  src={user.profile_image}
+                  className="w-10 h-10 rounded-full"
+                  alt={user.username}
+                />
+                <p className="mr-10 font-bold text-gray-700">{user.username}</p>
+                <p className="font-thin text-sm">{user.last_message}</p>
+              </div>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );

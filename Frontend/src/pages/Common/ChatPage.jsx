@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import UserList from "../../components/chat/Userlist";
+import React, { useEffect, useState } from "react";
+import UserList from "../../components/chat/UserList";
 import ChatWindow from "../../components/chat/ChatWindow";
 import Navbar from "../../components/Navbar";
+import jwtDecode from "jwt-decode";  // Remove curly braces around jwtDecode
+import api from "../../services/Axios";
 
 function ChatPage() {
-  const [users] = useState([
-    { id: 1, name: "Athiwh", last_message: "8/12/24" },
-    { id: 2, name: "Jaya krishnan", last_message: "6/2/24" },
-    // Add more users here
-  ]);
+  const [users, setUsers] = useState([]);  // Initialize as an empty array
+  const [selectedUser, setSelectedUser] = useState(null);  // Initialize as null
 
   const [messages] = useState([
     { from: 1, content: "Hello from User 1" },
@@ -17,7 +16,20 @@ function ChatPage() {
     // Add more messages here
   ]);
 
-  const [selectedUser, setSelectedUser] = useState(users[0]);
+  console.log(selectedUser, 'selectedUser');
+
+  const access = jwtDecode(localStorage.getItem('accessToken'));
+  const sender_id = access.user;
+
+  useEffect(() => {
+    const fetch_receivers = async () => {
+      const response = await api.get(`message/chat/receivers/${sender_id}/`);
+      console.log(response.data);
+      setUsers(response.data.results);
+    };
+
+    fetch_receivers();
+  }, [sender_id]);
 
   return (
     <div className="flex flex-col h-screen">
@@ -28,7 +40,7 @@ function ChatPage() {
         <UserList users={users} onSelectUser={setSelectedUser} />
         <ChatWindow
           selectedUser={selectedUser}
-          messages={messages.filter((msg) => msg.from === selectedUser.id)}
+          messages={selectedUser ? messages.filter((msg) => msg.from === selectedUser.id) : []}
         />
       </div>
     </div>
