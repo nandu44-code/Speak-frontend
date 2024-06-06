@@ -2,10 +2,10 @@ import React from "react";
 
 const UserList = ({ users, onSelectUser }) => {
   return (
-    <div className="w-1/4 border-r border-gray-300 h-screen overflow-y-auto pt-20">
+    <div className="w-1/4 bg-shadow-lg shadow-black h-screen overflow-y-auto pt-20 sticky top-0 mr-2">
       <input
         type="search"
-        className="m-10 p-5 bg-gray-200 font-semibold text-black rounded-md"
+        className=" flex m-10 p-5 bg-gray-200 font-semibold text-black rounded-md"
         placeholder="Search users"
       />
       <ul>

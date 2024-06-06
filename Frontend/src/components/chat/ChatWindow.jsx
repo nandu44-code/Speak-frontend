@@ -1,5 +1,17 @@
 import React, { useState } from "react";
 
+const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    return date.toLocaleString(undefined, options);
+  };
+  
 const ChatWindow = ({ selectedUser, messages, onSendMessage }) => {
   const [message, setMessage] = useState("");
 
@@ -17,14 +29,15 @@ const ChatWindow = ({ selectedUser, messages, onSendMessage }) => {
   return (
     <>
       {!selectedUser ? (
-        <div className="flex justify-center items-center w-full">
-          <p className="font-normal text-gray-100 bg-stone-400 px-4 py-2">
-            Choose someone to have a chat with
+        <div className="flex justify-center items-center w-full h-screen ">
+          <p className="font-semibold text-gray-800 px-4 py-2 w-96 bg-gray-100 rounded-full">
+            Choose someone to have a chat with and send and receive messages and connect with your favourite tutors around the world on your palm
           </p>
+          <img src=""/>
         </div>
       ) : (
         <div className="w-3/4 h-full flex flex-col pt-28 px-5">
-          <div className="bg-gray-300 rounded-sm flex">
+          <div className="bg-gray-300 rounded-md flex sticky top-28 ">
             <img
               src={selectedUser.profile_image || ""}
               className="h-12 w-12 my-4 mx-2 rounded-full"
@@ -42,28 +55,29 @@ const ChatWindow = ({ selectedUser, messages, onSendMessage }) => {
                   message.sender === selectedUser.id ? "text-left" : "text-right"
                 }`}
               >
-                <div
-                  className={`inline-block p-2 rounded-lg ${
+                <p
+                  className={`inline-block p-2 rounded-lg max-w-xs break-words ${
                     message.sender === selectedUser.id
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-300"
+                      ? "bg-blue-400 text-white"
+                      : "bg-lime-200 text-gray-800 font-normal"
                   }`}
                 >
                   {message.content}
-                </div>
+                </p>
+                <p className="font-extralight text-sm">{formatTimestamp(message.timestamp)}</p>
               </div>
             ))}
           </div>
-          <div className="p-4 border-t border-gray-300 flex-none flex">
+          <div className="p-4 bg-gray-300 rounded-md flex-none flex sticky bottom-1">
             <input
               type="text"
-              className="w-full p-2 border rounded-lg"
+              className="w-full p-2 border rounded-lg "
               placeholder="Type a message..."
               value={message}
               onChange={handleInputChange}
             />
             <button
-              className="ml-2 p-2 bg-blue-500 text-white rounded-lg"
+              className="ml-2 p-2 bg-indigo-800 text-white rounded-lg"
               onClick={handleSendMessage}
             >
               Send

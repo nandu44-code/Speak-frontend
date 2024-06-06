@@ -89,7 +89,7 @@ function ChatPage() {
         <Navbar />
       </div>
       <div className="flex flex-1">
-        <UserList users={users} onSelectUser={handleUserSelect} />
+        <UserList users={users} onSelectUser={handleUserSelect}/>
         <div className="flex flex-col flex-1">
           <ChatWindow
             selectedUser={selectedUser}
