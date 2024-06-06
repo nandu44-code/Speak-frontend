@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import UserList from "../../components/chat/UserList";
+import UserList from "../../components/chat/Userlist";
 import ChatWindow from "../../components/chat/ChatWindow";
 import Navbar from "../../components/Navbar";
 import jwtDecode from "jwt-decode";  // Remove curly braces around jwtDecode
