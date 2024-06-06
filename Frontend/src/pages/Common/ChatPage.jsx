@@ -47,8 +47,9 @@ function ChatPage() {
 
   const fetchMessages = async (receiver_id) => {
     const response = await api.get(`message/chat/messages/${sender_id}/${receiver_id}/`);
-    setMessages(response.data.results);
-    console.log(response.data.results,'this is the messages')
+    setMessages(response.data);
+    console.log(response.data,'this is the messages')
+    console.log(response.data,'this is the messages data')
   };
 
 

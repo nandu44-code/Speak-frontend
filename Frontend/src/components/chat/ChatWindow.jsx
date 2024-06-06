@@ -23,10 +23,10 @@ const ChatWindow = ({ selectedUser, messages }) => {
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`p-2 my-2 ${message.from === selectedUser.id ? "text-right" : "text-left"}`}
+                className={`p-2 my-2 ${message.sender === selectedUser.id ? "text-left" : "text-right"}`}
               >
                 <div
-                  className={`inline-block p-2 rounded-lg ${message.from === selectedUser.id ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+                  className={`inline-block p-2 rounded-lg ${message.sender === selectedUser.id ? "bg-blue-500 text-white" : "bg-gray-300"}`}
                 >
                   {message.content}
                 </div>
