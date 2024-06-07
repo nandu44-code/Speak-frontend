@@ -58,36 +58,39 @@ function App() {
           <Route path='/login/' element={<LoginPage/>} />
           <Route path='/otp/' element={<OtpPgae/>}/>
           
+  {/* Student Routes */}
+        <Route path="/student/home/" element={<UserProtectedRoute requiredRole="student"><StudentHomePage/></UserProtectedRoute>} />
+        <Route path="/student/profile/" element={<UserProtectedRoute requiredRole="student"><StudentProfile/></UserProtectedRoute>} />
+        <Route path="/student/changePassword/" element={<UserProtectedRoute requiredRole="student"><ChangePassPage/></UserProtectedRoute>} />
+        <Route path="/student/findTutors/" element={<UserProtectedRoute requiredRole="student"><FindTutorsPage/></UserProtectedRoute>} />
+        <Route path="/student/TutorDetails/:id" element={<UserProtectedRoute requiredRole="student"><TutorSideDetailsPage/></UserProtectedRoute>} />
+        <Route path="/student/paymentSuccess/" element={<UserProtectedRoute requiredRole="student"><PaymentSuccessPage/></UserProtectedRoute>} />
+        <Route path="/student/viewBookings/" element={<UserProtectedRoute requiredRole="student"><ViewBookingsStudent/></UserProtectedRoute>} />
+        <Route path="/student/wallet/" element={<UserProtectedRoute requiredRole="student"><WalletPage/></UserProtectedRoute>} />
+        
+        {/* Tutor Routes */}
+        <Route path="/tutor/home/" element={<UserProtectedRoute requiredRole="tutor"><TutorHomePage/></UserProtectedRoute>} />
+        <Route path="/tutor/checklist/" element={<UserProtectedRoute requiredRole="tutor"><TutorCheklistPage/></UserProtectedRoute>} />
+        <Route path="/tutor/checklist/processing" element={<UserProtectedRoute requiredRole="tutor"><TutorProcessingPage/></UserProtectedRoute>} />
+        <Route path="/tutor/rejected/" element={<UserProtectedRoute requiredRole="tutor"><RejectedPage/></UserProtectedRoute>} />
+        <Route path="/tutor/createslot/" element={<UserProtectedRoute requiredRole="tutor"><CreateSlotPage/></UserProtectedRoute>} />
+        <Route path="/tutor/viewslot/" element={<UserProtectedRoute requiredRole="tutor"><ViewSlotPage/></UserProtectedRoute>} />
+        <Route path="/tutor/viewbookings/" element={<UserProtectedRoute requiredRole="tutor"><ViewBookingsPage/></UserProtectedRoute>} />
+        <Route path="/tutor/profile/" element={<UserProtectedRoute requiredRole="tutor"><TutorProfile/></UserProtectedRoute>} />
+        <Route path="/tutor/chat/" element={<UserProtectedRoute requiredRole="tutor"><TutorChatPage/></UserProtectedRoute>} />
 
-          <Route path='/student/home/' element={<UserProtectedRoute ><StudentHomePage/>  </UserProtectedRoute> }/>
-          <Route path='/student/profile/' element={<UserProtectedRoute><StudentProfile/></UserProtectedRoute>}/> 
-          <Route path='/student/changePassword/' element={<ChangePassPage/>}/> 
-          <Route path='/student/findTutors/' element={<FindTutorsPage/>}/>
-          <Route path='/student/TutorDetails/:id' element={<TutorSideDetailsPage/>}/>
-          <Route path='/student/paymentSuccess/' element={<PaymentSuccessPage/>}/>
-          <Route path='/student/viewBookings/' element={<ViewBookingsStudent/>}/>
-          <Route path='/student/wallet/' element={<WalletPage/>}/>
+        {/* Admin Routes */}
+        <Route path='/admin/users' element={<UserProtectedRoute requiredRole="admin"><AdminUsersPage/></UserProtectedRoute>}/>
+        <Route path='/admin/tutors' element={<UserProtectedRoute requiredRole="admin"><AdminTutorsPage/></UserProtectedRoute>}/>
+        <Route path='/admin/' element={<UserProtectedRoute requiredRole="admin"><AdminHomePage/></UserProtectedRoute>}/>
+        <Route path='/admin/requests' element={<UserProtectedRoute requiredRole="admin"><AdminRequestsPage/></UserProtectedRoute>}/>
+        <Route path='/admin/requests/detail/:id' element={<UserProtectedRoute requiredRole="admin"><RequestDetailsPage/></UserProtectedRoute>}/>
+        <Route path='/admin/tutors/detail/:id' element={<UserProtectedRoute requiredRole="admin"><TutorDetailsPage/></UserProtectedRoute>}/>
+        <Route path='/admin/bookings' element={<UserProtectedRoute requiredRole="admin"><AdminBookings/></UserProtectedRoute>}/>
 
-          <Route path='/tutor/home/' element={<TutorHomePage/>}/>
-          <Route path='/tutor/checklist/' element={<TutorCheklistPage/>}/>
-          <Route path='/tutor/checklist/processing' element={<TutorProcessingPage/>}/>
-          <Route path='tutor/rejected/' element={<RejectedPage/>}/>
-          <Route path='tutor/createslot/' element={<CreateSlotPage/>}/>
-          <Route path='tutor/viewslot/' element={<ViewSlotPage/>}/>
-          <Route path='tutor/viewbookings/' element={<ViewBookingsPage/>}/>
-          <Route path='tutor/profile/' element={<TutorProfile/>}/>
-          <Route path='/tutor/chat/' element={<TutorChatPage/>}/>
-
-          <Route path='/admin/users' element={<AdminUsersPage/>}/>
-          <Route path='/admin/tutors' element={<AdminTutorsPage/>}/>
-          <Route path='/admin/' element={<AdminHomePage/>}/>
-          <Route path='/admin/requests' element={<AdminRequestsPage/>}/>
-          <Route path='/admin/requests/detail/:id' element={<RequestDetailsPage/>}/>
-          <Route path='/admin/tutors/detail/:id' element={<TutorDetailsPage/>}/>
-          <Route path='/admin/bookings' element={<AdminBookings/>}/>
-
-          <Route path='/room/:roomID/' element={<Room/>} />
-          <Route path='/chat/' element={<ChatPage/>} />
+        {/* common routes for user and tutor*/}
+        <Route path='/room/:roomID/' element={<Room/>} />
+        <Route path='/chat/' element={<UserProtectedRoute><ChatPage/></UserProtectedRoute>} />
           
         </Routes>
       </>
