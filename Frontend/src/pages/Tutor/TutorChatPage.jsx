@@ -6,8 +6,7 @@ function TutorChatPage() {
     <div className='flex h-screen'>
         <TutorSidebar/>
         <div className='flex-1'>
-
-        <ChatPage/>
+            <ChatPage/>
         </div>
     </div>
   )
