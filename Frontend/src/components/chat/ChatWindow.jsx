@@ -64,8 +64,8 @@ const ChatWindow = ({ selectedUser, messages, onSendMessage }) => {
                 <p
                   className={`inline-block p-2 rounded-lg max-w-xs break-words ${
                     message.sender === selectedUser.id
-                      ? "bg-blue-400 text-white"
-                      : "bg-lime-200 text-gray-800 font-normal"
+                      ? "bg-blue-600 text-white"
+                      : "bg-indigo-800 text-white font-normal"
                   }`}
                 >
                   {message.content}

@@ -10,7 +10,6 @@ function FindTutorsPage() {
   const [id, setId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
-  const [option, setOption] = useState("None");
   const [studentPreference, setStudentPreference] = useState("");
   const [englishAccent, setEnglishAccent] = useState("None");
 
@@ -45,7 +44,8 @@ function FindTutorsPage() {
         } else if (searchTerm.trim() !== "") {
           const response = await api.get(`tutor-search/?search=${searchTerm}`);
           setTutors(response.data.results);
-        } else {
+        }
+         else {
           const response = await api.get("tutors/");
           setTutors(response.data);
         }
@@ -93,9 +93,9 @@ function FindTutorsPage() {
         Search
       </button>
       <div className="w-full">
-        <label className="font-bold text-lg text-indigo-800 px-4">Filter by:</label>
+        <label className="font-semibold text-lg text-indigo-900 px-4">Filter by:</label>
         <select name="englishAccent" id="englishAccent" value={englishAccent} onChange={handleFilter} className="px-2 py-2 border-2 border-indigo-800 my-2 mx-2 rounded-md">
-          <option value="None">None</option>
+          <option value="None">Accent</option>
           <option value="british">British</option>
           <option value="american">American</option>
           <option value="australian">Australian</option>
@@ -107,14 +107,14 @@ function FindTutorsPage() {
           <option value="singaporean">Singaporean</option>
           <option value="caribbean">Caribbean</option>
         </select>
-        <select name="studentPreference" id="studentPreference" value={studentPreference} onChange={(e) => setStudentPreference(e.target.value)} className="px-2 py-2 border-2 border-indigo-800 my-2 rounded-md">
+        {/* <select name="studentPreference" id="studentPreference" value={studentPreference} onChange={(e) => setStudentPreference(e.target.value)} className="px-2 py-2 border-2 border-indigo-800 my-2 rounded-md">
           <option value="None">Student preferences</option>
           <option value="no_proficiency">No proficiency</option>
           <option value="low_proficiency">Low proficiency</option>
           <option value="intermediate_proficiency">Intermediate proficiency</option>
           <option value="upper_intermediate_proficiency">Upper Intermediate proficiency</option>
           <option value="high_proficiency">High Proficiency</option>
-        </select>
+        </select> */}
       </div>
       {loading ? (
         <div className="flex justify-center items-center mt-60">
