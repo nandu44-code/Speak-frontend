@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import UserList from "../../components/chat/Userlist";
 import ChatWindow from "../../components/chat/ChatWindow";
 import Navbar from "../../components/Navbar";
-import {jwtDecode} from "jwt-decode";  
+import { jwtDecode } from "jwt-decode";  
 import api from "../../services/Axios";
 
 function ChatPage() {
   const [users, setUsers] = useState([]);  
+  const [searchResults, setSearchResults] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null); 
   const [socket, setSocket] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const access = jwtDecode(localStorage.getItem('accessToken'));
   const sender_id = access.user;
@@ -60,16 +62,24 @@ function ChatPage() {
 
       socket.send(JSON.stringify(message));
 
-    //   // Add the message to the chat window immediately
-    //   const normalizedMessage = {
-    //     id: Date.now(),
-    //     content: messageContent,
-    //     sender: sender_id,
-    //     receiver: selectedUser.id,
-    //     timestamp: new Date().toISOString(),
-    //   };
+    }
+  };
 
-    //   setMessages((prevMessages) => [...prevMessages, normalizedMessage]);
+  const handleSearch = async (query) => {
+    setSearchQuery(query);
+    console.log(query,'from chatpage')
+
+    if (query.trim() === '') {
+      setSearchResults([]);
+      return;
+    }
+
+    try {
+      const response = await api.get(`chat-search/?search=${query}`);
+      console.log(response.data,'response froom the api search')
+      setSearchResults(response.data);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
     }
   };
 
@@ -84,12 +94,20 @@ function ChatPage() {
   }, [sender_id]);
 
   return (
-    <div className="flex flex-col h-screen">
-      {access.is_student?<div className="flex-none">
-        <Navbar />
-      </div>:<></>}
-      <div className="flex w-11/12">
-        <UserList users={users} onSelectUser={handleUserSelect}/>
+    <div className="flex flex-col h-screen w-full">
+      {access.is_student ? (
+        <div className="flex-none">
+          <Navbar />
+        </div>
+      ) : null}
+      <div className="flex flex-1">
+        <UserList
+          users={users}
+          searchResults={searchResults}
+          searchQuery={searchQuery}
+          onSearch={handleSearch}
+          onSelectUser={handleUserSelect}
+        />
         <div className="flex flex-col flex-1">
           <ChatWindow
             selectedUser={selectedUser}

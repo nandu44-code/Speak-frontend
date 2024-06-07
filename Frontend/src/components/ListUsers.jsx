@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import api from "../services/Axios";
 
-function ListUsers() {
+function  ListUsers() {
   const [users, setUsers] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);

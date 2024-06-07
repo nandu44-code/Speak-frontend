@@ -1,18 +1,27 @@
 import React from "react";
 
-const UserList = ({ users, onSelectUser }) => {
+const UserList = ({ users = [], searchResults = [], searchQuery, onSearch, onSelectUser }) => {
+  const handleSearchChange = (e) => {
+    onSearch(e.target.value);
+    console.log(e.target.value, 'from userlist');
+  };
+
+  const usersToDisplay = searchQuery ? searchResults : users;
+
   return (
     <div className="w-1/4 bg-shadow-lg shadow-black h-screen overflow-y-auto pt-20 sticky top-0 mr-2">
       <input
         type="search"
-        className=" flex m-10 p-5 bg-gray-200 font-semibold text-black rounded-md"
+        value={searchQuery}
+        onChange={handleSearchChange}
+        className="flex m-10 p-5 bg-gray-200 font-semibold text-black rounded-md"
         placeholder="Search users"
       />
       <ul>
-        {users.length === 0 ? (
+        {usersToDisplay.length === 0 ? (
           <p>No users found</p>
         ) : (
-          users.map((user) => (
+          usersToDisplay.map((user) => (
             <li
               key={user.id}
               className="p-4 hover:bg-gray-200 cursor-pointer"
