@@ -42,6 +42,14 @@ function Navbar() {
       setIs_tutor(is_tutor);
       setIs_rejected(is_rejected);
       setIs_student(is_student);
+
+      if (decodedToken.is_superuser == true)
+        {
+          navigate('/admin/')
+        }
+      else if(decodedToken.is_tutor == true  && decodedToken.is_approved == true){
+        navigate('/tutor/home/')
+      }
     }
   }, []);
 

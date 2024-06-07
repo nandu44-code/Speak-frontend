@@ -17,6 +17,7 @@ function TutorSidebar() {
 
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     dispatch(clearUser());
     navigate("/login");
   };

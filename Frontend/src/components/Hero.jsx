@@ -7,9 +7,6 @@ import heroimage4 from "../assets/images/heroimage4.jpg";
 import { FaArrowRight } from "react-icons/fa";
 
 function Hero() {
-  const backgroundImageUrl =
-    "/assets/images/pexels-andrea-piacquadio-3772511.jpg";
- 
 
   return (
     <div className="relative  rounded-r-full rounded-b-2xl rounded-l-full rounded-t-2xl pt-24 bg-cover bg-dark flex flex-row-reverse items-center justify-center mt-0 w-full h-min opacity-95 border-l-8 border-stone-100 border-b-8">
@@ -25,6 +22,7 @@ function Hero() {
         <button
           className="mt-8 bg-indigo-700 hover:bg-indigo-800 text-white py-3 px-6 rounded-lg font-semibold text-lg focus:outline-none animate-bounce flex flex-row"
           // style={{ background: colors[colorIndex] }}
+          
         >
           Book Now
           <span className="mt-2 ml-10">
