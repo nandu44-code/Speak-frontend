@@ -75,6 +75,18 @@ function TutorSidebar() {
                 </li>
                 <li>
                   <Link
+                    to="/tutor/chat/"
+                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-stone-500 group  bg-gray-700"
+                  >
+                    <HiOutlineDocumentReport
+                      size={30}
+                      className="inline mr-2 ml-4 hover:text-blue-800"
+                    />
+                    Messages
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     to="/tutor/createslot/"
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-stone-500 group  bg-gray-700"
                   >

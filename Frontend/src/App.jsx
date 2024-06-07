@@ -27,6 +27,7 @@ import CreateSlotPage from './pages/Tutor/CreateSlotPage';
 import ViewSlotPage from './pages/Tutor/ViewSlotPage';
 import TutorSideDetailsPage from './pages/Student/TutorDetailsPage';
 import ViewBookingsPage from './pages/Tutor/ViewBookingsPage';
+import TutorChatPage from './pages/Tutor/TutorChatPage';
 
 //admin related pages
 import AdminHomePage from './pages/Admin/AdminHomePage';
@@ -75,6 +76,7 @@ function App() {
           <Route path='tutor/viewslot/' element={<ViewSlotPage/>}/>
           <Route path='tutor/viewbookings/' element={<ViewBookingsPage/>}/>
           <Route path='tutor/profile/' element={<TutorProfile/>}/>
+          <Route path='/tutor/chat/' element={<TutorChatPage/>}/>
 
           <Route path='/admin/users' element={<AdminUsersPage/>}/>
           <Route path='/admin/tutors' element={<AdminTutorsPage/>}/>

@@ -85,9 +85,9 @@ function ChatPage() {
 
   return (
     <div className="flex flex-col h-screen">
-      <div className="flex-none">
+      {access.is_student?<div className="flex-none">
         <Navbar />
-      </div>
+      </div>:<></>}
       <div className="flex w-11/12">
         <UserList users={users} onSelectUser={handleUserSelect}/>
         <div className="flex flex-col flex-1">
