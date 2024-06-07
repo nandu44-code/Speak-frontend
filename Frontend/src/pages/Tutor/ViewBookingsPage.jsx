@@ -129,8 +129,7 @@ function ViewBookingsPage() {
   return (
     <div className="flex flex-row">
       <TutorSidebar />
-      <div className="flex w-full justify-center">
-        <div className="flex flex-col items-center mt-4">
+        <div className="flex flex-col w-full items-center mt-4">
           <div className="w-96 p-6 bg-stone-400 text-center text-2xl text-white font-bold rounded-md shadow-md shadow-gray-700">
             Bookings
           </div>
@@ -243,7 +242,6 @@ function ViewBookingsPage() {
             </table>
           </div>
         </div>
-      </div>
     </div>
   );
 }

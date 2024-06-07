@@ -98,8 +98,8 @@ function ViewSlotPage() {
       
         <TutorSidebar />
       
-      <div className="flex flex-col">
-        <div className="flex justify-center">
+      <div className="flex flex-col justify-center items-center w-full">
+        <div className="flex ">
           <div className="w-auto ml-80 bg-stone-200 h-28 rounded-2xl px-4 py-2 mt-32">
             {/* <h2 className="text-xl font-bold mb-4">Search Slots by Date</h2> */}
             <form onSubmit={handleSubmit} className="flex items-center">

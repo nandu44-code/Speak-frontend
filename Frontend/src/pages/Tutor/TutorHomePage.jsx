@@ -8,7 +8,7 @@ function TutorHomePage() {
   const [pending, setPending] = useState("");
   const [confirmed, setConfirmed] = useState("");
   const [completed, setCompleted] = useState("");
-  const [slotscount, setSlotscount] = useState("")
+  const [slotscount, setSlotscount] = useState("");
   useEffect(() => {
     const fetch_bookings_count = async () => {
       setLoading(true);
@@ -24,10 +24,9 @@ function TutorHomePage() {
     };
 
     const fetch_slots_count = async () => {
-      try{
-
-        const token = localStorage.getItem('accessToken')
-        const access = jwtDecode(token)
+      try {
+        const token = localStorage.getItem("accessToken");
+        const access = jwtDecode(token);
 
         if (!access.is_tutor) {
           console.error("User is not a tutor");
@@ -36,12 +35,12 @@ function TutorHomePage() {
         const tutor = access.user;
 
         const response = await api.get(`/slot/slots-count/${tutor}/`);
-        console.log(response, 'response_slots_count')
-        setSlotscount(response.data.slots_count)
-      }catch (error) {
-          console.log(error,'error is this ')
+        console.log(response, "response_slots_count");
+        setSlotscount(response.data.slots_count);
+      } catch (error) {
+        console.log(error, "error is this ");
       }
-    }
+    };
 
     fetch_bookings_count();
     fetch_slots_count();
@@ -50,12 +49,13 @@ function TutorHomePage() {
 
   return (
     <div className="flex flex-row">
-      <TutorSidebar />
-      <div className="flex flex-col w-full">
-        <div className="flex justify-center items-center w-full">
-          <p className="flex justify-center items-center w-full font-bold text-2xl text-indigo-600">Tutor Dashboard</p>
+
+        <TutorSidebar />
+      <div className="flex flex-col ml-64  w-full">
+        <div className="flex justify-center items-center w-full my-10">
+          <p className="font-bold text-2xl text-indigo-600">Tutor Dashboard</p>
         </div>
-        <div className="flex justify-around w-full mt-20">
+        <div className="flex justify-around ">
           <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-rose-300">
             <p className="pt-10 text-red font-normal">Pending Bookings</p>
             {loading ? (

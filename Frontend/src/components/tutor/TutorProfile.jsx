@@ -40,7 +40,7 @@ function TutorProfile() {
   return (
     <div className='flex flex-row'>
         <TutorSidebar/>
-        <div className='flex flex-col w-full mt-10 items-center mb-5'>
+        <div className='flex flex-col w-full mt-10 ml-64 justify-center items-center mb-5'>
             <p  className='text-gray-600 font-normal text-xl mb-10'>Profile</p>
             <div className='flex flex-row gap-4 justify-center w-1/4 mb-5'>
                 <img src={userData.profile_image} className='rounded-xl'></img>
