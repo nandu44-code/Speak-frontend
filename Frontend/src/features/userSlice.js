@@ -169,21 +169,23 @@ export const getTutorRequests = createAsyncThunk("getTutorRequests", async () =>
 
 export const otp_validation = createAsyncThunk(
   "otpValidation",
-  async (credentials) => {
+  async (credentials,{rejectWithValue}) => {
     try {
       const response = await api.post("validate-otp/", credentials);
-  
+      console.log(response.data,'redusx'
+      )
       if (response.data.status) {
-        if (response.data.status == 200) {
+        if (response.data.status == 201) {
           console.log("otp verified successfully");
-        } else {
+        } else if(request.status == 400) {
           console.log("otp is not verified");
+          throw new Error('OTP verification failed');
         }
       }
-    } catch (error) {
-      console.log("Error", error);
 
-      toast.error(error);
+    } catch (error) {
+      console.log("Error is this ", error);
+      return rejectWithValue(error.response.data.Detail);
     }
   }
 );
@@ -205,6 +207,7 @@ const initialState = {
   error: "",
   data: [],
   tutor: [],
+  otp_context:''
 };
 
 const userSlice = createSlice({
@@ -386,13 +389,14 @@ const userSlice = createSlice({
         state.loading = false;
         toast.success("account created successfully");
       })
-      .addCase(otp_validation.rejected, (state) => {
+      .addCase(otp_validation.rejected, (state,action) => {
         state.loading = false;
+        console.log(action.payload,'actin.payload')
         Swal.fire({
           background: "#fff",
           icon: "error",
-          title: "oops, something went wrong",
-          text: action.payload,
+          title: action.payload,
+          text: "try again",
         });
       });
 

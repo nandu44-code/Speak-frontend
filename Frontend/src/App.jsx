@@ -43,6 +43,8 @@ import { Wallet } from 'lucide-react';
 
 import Room from './pages/Common/Room';
 import ChatPage from './pages/Common/ChatPage';
+import ForgotPassOtp from './pages/Auth/ForgotPassOtp';
+import PasswordResetPage from './pages/Auth/PasswordResetPage';
 
 function App() {
   
@@ -57,6 +59,8 @@ function App() {
           <Route path='register/' element={<SignUpPage/>} />
           <Route path='/login/' element={<LoginPage/>} />
           <Route path='/otp/' element={<OtpPgae/>}/>
+          <Route path='/forgot-pass/otp/' element={<ForgotPassOtp/>}/>
+          <Route path='/forgot-pass/reset/' element={<PasswordResetPage/>}/>
           
   {/* Student Routes */}
         <Route path="/student/home/" element={<UserProtectedRoute requiredRole="student"><StudentHomePage/></UserProtectedRoute>} />
@@ -90,7 +94,7 @@ function App() {
 
         {/* common routes for user and tutor*/}
         <Route path='/room/:roomID/' element={<Room/>} />
-        <Route path='/chat/' element={<UserProtectedRoute><ChatPage/></UserProtectedRoute>} />
+        <Route path='/chat/' element={<ChatPage/>} />
           
         </Routes>
       </>

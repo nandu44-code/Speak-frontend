@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
-import { BsCheckLg } from 'react-icons/bs';
-import OtpInput from 'react-otp-input';
+import OtpInput from 'react-otp-input'; 
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { otp_validation } from '../../features/userSlice';
 import { toast } from 'react-toastify';
+import { unwrapResult } from "@reduxjs/toolkit";
 
 function OtpPage() {
   const [otp, setOtp] = useState('');
@@ -33,12 +33,13 @@ function OtpPage() {
           value={otp}
           onChange={handleOtpChange} // Pass the handleOtpChange function as the onChange prop
           numInputs={6}
+          inputType='number'
           renderSeparator={<span className='mx-4 mt-20'></span>}
           renderInput={(props) => (
             <input
               {...props}
               className="h-14 text-lg border-2 mb-10 mt-20 border-gray-300 rounded-md focus:outline-none focus:border-2 focus:border-blue-700 text-center"
-              style={{ width: '3em' }}
+              style={{ width: '3em' } }
             />
           )}
         />
@@ -55,7 +56,8 @@ function OtpPage() {
               };
               console.log(credentials)
               try {
-                await dispatch(otp_validation(credentials));
+                const resultAction = await dispatch(otp_validation(credentials));
+                const originalPromiseResult = unwrapResult(resultAction);
                 navigate('/login/');
               } catch (error) {
                 console.log("error", error);
@@ -63,7 +65,6 @@ function OtpPage() {
             } else {
              
               toast.error('Invalid OTP length')
-              // Optionally, provide user feedback for invalid OTP length
             }
           }}
         >
