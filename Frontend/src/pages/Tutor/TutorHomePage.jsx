@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import TutorSidebar from "../../components/tutor/TutorSidebar";
 import api from "../../services/Axios";
 import { jwtDecode } from "jwt-decode";
+import { Chart as ChartJS } from "chart.js/auto"; // Import necessary chart.js modules
+import { Bar } from "react-chartjs-2";
 
 function TutorHomePage() {
   const [loading, setLoading] = useState(false);
@@ -9,6 +11,8 @@ function TutorHomePage() {
   const [confirmed, setConfirmed] = useState("");
   const [completed, setCompleted] = useState("");
   const [slotscount, setSlotscount] = useState("");
+  const [bookedSlots, setBookedSlots] = useState("");
+
   useEffect(() => {
     const fetch_bookings_count = async () => {
       setLoading(true);
@@ -37,6 +41,7 @@ function TutorHomePage() {
         const response = await api.get(`/slot/slots-count/${tutor}/`);
         console.log(response, "response_slots_count");
         setSlotscount(response.data.slots_count);
+        setBookedSlots(response.data.booked_slots);
       } catch (error) {
         console.log(error, "error is this ");
       }
@@ -64,7 +69,7 @@ function TutorHomePage() {
               </p>
             ) : (
               <p className="text-4xl mt-5 text-red-700 font-bold">
-                {completed}
+                {pending}
               </p>
             )}
           </div>
@@ -73,7 +78,7 @@ function TutorHomePage() {
             {loading ? (
               <p>loading...</p>
             ) : (
-              <p className="text-4xl mt-5 text-red-700 font-bold">{pending}</p>
+              <p className="text-4xl mt-5 text-red-700 font-bold">{completed}</p>
             )}
           </div>
           <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-stone-300">
@@ -85,6 +90,44 @@ function TutorHomePage() {
                 {confirmed}
               </p>
             )}
+          </div>
+          <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-stone-300">
+            <p className="pt-10 text-red font-normal">Total slots</p>
+            {loading ? (
+              <p>loading...</p>
+            ) : (
+              <p className="text-4xl mt-5 text-red-700 font-bold">
+                {slotscount}
+              </p>
+            )}
+          </div>
+        </div>
+        <div className="flex justify-start items-center mt-44 w-full">
+          <div className="mx-10 my-1 w-full h-[500px]"> 
+            <Bar
+              data={{
+                labels: ["Pending", "Confirmed", "Completed"],
+                datasets: [
+                  {
+                    label: "Bookings",
+                    data: [pending, confirmed, completed], // Use values directly
+                    backgroundColor: ["rgba(79, 120, 200, 0.6)"],
+                    borderColor: ["rgba(7, 192, 196, 1)"],
+                    borderWidth: 2,
+                  },
+                ],
+              }}
+              options={{
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                  },
+                },
+              }}
+              height={500} // Adjust height here
+              width={800} // Adjust width here
+              className="w-full h-fit"
+            />
           </div>
         </div>
       </div>

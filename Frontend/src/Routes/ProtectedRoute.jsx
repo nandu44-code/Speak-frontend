@@ -32,6 +32,8 @@ const UserProtectedRoute = ({ children, requiredRole }) => {
         const currentTime = Date.now() / 1000;
         if (decode.exp < currentTime) {
           console.warn('Token has expired');
+          localStorage.removeItem('accessToken')
+          localStorage.removeItem('refreshToken')
           navigate('/login');
         } else {
           setLoading(false);
