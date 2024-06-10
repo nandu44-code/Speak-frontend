@@ -52,7 +52,7 @@ const handleWalletBooking = async () => {
               }
             } catch (error) {
               console.error("Error creating booking:", error);
-             
+              
             }
           }
         });
