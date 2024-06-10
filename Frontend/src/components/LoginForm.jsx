@@ -32,14 +32,12 @@ function LoginForm() {
 
   const handleLogin = async(e) =>{
       e.preventDefault()  
-      console.log('hiiiiiiiiiiiii..........')
       const credentials = {
         email: formData.email,
         password: formData.password,
     }
     console.log(formData.password)
     await dispatch(Login(credentials));
-    console.log('after dispatching the login')
     if (localStorage.getItem('accessToken')){
       let token = localStorage.getItem('accessToken')
       let access = jwtDecode(token)
@@ -103,7 +101,7 @@ function LoginForm() {
           />
         </div>
         <div className='flex justify-start px-2'>
-          <h4 className='text-indigo-800 cursor-pointer' onClick={()=> {setShowModal(true)}}>forgot password?</h4>
+          {/* <h4 className='text-indigo-800 cursor-pointer' onClick={()=> {setShowModal(true)}}>forgot password?</h4> */}
         </div>
         <button type="submit" className="w-full cursor-pointer bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-blue-600 ">
          Log in

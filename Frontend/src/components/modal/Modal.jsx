@@ -33,7 +33,7 @@ function Modal({ onClose }) {
       };
       console.log(email);
       setLoading(true);
-      const response = await api.post("forgot-password/", credential);
+      const response = await api.post("forgot-password-otp/", credential);
       setLoading(false);
       console.log(response.data);
       if (response.status == 200) {
