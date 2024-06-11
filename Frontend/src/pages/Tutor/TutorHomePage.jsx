@@ -110,7 +110,7 @@ function TutorHomePage() {
                 datasets: [
                   {
                     label: "Bookings",
-                    data: [pending, confirmed, completed], // Use values directly
+                    data: [pending, confirmed, completed], 
                     backgroundColor: ["rgba(79, 120, 200, 0.6)"],
                     borderColor: ["rgba(7, 192, 196, 1)"],
                     borderWidth: 2,

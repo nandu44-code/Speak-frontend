@@ -14,6 +14,7 @@ import { TailSpin } from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 import { app, firebaseStore } from "../../services/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import api from "../../services/Axios";
 
 function StudentProfile() {
   const dispatch = useDispatch();
@@ -102,12 +103,20 @@ function StudentProfile() {
       id: access.user,
       username: userprofile.username,
       email: userprofile.email,
-      // "password": userprofile.password,
-      profile_image: url, // Use the URL passed as an argument
+      profile_image: url, 
     };
 
-    await dispatch(changeProfileImage(credentials));
-  };
+    try{
+      const request = await api.patch(`users/${credentials.id}/`, credentials);
+      if (request.status == 200) {
+        console.log("profile updated successfully");
+        return request.data;
+      }
+    } catch (error) {
+      console.log("Error:", error);
+    }
+
+    }
   
   return (
     <>
