@@ -23,10 +23,10 @@ function ChatPage() {
 
     const ws = new WebSocket(`ws://localhost:8000/ws/chat/${sender_id}/${receiver_id}/`);
     setSocket(ws);
-
+    console.log(ws)
     ws.onopen = () => { 
         console.log('WebSocket connected'); 
-    };
+    }; 
 
     ws.onmessage = (event) => {
         const message = JSON.parse(event.data);

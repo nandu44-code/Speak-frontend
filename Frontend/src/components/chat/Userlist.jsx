@@ -1,5 +1,5 @@
 import React from "react";
-
+import imageSrc from '../../assets/images/profileuser.jpg'
 const UserList = ({ users = [], searchResults = [], searchQuery, onSearch, onSelectUser }) => {
   const handleSearchChange = (e) => {
     onSearch(e.target.value);
@@ -14,22 +14,24 @@ const UserList = ({ users = [], searchResults = [], searchQuery, onSearch, onSel
         type="search"
         value={searchQuery}
         onChange={handleSearchChange}
-        className="flex m-10 p-5 bg-gray-200 font-semibold text-black rounded-md"
+        className="flex m-10 px-4 py-2 bg-gray-200 font-semibold text-black rounded-md"
         placeholder="Search users"
       />
       <ul>
         {usersToDisplay.length === 0 ? (
           <p>No users found</p>
         ) : (
+          
           usersToDisplay.map((user) => (
             <li
               key={user.id}
-              className="p-4 hover:bg-gray-200 cursor-pointer"
+              className="p-4 hover:bg-gray-200 cursor-pointer bg-gray-100 rounded-md mb-2 mx-2"
               onClick={() => onSelectUser(user)}
             >
+            
               <div className="flex gap-3">
                 <img
-                  src={user.profile_image}
+                  src={user.profile_image?user.profile_image:imageSrc}
                   className="w-10 h-10 rounded-full"
                   alt={user.username}
                 />

@@ -1,5 +1,5 @@
 import React, { useState,useEffect,useRef } from "react";
-
+import imageSrc from '../../assets/images/profileuser.jpg'
 const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
     const options = {
@@ -45,7 +45,7 @@ const ChatWindow = ({ selectedUser, messages, onSendMessage }) => {
         <div className="w-3/4 h-full flex flex-col pt-28 px-5">
           <div className="bg-gray-300 rounded-md flex sticky top-28 ">
             <img
-              src={selectedUser.profile_image || ""}
+              src={selectedUser.profile_image ?selectedUser.profile_image:imageSrc}
               className="h-12 w-12 my-4 mx-2 rounded-full"
               alt={selectedUser.username}
             />
