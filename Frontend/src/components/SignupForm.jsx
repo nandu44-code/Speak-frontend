@@ -289,7 +289,7 @@ function SignUpForm() {
             type="submit"
             className="w-full bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-blue-600"
           >
-            {loading ? 'signing up....' : "Sign Up"}
+            {loading ? <div className="flex justify-center items-center w-full"><TailSpin width={30} height={30} color="white"/></div>: "Sign Up"}
           </button>: <button
             type="submit"
             className="w-full bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-blue-600"
