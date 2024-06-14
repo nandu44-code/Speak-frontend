@@ -20,6 +20,7 @@ function ChatPage() {
     setSelectedUser(user);
     fetchMessages(user.id);
     const receiver_id = user.id;
+    print(receiver_id)
 
     const ws = new WebSocket(`ws://localhost:8000/ws/chat/${sender_id}/${receiver_id}/`);
     setSocket(ws);

@@ -41,7 +41,7 @@ function CreateSlotForm() {
     console.log("End Date:", endDate);
 
     // Check if start date is before end date
-    if (startDate >= endDate) {
+    if (startDate > endDate) {
       toast.error("Start date must be before end date.");
       console.log("Validation failed: Start date must be before end date.");
       return false;
