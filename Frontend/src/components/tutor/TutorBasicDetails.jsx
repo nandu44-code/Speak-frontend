@@ -13,7 +13,7 @@ import { TailSpin } from "react-loader-spinner";
 import "react-toastify/dist/ReactToastify.css";
 import { app, firebaseStore } from "../../services/Firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import { unwrapResult } from "@reduxjs/toolkit";
 
@@ -129,10 +129,10 @@ function TutorBasicDetails() {
       return;
     }
     console.log("its entering here");
-    const uuid = uuidv4();
+    // const uuid = uuidv4();
 
     const storageRef = ref(firebaseStore);
-    const imageRef = ref(storageRef, `images/${profileImage.name}_${uuid}`);
+    const imageRef = ref(storageRef, `images/${profileImage.name}_${access.user}`);
 
     uploadBytes(imageRef, profileImage)
       .then((snapshot) => {
