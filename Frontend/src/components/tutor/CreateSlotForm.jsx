@@ -99,7 +99,7 @@ function CreateSlotForm() {
       })
     } catch (error) {
       console.error("Error creating slot:", error);
-      toast.error("Error creating slot");
+      toast.error("Error creating slot check already created slots or choose the time accordingly");
     }
   };
 

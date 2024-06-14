@@ -229,7 +229,7 @@ function ViewBookingsPage() {
                               ) : (
                                 booking.status !== 'completed' && (
                                   // <button className="bg-red-500 text-black px-4 py-2 rounded-md" onClick={() => handleCancelBooking(booking.slot)}>Cancel</button>
-                                  <P></P>
+                                  <p>.</p>
                                 )
                               )}
                             </>
