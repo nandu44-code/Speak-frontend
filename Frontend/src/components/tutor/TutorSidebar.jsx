@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { clearUser } from "../../features/userSlice";
 import { BsHouseDoor, BsPeople } from "react-icons/bs";
 import { IoMdSchool } from "react-icons/io";
+import { FaWallet } from "react-icons/fa";
+
 import {
   HiOutlineDocumentReport,
   HiOutlineClipboardList,
@@ -60,6 +62,18 @@ function TutorSidebar() {
                       className="inline mr-2 ml-4 hover:text-blue-800"
                     />
                     Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/tutor/wallet/"
+                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-stone-500 group bg-gray-700"
+                  >
+                    <FaWallet
+                      size={28}
+                      className="inline mr-2 ml-4 hover:text-blue-800"
+                    />
+                    Wallet
                   </Link>
                 </li>
                 <li>

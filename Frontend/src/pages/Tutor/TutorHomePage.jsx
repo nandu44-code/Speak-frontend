@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import TutorSidebar from "../../components/tutor/TutorSidebar";
 import api from "../../services/Axios";
 import { jwtDecode } from "jwt-decode";
-import { Chart as ChartJS } from "chart.js/auto"; // Import necessary chart.js modules
 import { Bar } from "react-chartjs-2";
 
 function TutorHomePage() {
@@ -25,6 +24,8 @@ function TutorHomePage() {
         setCompleted(response.data.completed_bookings);
       } catch (error) {
         console.error("Error fetching user count:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -65,71 +66,86 @@ function TutorHomePage() {
     fetch_bookings_count();
     fetch_slots_count();
     fetch_wallet_amount();
-    setLoading(false);
   }, []);
 
+  const checkWalletAmount = () =>{
+    if( wallet != 0){
+
+      return true
+    }
+    else{
+      return false
+    }
+  }
+
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row h-screen overflow-hidden">
       <TutorSidebar />
-      <div className="flex flex-col ml-64  w-full">
-        <div className="flex justify-center items-center w-full my-10">
-          <p className="font-bold text-2xl text-indigo-600">Tutor Dashboard</p>
-        </div>
-        <div className="flex justify-around">
-          <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-rose-300">
-            <p className="pt-10 text-red font-normal">Pending Bookings</p>
-            {loading ? (
-              <p className="text-4xl mt-5 text-red-700 font-bold">
-                loading....
+      <div className="flex flex-col ml-64 w-full overflow-y-auto">
+        <div className="w-full max-w-4xl mx-auto">
+          <div className="flex justify-center items-center w-full mt-10 mb-20">
+            <p className="font-bold text-5xl text-indigo-600 fixed">Tutor Dashboard</p>
+          </div>
+          <div className="flex justify-around">
+            <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-pink-600">
+              <p className="pt-10 text-white font-semibold">Pending Bookings</p>
+              {loading ? (
+                <p className="text-white">
+                  loading....
+                </p>
+              ) : (
+                <p className="text-4xl mt-5 text-white font-bold">{pending}</p>
+              )}
+            </div>
+            <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-sky-600">
+              <p className="pt-10 text-white font-semibold">Completed Sessions</p>
+              {loading ? (
+                <p className="text-white">
+                  loading....
+                </p>
+              ) : (
+                <p className="text-4xl mt-5 text-white font-bold">
+                  {completed}
+                </p>
+              )}
+            </div>
+            <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-orange-600">
+              <p className="pt-10 text-white font-semibold">Confirmed Bookings</p>
+              {loading ? (
+                <p className="text-white">
+                  loading....
+                </p>
+              ) : (
+                <p className="text-4xl mt-5 text-white font-bold">
+                  {confirmed}
+                </p>
+              )}
+            </div>
+            <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-green-600">
+              <p className="pt-10 text-white font-semibold">Total slots</p>
+              {loading ? (
+                <p className="text-white">
+                  loading....
+                </p>
+              ) : (
+                <p className="text-4xl mt-5 text-white font-bold">
+                  {slotscount}
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="flex justify-center items-center mt-10">
+            <div className="bg-white shadow-lg shadow-gray-500 px-2 py-6 rounded-lg w-1/2">
+              <p className="px-4 py-6 text-xl text-green-700 font-semibold">
+                Your Wallet Amount
               </p>
-            ) : (
-              <p className="text-4xl mt-5 text-red-700 font-bold">{pending}</p>
-            )}
-          </div>
-          <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-sky-300">
-            <p className="pt-10 text-red font-normal">Completed Sessions</p>
-            {loading ? (
-              <p>loading...</p>
-            ) : (
-              <p className="text-4xl mt-5 text-red-700 font-bold">
-                {completed}
+              <p className="px-4 py-6 font-bold text-6xl text-gray-600">
+                {wallet}
               </p>
-            )}
+            </div>
           </div>
-          <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-stone-300">
-            <p className="pt-10 text-red font-normal">Confirmed Bookings</p>
-            {loading ? (
-              <p>loading...</p>
-            ) : (
-              <p className="text-4xl mt-5 text-red-700 font-bold">
-                {confirmed}
-              </p>
-            )}
-          </div>
-          <div className="w-44 h-44 shadow-sm shadow-gray-500 rounded-md bg-green-300">
-            <p className="pt-10 text-red font-normal">Total slots</p>
-            {loading ? (
-              <p>loading...</p>
-            ) : (
-              <p className="text-4xl mt-5 text-red-700 font-bold">
-                {slotscount}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className="flex w-full justify-center items-center">
-          <div className="mt-20 bg-white shadow-lg shadow-gray-500 px-2 py-6 w-1/2 rounded-lg">
-            <p className="px-4 py-6 text-xl text-green-700 font-semibold">
-              Your Wallet Amount
-            </p>
-            <p className="px-4 py-6 font-bold text-6xl text-gray-600">
-              {wallet}
-            </p>
-          </div>
-        </div>
-        <div className="flex">
-          <div className="flex justify-start items-center mt-44 w-full">
-            <div className="mx-10 my-1 w-full h-[500px]">
+          <div className="flex justify-center items-center mt-10">
+            <div className="bg-white shadow-lg shadow-gray-500 px-2 py-6 rounded-lg">
               <Bar
                 data={{
                   labels: ["Pending", "Confirmed", "Completed"],
@@ -137,8 +153,8 @@ function TutorHomePage() {
                     {
                       label: "Bookings",
                       data: [pending, confirmed, completed],
-                      backgroundColor: ["rgba(79, 120, 200, 0.6)"],
-                      borderColor: ["rgba(7, 192, 196, 1)"],
+                      backgroundColor: "rgba(100, 120, 100, 0.8)",
+                      borderColor: "rgba(7, 192, 196, 1)",
                       borderWidth: 2,
                     },
                   ],
@@ -150,9 +166,8 @@ function TutorHomePage() {
                     },
                   },
                 }}
-                height={500} // Adjust height here
-                width={800} // Adjust width here
-                className="w-full h-fit"
+                height={500}
+                width={800}
               />
             </div>
           </div>

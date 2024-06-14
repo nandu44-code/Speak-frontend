@@ -28,7 +28,7 @@ import ViewSlotPage from './pages/Tutor/ViewSlotPage';
 import TutorSideDetailsPage from './pages/Student/TutorDetailsPage';
 import ViewBookingsPage from './pages/Tutor/ViewBookingsPage';
 import TutorChatPage from './pages/Tutor/TutorChatPage';
-
+import TutorWalletPage from './pages/Tutor/TutorWalletPage';
 //admin related pages
 import AdminHomePage from './pages/Admin/AdminHomePage';
 import AdminUsersPage from './pages/Admin/AdminUsersPage';
@@ -79,6 +79,7 @@ function App() {
         <Route path="/tutor/viewbookings/" element={<UserProtectedRoute requiredRole="tutor"><ViewBookingsPage/></UserProtectedRoute>} />
         <Route path="/tutor/profile/" element={<UserProtectedRoute requiredRole="tutor"><TutorProfile/></UserProtectedRoute>} />
         <Route path="/tutor/chat/" element={<UserProtectedRoute requiredRole="tutor"><TutorChatPage/></UserProtectedRoute>} />
+        <Route path="/tutor/wallet/" element={<UserProtectedRoute requiredRole="tutor"><TutorWalletPage/></UserProtectedRoute>} />
 
         {/* Admin Routes */}
         <Route path='/admin/users' element={<UserProtectedRoute requiredRole="admin"><AdminUsersPage/></UserProtectedRoute>}/>
