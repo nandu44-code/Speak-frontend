@@ -8,8 +8,8 @@ function Room() {
 
     useEffect(() => {
         const myMeeting = async () => {
-            const appID = 940242502;
-            const serverSecret = '5f9ef8978b21371e6b2548480ab0d63c';
+            const appID = 526911518;
+            const serverSecret = 'c11ff9b5ab39d03f6236b4f8a5e4184e';
             const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, Date.now().toString(), 'nandu');
 
             const zc = ZegoUIKitPrebuilt.create(kitToken);
@@ -24,9 +24,7 @@ function Room() {
         myMeeting();
 
         return () => {
-            // Clean-up function to leave the room when the component unmounts
-            // You may need to add the necessary leave room logic here
-           
+            
         };
     }, [roomID]);
 

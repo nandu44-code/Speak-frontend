@@ -167,6 +167,7 @@ function ViewBookingsStudent() {
           {bookings.length !== 0 ? (
             <div className="h-100">
               {bookings.map((booking) => (
+                
                 <div
                   key={booking.id}
                   className="bg-white shadow-md shadow-gray-700 rounded-md p-4 mb-4 "
