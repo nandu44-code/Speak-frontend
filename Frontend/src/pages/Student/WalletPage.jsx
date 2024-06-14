@@ -16,14 +16,6 @@ function WalletPage() {
 
 
     
-    // if (id){
-    //   fetchWalletData();
-    //   console.log('hi fetch wallet Data fn is getting called')
-    // }
-
-    // fetchWalletData();
-    // console.log('hi fetch wallet Data fn is getting called')
-    
   }, []);
 
 
