@@ -72,12 +72,12 @@ function TutorBasicDetails() {
           toast.error("choose atleast one preference")
     }else {
       // loading = true
-      const uuid = uuidv4();
+      // const uuid = uuidv4();
 
       const storageRef = ref(firebaseStore);
       const imageRef = ref(
         storageRef,
-        `certificates/${certificates.name}_${uuid}`
+        `certificates/${certificates.name}`
       );
       uploadBytes(imageRef, profileImage).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
