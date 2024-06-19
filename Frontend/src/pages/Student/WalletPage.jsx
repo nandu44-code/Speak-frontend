@@ -41,6 +41,7 @@ function WalletPage() {
         setHistory(response.data.results);
       } catch (error) {
         console.error("Error fetching wallet amount:", error);
+        setHistory([])
       }
     };
 
