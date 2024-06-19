@@ -5,8 +5,8 @@ import api from "../../services/Axios";
 import { jwtDecode } from "jwt-decode";
 
 function WalletPage() {
-  const [amount, setAmount] = useState(null);
-  const [history, setHistory] = useState(null);
+  const [amount, setAmount] = useState('');
+  const [history, setHistory] = useState('');
 
   const [id, setId] = useState(null);
 
