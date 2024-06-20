@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch ,useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Login } from '../features/userSlice';
 import {jwtDecode} from 'jwt-decode';
-
+import { TailSpin } from 'react-loader-spinner';
 import imageSrc from "../assets/images/12953573_Data_security_05.jpg";
 import Modal from './modal/Modal';
 
@@ -12,6 +12,7 @@ function LoginForm() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [showModal,setShowModal] = useState(false)
+  const loading = useSelector((state) => state.user.loading);
 
   
   const handleClickSignUp = () => {
@@ -103,9 +104,12 @@ function LoginForm() {
         <div className='flex justify-start px-2'>
           {/* <h4 className='text-indigo-800 cursor-pointer' onClick={()=> {setShowModal(true)}}>forgot password?</h4> */}
         </div>
-        <button type="submit" className="w-full cursor-pointer bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-blue-600 ">
-         Log in
-        </button>
+        <button
+            type="submit"
+            className="w-full bg-indigo-900 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:bg-blue-600"
+          >
+            {loading ? <div className="flex justify-center items-center w-full"><TailSpin width={30} height={30} color="white"/></div>: "Login here"}
+          </button>
         <h4 className='text-md'>Don't have an account?</h4>
         <h4 className='text-indigo-800 cursor-pointer' onClick={handleClickSignUp}>click here to register</h4>
       </form>

@@ -255,8 +255,8 @@ const userSlice = createSlice({
         state.loading = true;
       })
       .addCase(Login.fulfilled, (state, action) => {
-        state.loading = false;
         state.is_authenticated = true;
+        state.loading = false;
         console.log("API Response Data:", action.payload);
       })
       .addCase(Login.rejected, (state) => {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 
 const api = axios.create({
-  baseURL: 'https://www.furnics.online'
+  baseURL: 'http://localhost:8001'
 });
 
 const refreshAccessToken = async () => {

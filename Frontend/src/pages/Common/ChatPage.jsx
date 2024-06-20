@@ -22,7 +22,7 @@ function ChatPage() {
     const receiver_id = user.id;
     print(receiver_id)
 
-    const ws = new WebSocket(`ws://localhost:8000/ws/chat/${sender_id}/${receiver_id}/`);
+    const ws = new WebSocket(`ws://localhost:8001/ws/chat/${sender_id}/${receiver_id}/`);
     setSocket(ws);
     console.log(ws)
     ws.onopen = () => { 
