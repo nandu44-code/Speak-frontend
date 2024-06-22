@@ -22,7 +22,7 @@ function ChatPage() {
     const receiver_id = user.id;
     print(receiver_id)
 
-    const ws = new WebSocket(`ws://localhost:8001/ws/chat/${sender_id}/${receiver_id}/`);
+    const ws = new WebSocket(`ws://furnics.online/ws/chat/${sender_id}/${receiver_id}/`);
     setSocket(ws);
     console.log(ws)
     ws.onopen = () => { 
@@ -64,7 +64,7 @@ function ChatPage() {
       socket.send(JSON.stringify(message));
 
     }
-  };
+  };  
 
   const handleSearch = async (query) => {
     setSearchQuery(query);
