@@ -65,7 +65,7 @@ function App() {
         <Route path="/student/changePassword/" element={<UserProtectedRoute requiredRole="student"><ChangePassPage/></UserProtectedRoute>} />
         <Route path="/student/findTutors/" element={<UserProtectedRoute requiredRole="student"><FindTutorsPage/></UserProtectedRoute>} />
         <Route path="/student/TutorDetails/:id" element={<UserProtectedRoute requiredRole="student"><TutorSideDetailsPage/></UserProtectedRoute>} />
-        <Route path="/student/paymentSuccess/" element={<UserProtectedRoute requiredRole="student"><PaymentSuccessPage/></UserProtectedRoute>} />
+        <Route path="/student/paymentSuccess/" element={<PaymentSuccessPage/>} />
         <Route path="/student/viewBookings/" element={<UserProtectedRoute requiredRole="student"><ViewBookingsStudent/></UserProtectedRoute>} />
         <Route path="/student/wallet/" element={<UserProtectedRoute requiredRole="student"><WalletPage/></UserProtectedRoute>} />
         
